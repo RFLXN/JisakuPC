@@ -52,23 +52,27 @@
      * 見積タイトル
 
 ### 5. データ構造の設定
+> [HY000][1681] Integer display width is deprecated and will be removed in a future release.
+    
+    MySQLの定数型はサイズを決めることが非推奨です。
+
 product_table
 
-| Column Name   | Data Type    | Constraints                |
-| ------------- | ------------ | -------------------------- |
-| product_no    | numeric(8)   | primary key auto_increment |
-| product_name  | varchar(8)   | not null                   |
-| product_price | numeric(8)   | not null                   |
-| product_spec  | varchar(100) | not null                   |
-| product_brand | varchar(20)  | not null                   |
-| product_type  | varchar(8)   | not null                   |
+| Column Name   | Data Type   | Constraints                |
+| ------------- | ----------- | -------------------------- |
+| product_no    | int         | primary key auto_increment |
+| product_name  | varchar(60) | not null                   |
+| product_price | int         | not null                   |
+| product_spec  | json        | not null                   |
+| product_brand | varchar(30) | not null                   |
+| product_type  | varchar(12) | not null                   |
 
 
 user_table
 
 | Column Name | Data Type   | Constraints                |
 | ----------- | ----------- | -------------------------- |
-| user_no     | numeric(8)  | primary key auto_increment |
+| user_no     | int         | primary key auto_increment |
 | user_id     | varchar(20) | not null unique            |
 | user_pw     | varchar(20) | not null                   |
 | admin       | boolean     | not null                   |
@@ -76,29 +80,29 @@ user_table
 
 build_table
 
-| Column Name            | Data Type  | Constraints                                       |
-| ---------------------- | ---------- | ------------------------------------------------- |
-| build_no               | numeric(8) | primary key auto_increment                        |
-| user_no                | numeric(8) | references user_table(user_no)                    |
-| cpu_product_no         | numeric(8) | default null references product_table(product_no) |
-| gpu_product_no         | numeric(8) | default null references product_table(product_no) |
-| ram_product_no         | numeric(8) | default null references product_table(product_no) |
-| storage_product_no     | numeric(8) | default null references product_table(product_no) |
-| motherboard_product_no | numeric(8) | default null references product_table(product_no) |
-| cooler_product_no      | numeric(8) | default null references product_table(product_no) |
-| case_product_no        | numeric(8) | default null references product_table(product_no) |
-| etc_product_no         | numeric(8) | default null references product_table(product_no) |
+| Column Name            | Data Type | Constraints                                       |
+| ---------------------- | --------- | ------------------------------------------------- |
+| build_no               | int       | primary key auto_increment                        |
+| user_no                | int       | references user_table(user_no)                    |
+| cpu_product_no         | int       | default null references product_table(product_no) |
+| gpu_product_no         | int       | default null references product_table(product_no) |
+| ram_product_no         | int       | default null references product_table(product_no) |
+| storage_product_no     | int       | default null references product_table(product_no) |
+| motherboard_product_no | int       | default null references product_table(product_no) |
+| cooler_product_no      | int       | default null references product_table(product_no) |
+| case_product_no        | int       | default null references product_table(product_no) |
+| etc_product_no         | int       | default null references product_table(product_no) |
 
 
 build_post_table
 
-| Column Name | Data Type    | Constraints                      |
-| ----------- | ------------ | -----------                      |
-| post_no     | numeric(8)   | primary key auto_increment       |
-| user_no     | numeric(8)   | references user_table(user_no)   |
-| build_no    | numeric(8)   | references build_table(build_no) |
-| title       | varchar(28)  | not null                         |
-| description | varchar(500) | not null                         |
+| Column Name | Data Type     | Constraints                      |
+| ----------- | ------------- | -----------                      |
+| post_no     | int           | primary key auto_increment       |
+| user_no     | int           | references user_table(user_no)   |
+| build_no    | int           | references build_table(build_no) |
+| title       | varchar(60)   | not null                         |
+| description | varchar(1000) | not null                         |
 
 
 ### 6. データベース設計
@@ -107,63 +111,65 @@ build_post_table
 
 ```mysql
 create table product_table(
-    product_no numeric(8) primary key auto_increment,
-    product_name varchar(8) not null,
-    product_price numeric(8) not null,
-    product_spec varchar(100) not null,
-    product_brand varchar(20) not null,
-    product_type varchar(8) not null
+    product_no int(8) not null auto_increment,
+    product_name varchar(60) not null,
+    product_price int(8) not null,
+    product_spec json not null,
+    product_brand varchar(30) not null,
+    product_type varchar(12) not null,
+    primary key (product_no)
 );
 
 create table user_table(
-    user_no numeric(8) primary key auto_increment,
+    user_no int(8) auto_increment,
     user_id varchar(20) not null unique,
     user_pw varchar(20) not null,
-    admin boolean not null
+    admin boolean not null,
+    primary key (user_no)
 );
 
 create table build_table(
-    build_no numeric(8) primary key auto_increment,
-    user_no numeric(8) references user_table(user_no),
-    cpu_product_no numeric(8) default null references product_table(product_no),
-    gpu_product_no numeric(8) default null references product_table(product_no),
-    ram_product_no numeric(8) default null references product_table(product_no),
-    storage_product_no numeric(8) default null references product_table(product_no),
-    motherboard_product_no numeric(8) default null references product_table(product_no),
-    cooler_product_no numeric(8) default null references product_table(product_no),
-    case_product_no numeric(8) default null references product_table(product_no),
-    etc_product_no numeric(8) default null references product_table(product_no)
+    build_no int(8) auto_increment,
+    user_no int(8) references user_table(user_no),
+    cpu_product_no int(8) default null references product_table(product_no),
+    gpu_product_no int(8) default null references product_table(product_no),
+    ram_product_no int(8) default null references product_table(product_no),
+    storage_product_no int(8) default null references product_table(product_no),
+    motherboard_product_no int(8) default null references product_table(product_no),
+    cooler_product_no int(8) default null references product_table(product_no),
+    case_product_no int(8) default null references product_table(product_no),
+    etc_product_no int(8) default null references product_table(product_no),
+    primary key (build_no)
 );
 
 create table build_post_table(
-    post_no numeric(8) primary key auto_increment,
-    user_no numeric(8) references user_table(user_no),
-    build_no numeric(8) references build_table(build_no),
-    title varchar(28) not null,
-    description varchar(500) not null
+    post_no int(8) auto_increment,
+    user_no int(8) references user_table(user_no),
+    build_no int(8) references build_table(build_no),
+    title varchar(60) not null,
+    description varchar(1000) not null,
+    date datetime default now(),
+    primary key (post_no)
 );
 ```
 
 ### 8. サンプル挿入SQLの作成
 
 ```mysql
-insert into product_table values (
-    'dummy cpu', 9999, 'dummy spec', 'dummy brand', 'cpu'
-), (
-    'dummy ram', 9999, 'dummy spec', 'dummy brand', 'ram'
-), (
-    'dummy gpu', 9999, 'dummy spec', 'dummy brand', 'gpu'
-), (
-    'dummy ssd', 9999, 'dummy spec', 'dummy brand', 'storage'
-);
+insert into product_table
+    (product_name, product_price, product_spec, product_brand, product_type)
+values
+    ('dummy cpu', 9999, '{"dummy spec":"dummy spec"}', 'dummy brand', 'cpu'),
+    ('dummy ram', 9999, '{"dummy spec":"dummy spec"}', 'dummy brand', 'ram'),
+    ('dummy gpu', 9999, '{"dummy spec":"dummy spec"}', 'dummy brand', 'gpu'),
+    ('dummy ssd', 9999, '{"dummy spec":"dummy spec"}', 'dummy brand', 'storage');
 
-insert into user_table values (
-    'userid1', 'userpass1', false
-), (
-    'userid2', 'userpass2', false
-), (
-    'admin', 'adminpass', true
-);
+insert into user_table
+    (user_id, user_pw, admin)
+values
+    ('userid1', 'userpass1', false),
+    ('userid2', 'userpass2', false),
+    ('admin', 'adminpass', true);
 
 ```
 
