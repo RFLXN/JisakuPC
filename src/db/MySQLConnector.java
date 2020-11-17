@@ -9,7 +9,7 @@ public class MySQLConnector implements DBConnector {
     public Connection getConnection(String host, String username, String password) throws SQLException {
         Connection connection = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(host, username, password);
             connection.setAutoCommit(false);
 
