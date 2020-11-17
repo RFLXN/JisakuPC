@@ -182,12 +182,12 @@ values
 ### 9. テストDBの作成
 in MySQL Console
 ```mysql
-// $project_root = プロジェクトのルートパス
+# $project_root = プロジェクトのルートパス
 
-// ルートユーザーでログイン
+# ルートユーザーでログイン
 source $project_root/sql/create_database.sql
 
-// username : jisaku / password : jisaku / database : jisaku でログイン
+# username : jisaku / password : jisaku / database : jisaku でログイン
 source $project_root/sql/create_table.sql
 source $project_root/sql/insert_dummy_data.sql
 ```
