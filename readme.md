@@ -56,6 +56,10 @@
     
     MySQLの定数型はサイズを決めることが非推奨です。
 
+> in Constraints : auto_increment
+
+    MySQLではシーケンスがありません。
+    その代わりに auto_incrementを使えます。
 product_table
 
 | Column Name   | Data Type   | Constraints                |
