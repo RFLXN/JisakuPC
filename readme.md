@@ -180,7 +180,13 @@ values
 ```
 
 ### 9. テストDBの作成
-
+in MySQL Console
+```mysql
+//project_root = プロジェクトのルートパス
+source $project_root/sql/create_database.sql
+source $project_root/sql/create_table.sql
+source $project_root/sql/insert_dummy_data.sql
+```
 ### 10. Gitによるプロジェクトの作成 ・ 共有
 
 ### 11. EclipseによるGitとの連携 ・ 設定
