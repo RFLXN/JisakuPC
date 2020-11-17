@@ -109,9 +109,9 @@ build_post_table
 create table product_table(
     product_no numeric(8) primary key auto_increment,
     product_name varchar(8) not null,
-    product_price numeric(8) NOT NULL,
-    product_spec varchar(100) NOT NULL,
-    product_brand varchar(20) NOT NULL,
+    product_price numeric(8) not null,
+    product_spec varchar(100) not null,
+    product_brand varchar(20) not null,
     product_type varchar(8) not null
 );
 
