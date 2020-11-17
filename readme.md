@@ -104,6 +104,7 @@ build_post_table
 ### 6. データベース設計
 
 ### 7. データベースSQLの作成
+
 ```mysql
 create table product_table(
     product_no numeric(8) primary key auto_increment,
@@ -142,7 +143,29 @@ create table build_post_table(
     description varchar(500) not null
 );
 ```
+
 ### 8. サンプル挿入SQLの作成
+
+```mysql
+insert into product_table values (
+    'dummy cpu', 9999, 'dummy spec', 'dummy brand', 'cpu'
+), (
+    'dummy ram', 9999, 'dummy spec', 'dummy brand', 'ram'
+), (
+    'dummy gpu', 9999, 'dummy spec', 'dummy brand', 'gpu'
+), (
+    'dummy ssd', 9999, 'dummy spec', 'dummy brand', 'storage'
+);
+
+insert into user_table values (
+    'userid1', 'userpass1', false
+), (
+    'userid2', 'userpass2', false
+), (
+    'admin', 'adminpass', true
+);
+
+```
 
 ### 9. テストDBの作成
 
