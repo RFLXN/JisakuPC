@@ -56,7 +56,7 @@ product_table
 
 | Column Name   | Data Type    | Constraints                |
 | ------------- | ------------ | -------------------------- |
-| product_no    | numeric(8)   | primary key AUTO_INCREMENT |
+| product_no    | numeric(8)   | primary key auto_increment |
 | product_name  | varchar(8)   | not null                   |
 | product_price | numeric(8)   | not null                   |
 | product_spec  | varchar(100) | not null                   |
@@ -68,7 +68,7 @@ user_table
 
 | Column Name | Data Type   | Constraints                |
 | ----------- | ----------- | -------------------------- |
-| user_no     | numeric(8)  | primary key AUTO_INCREMENT |
+| user_no     | numeric(8)  | primary key auto_increment |
 | user_id     | varchar(20) | not null unique            |
 | user_pw     | varchar(20) | not null                   |
 | admin       | boolean     | not null                   |
@@ -78,7 +78,7 @@ build_table
 
 | Column Name            | Data Type  | Constraints                                       |
 | ---------------------- | ---------- | ------------------------------------------------- |
-| build_no               | numeric(8) | primary key AUTO_INCREMENT                        |
+| build_no               | numeric(8) | primary key auto_increment                        |
 | user_no                | numeric(8) | references user_table(user_no)                    |
 | cpu_product_no         | numeric(8) | default null references product_table(product_no) |
 | gpu_product_no         | numeric(8) | default null references product_table(product_no) |
@@ -94,7 +94,7 @@ build_post_table
 
 | Column Name | Data Type    | Constraints                      |
 | ----------- | ------------ | -----------                      |
-| post_no     | numeric(8)   | primary key AUTO_INCREMENT       |
+| post_no     | numeric(8)   | primary key auto_increment       |
 | user_no     | numeric(8)   | references user_table(user_no)   |
 | build_no    | numeric(8)   | references build_table(build_no) |
 | title       | varchar(28)  | not null                         |
@@ -104,7 +104,44 @@ build_post_table
 ### 6. データベース設計
 
 ### 7. データベースSQLの作成
+```mysql
+create table product_table(
+    product_no numeric(8) primary key auto_increment,
+    product_name varchar(8) not null,
+    product_price numeric(8) NOT NULL,
+    product_spec varchar(100) NOT NULL,
+    product_brand varchar(20) NOT NULL,
+    product_type varchar(8) not null
+);
 
+create table user_table(
+    user_no numeric(8) primary key auto_increment,
+    user_id varchar(20) not null unique,
+    user_pw varchar(20) not null,
+    admin boolean not null
+);
+
+create table build_table(
+    build_no numeric(8) primary key auto_increment,
+    user_no numeric(8) references user_table(user_no),
+    cpu_product_no numeric(8) default null references product_table(product_no),
+    gpu_product_no numeric(8) default null references product_table(product_no),
+    ram_product_no numeric(8) default null references product_table(product_no),
+    storage_product_no numeric(8) default null references product_table(product_no),
+    motherboard_product_no numeric(8) default null references product_table(product_no),
+    cooler_product_no numeric(8) default null references product_table(product_no),
+    case_product_no numeric(8) default null references product_table(product_no),
+    etc_product_no numeric(8) default null references product_table(product_no)
+);
+
+create table build_post_table(
+    post_no numeric(8) primary key auto_increment,
+    user_no numeric(8) references user_table(user_no),
+    build_no numeric(8) references build_table(build_no),
+    title varchar(28) not null,
+    description varchar(500) not null
+);
+```
 ### 8. サンプル挿入SQLの作成
 
 ### 9. テストDBの作成
