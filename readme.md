@@ -60,6 +60,8 @@
 
     MySQLではシーケンスがありません。
     その代わりに auto_incrementを使えます。
+    
+    
 product_table
 
 | Column Name   | Data Type   | Constraints                |
