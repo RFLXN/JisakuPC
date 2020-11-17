@@ -52,7 +52,12 @@
      * 見積タイトル
 
 ### 5. データ構造の設定
-
+    | Column Name | Data Type | Constraints |
+    | ----------- | --------- | ----------- |
+    | product_no  | number(8) | PRIMARY KEY |
+    
+    
+    
 ### 6. データベース設計
 
 ### 7. データベースSQLの作成
