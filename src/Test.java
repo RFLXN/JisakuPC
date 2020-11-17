@@ -12,7 +12,7 @@ public class Test {
             Connection connection
                     = connector.getConnection("jdbc:mysql://localhost/jisaku?&serverTimezone=UTC", "jisaku", "jisaku");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from product_table");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM product_table");
 
             while (resultSet.next()) {
                 String[] s = new String[6];
