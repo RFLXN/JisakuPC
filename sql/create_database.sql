@@ -1,5 +1,5 @@
-create database jisaku;
+CREATE DATABASE jisaku;
 
-create user jisaku identified by 'jisaku';
+CREATE USER jisaku IDENTIFIED BY 'jisaku';
 
-grant all privileges on jisaku.* to 'jisaku'@'%';
+GRANT ALL PRIVILEGES ON jisaku.* TO 'jisaku'@'%';
