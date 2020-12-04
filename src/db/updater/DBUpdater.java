@@ -1,6 +1,7 @@
 package db.updater;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public abstract class DBUpdater {
     private Connection connection;

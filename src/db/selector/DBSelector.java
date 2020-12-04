@@ -2,6 +2,7 @@ package db.selector;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public abstract class DBSelector {
     private Connection connection;

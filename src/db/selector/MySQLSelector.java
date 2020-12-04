@@ -20,22 +20,6 @@ public class MySQLSelector extends DBSelector {
             resultSet = statement.executeQuery(querySQL);
         } catch (SQLException e) {
             throw new DBSelectException(e.getMessage(), e);
-        } finally {
-            if(statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    throw new DBSelectException(e.getMessage(), e);
-                }
-            }
-
-            if(connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new DBSelectException(e.getMessage(), e);
-                }
-            }
         }
 
         return resultSet;

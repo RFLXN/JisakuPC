@@ -7,6 +7,7 @@ import db.dao.DAOException;
 import db.dao.product.MySQLProductDao;
 import db.dao.product.ProductDao;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -41,7 +42,7 @@ public class MySQLDaoFactory extends DBDaoFactory {
         Properties properties = new Properties();
 
         try {
-            properties.load(new FileInputStream("../../resources/mysql.properties"));
+            properties.load(new FileInputStream("src/resources/mysql.properties"));
 
             info.setHost(properties.getProperty("host"));
             info.setUserName(properties.getProperty("username"));

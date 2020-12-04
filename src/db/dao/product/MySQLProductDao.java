@@ -2,6 +2,8 @@ package db.dao.product;
 
 import bean.DBConnectionInfo;
 import bean.Product;
+import db.connector.DBCloseException;
+import db.connector.DBCloser;
 import db.connector.DBConnectException;
 import db.connector.DBConnector;
 import db.dao.DAOException;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLProductDao implements ProductDao {
+    private Connection connection;
     @Override
     public void addProduct(Product product) throws DAOException {
 
@@ -46,7 +49,9 @@ public class MySQLProductDao implements ProductDao {
             product.setSpec(resultSet.getString("product_spec"));
             product.setBrand(resultSet.getString("product_brand"));
             product.setType(resultSet.getString("product_type"));
-        } catch (SQLException e) {
+
+            DBCloser.closer(connection);
+        } catch (SQLException | DBCloseException e) {
             throw new DAOException(e.getMessage(), e);
         }
 
@@ -72,7 +77,9 @@ public class MySQLProductDao implements ProductDao {
 
                 products.add(product);
             }
-        } catch (SQLException e) {
+
+            DBCloser.closer(connection);
+        } catch (SQLException | DBCloseException e) {
             throw new DAOException(e.getMessage(), e);
         }
 
@@ -98,7 +105,9 @@ public class MySQLProductDao implements ProductDao {
 
                 products.add(product);
             }
-        } catch (SQLException e) {
+
+            DBCloser.closer(connection);
+        } catch (SQLException | DBCloseException e) {
             throw new DAOException(e.getMessage(), e);
         }
 
@@ -110,7 +119,7 @@ public class MySQLProductDao implements ProductDao {
         DBConnector connector = factory.getConnector();
         DBConnectionInfo info = factory.getConnectionInfo();
 
-        Connection connection = null;
+        connection = null;
         try {
             connection = connector.getConnection(info.getHost()
                     , info.getUserName(), info.getPassword());
@@ -121,7 +130,7 @@ public class MySQLProductDao implements ProductDao {
     }
 
     private ResultSet query(String querySQL) throws DAOException {
-        Connection connection = getConnection();
+        connection = getConnection();
         ResultSet resultSet = null;
 
         try {
