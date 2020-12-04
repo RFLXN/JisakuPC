@@ -1,4 +1,4 @@
-import db.MySQLConnector;
+import db.connector.MySQLConnector;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
