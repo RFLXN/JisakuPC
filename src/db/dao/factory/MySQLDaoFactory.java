@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class MySQLDaoFactory extends DBDaoFactory {
     private static final MySQLDaoFactory instance;
@@ -39,17 +40,12 @@ public class MySQLDaoFactory extends DBDaoFactory {
     public DBConnectionInfo getConnectionInfo() throws DAOException {
         DBConnectionInfo info = new DBConnectionInfo();
 
-        Properties properties = new Properties();
+        ResourceBundle bundle = ResourceBundle.getBundle("resources.mysql");
 
-        try {
-            properties.load(new FileInputStream("src/resources/mysql.properties"));
+        info.setHost(bundle.getString("host"));
+        info.setUserName(bundle.getString("username"));
+        info.setPassword(bundle.getString("password"));
 
-            info.setHost(properties.getProperty("host"));
-            info.setUserName(properties.getProperty("username"));
-            info.setPassword(properties.getProperty("password"));
-        } catch (IOException e) {
-            throw new DAOException("Failed to Load MySQL Properties File", e);
-        }
 
         return info;
     }

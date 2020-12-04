@@ -1,10 +1,8 @@
 package command;
 import context.RequestContext;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 
 public abstract class CommandFactory {
@@ -12,18 +10,11 @@ public abstract class CommandFactory {
 
         AbstractCommand command = null;
 
-        Properties prop = new Properties();
-
         try {
-            prop.load(new FileInputStream("../resources/commands.properties"));
-            String name = prop.getProperty(requestContext.getCommandPath());
+            ResourceBundle bundle = ResourceBundle.getBundle("resources.commands");
+            String name = bundle.getString(requestContext.getCommandPath());
 
             command = (AbstractCommand)Class.forName(name).newInstance();
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage(), e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e.getMessage(), e);
         } catch (InstantiationException e) {
