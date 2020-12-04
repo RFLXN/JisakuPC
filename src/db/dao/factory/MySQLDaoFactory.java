@@ -1,8 +1,11 @@
-package db.dao;
+package db.dao.factory;
 
 import bean.DBConnectionInfo;
 import db.connector.DBConnector;
 import db.connector.MySQLConnector;
+import db.dao.DAOException;
+import db.dao.product.MySQLProductDao;
+import db.dao.product.ProductDao;
 
 import java.io.FileInputStream;
 import java.io.IOException;

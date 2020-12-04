@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Product implements Serializable {
     private String no;
     private String name;
+    private String price;
     private String spec;
     private String brand;
     private String type;
@@ -17,6 +18,10 @@ public class Product implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getPrice() {
+        return price;
     }
 
     public String getSpec() {
@@ -37,6 +42,10 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public void setSpec(String spec) {

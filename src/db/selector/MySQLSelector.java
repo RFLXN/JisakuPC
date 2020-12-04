@@ -1,4 +1,4 @@
-package db.connector;
+package db.selector;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MySQLSelector extends DBSelector {
-
     public MySQLSelector(Connection connection) {
         super(connection);
     }
+
     @Override
     public ResultSet select(String querySQL) throws DBSelectException {
         Connection connection = getConnection();
@@ -20,6 +20,24 @@ public class MySQLSelector extends DBSelector {
             resultSet = statement.executeQuery(querySQL);
         } catch (SQLException e) {
             throw new DBSelectException(e.getMessage(), e);
+        } finally {
+            if(statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    throw new DBSelectException(e.getMessage(), e);
+                }
+            }
+
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    throw new DBSelectException(e.getMessage(), e);
+                }
+            }
         }
+
+        return resultSet;
     }
 }

@@ -1,4 +1,7 @@
-package db.dao;
+package db.dao.factory;
+
+import db.dao.DAOException;
+import db.dao.product.ProductDao;
 
 import java.io.FileInputStream;
 import java.util.Properties;

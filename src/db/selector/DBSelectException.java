@@ -1,4 +1,4 @@
-package db.connector;
+package db.selector;
 
 import db.DBException;
 
