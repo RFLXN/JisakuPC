@@ -13,5 +13,5 @@ public abstract class AbstractCommand {
         return requestContext;
     }
 
-    public abstract ResponseContext execute(ResponseContext responseContext) throws CommandException;
+    public abstract ResponseContext execute(ResponseContext responseContext);
 }
