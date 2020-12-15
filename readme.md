@@ -61,6 +61,10 @@
     MySQLではシーケンスがありません。
     その代わりに AUTO_INCREMENTを使えます。
     
+> JSON型
+
+    MySQLにはJSON型があり、JSONデータを処理するための色んな関数が定義されています。
+    
     
 product_table
 
