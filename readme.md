@@ -61,7 +61,7 @@
     MySQLではシーケンスがありません。
     その代わりに AUTO_INCREMENTを使えます。
     
-> JSON型
+> [JSON型 (JSON FUNCTION REFERENCE DOCUMENT)](https://dev.mysql.com/doc/refman/5.7/en/json-function-reference.html)
 
     MySQLにはJSON型があり、JSONデータを処理するための色んな関数が定義されています。
     
