@@ -6,13 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MySQLUpdater extends DBUpdater {
-    public MySQLUpdater(Connection connection) {
-        super(connection);
-    }
-
     @Override
-    public void update(String updateSQL) throws DBUpdateException {
-        Connection connection = getConnection();
+    public void update(Connection connection, String updateSQL) throws DBUpdateException {
         Statement statement = null;
 
         try {
@@ -44,42 +39,11 @@ public class MySQLUpdater extends DBUpdater {
     }
 
     @Override
-    public void update(String updateSQL, String[][] data) throws DBUpdateException {
-        Connection connection = getConnection();
-        PreparedStatement statement = null;
-
+    public void update(PreparedStatement statement) throws DBUpdateException {
         try {
-            statement = connection.prepareStatement(updateSQL);
-
-            for(int i=0; i<data.length ; i++) {
-                for(int j=0 ; j<data[i].length ; j++) {
-                    statement.setString(j+1, data[i][j]);
-                }
-                statement.executeUpdate();
-            }
-
+            statement.executeUpdate();
         } catch (SQLException e) {
-            try {
-                connection.rollback();
-                throw new DBUpdateException(e.getMessage(), e);
-            } catch (SQLException re) {
-                throw new DBUpdateException(re.getMessage(), re);
-            }
-        } finally {
-            if(statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    throw new DBUpdateException(e.getMessage(), e);
-                }
-            }
-            if(connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new DBUpdateException(e.getMessage(), e);
-                }
-            }
+            throw new DBUpdateException(e.getMessage(), e);
         }
     }
 }

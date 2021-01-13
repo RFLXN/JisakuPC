@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public abstract class DBCloser {
-    public static void closer(Connection connection) throws DBCloseException {
+    public static void close(Connection connection) throws DBCloseException {
         try {
             connection.close();
         } catch (SQLException e) {

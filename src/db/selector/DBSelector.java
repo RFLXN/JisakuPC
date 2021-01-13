@@ -1,19 +1,12 @@
 package db.selector;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class DBSelector {
-    private Connection connection;
+    public abstract ResultSet select(Connection connection, String querySQL) throws DBSelectException;
 
-    public DBSelector(Connection connection) {
-        this.connection = connection;
-    }
-
-    protected Connection getConnection() {
-        return connection;
-    }
-
-    public abstract ResultSet select(String querySQL) throws DBSelectException;
+    public abstract ResultSet select(PreparedStatement statement) throws DBSelectException;
 }

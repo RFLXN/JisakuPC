@@ -10,6 +10,6 @@ VALUES
 INSERT INTO user_table
     (user_id, user_pw, admin)
 VALUES
-    ('userid1', 'userpass1', false),
-    ('userid2', 'userpass2', false),
-    ('admin', 'adminpass', true);
+    ('userid1', sha2('userpass1', 256), false),
+    ('userid2', sha2('userpass2', 256), false),
+    ('admin', sha2('adminpass', 256), true);
