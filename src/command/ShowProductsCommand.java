@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ShowProductsCommand extends AbstractCommand {
     @Override
-    public ResponseContext execute(ResponseContext responseContext) {
+    public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         List<Product> products = new ArrayList<>();
 
         try {
@@ -19,7 +19,7 @@ public class ShowProductsCommand extends AbstractCommand {
             ProductDao dao = daoFactory.getProductsDao();
             products = dao.getAllProducts();
         } catch (DAOException e) {
-            e.printStackTrace();
+            throw new CommandException(e);
         }
 
         responseContext.setResult(products);

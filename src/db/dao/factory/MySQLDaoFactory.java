@@ -6,6 +6,8 @@ import db.connector.MySQLConnector;
 import db.dao.DAOException;
 import db.dao.product.MySQLProductDao;
 import db.dao.product.ProductDao;
+import db.dao.user.MySQLUserDao;
+import db.dao.user.UserDao;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +31,11 @@ public class MySQLDaoFactory extends DBDaoFactory {
     @Override
     public ProductDao getProductsDao() {
         return new MySQLProductDao();
+    }
+
+    @Override
+    public UserDao getUserDao() {
+        return new MySQLUserDao();
     }
 
     @Override

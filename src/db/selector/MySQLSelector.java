@@ -8,7 +8,7 @@ public class MySQLSelector extends DBSelector {
         Statement statement = null;
         ResultSet resultSet = null;
         try {
-            statement = connection.createStatement();
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             resultSet = statement.executeQuery(querySQL);
         } catch (SQLException e) {
             throw new DBSelectException(e.getMessage(), e);

@@ -17,12 +17,17 @@ public class FrontServlet extends javax.servlet.http.HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws IOException, ServletException {
         req.setCharacterEncoding("utf-8");
-
+        
         ApplicationController controller = new WebApplicationController();
 
         RequestContext requestContext = controller.getRequest(req);
-        ResponseContext responseContext = controller.handleRequest(requestContext);
-        responseContext.setResponse(res);
-        controller.handleResponse(requestContext, responseContext);
+        ResponseContext responseContext = null;
+        try {
+            responseContext = controller.handleRequest(requestContext);
+            responseContext.setResponse(res);
+            controller.handleResponse(requestContext, responseContext);
+        } catch (ControllerException e) {
+            throw new ServletException(e);
+        }
     }
 }
