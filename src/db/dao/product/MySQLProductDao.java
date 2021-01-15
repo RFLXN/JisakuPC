@@ -142,6 +142,8 @@ public class MySQLProductDao implements ProductDao {
 
         return products;
     }
+
+    @Override
     public List<Product> getAllProducts() throws DAOException {
         ArrayList<Product> products = new ArrayList<>();
 
