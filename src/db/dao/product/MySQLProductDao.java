@@ -111,6 +111,37 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
+    public List<Product> getSearchProducts(String moji) throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+
+        String sql = "SELECT  * FROM product_table WHERE product_name LIKE ?";
+
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1, "%" + moji + "%");
+
+            ResultSet resultSet = query(statement);
+
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return products;
+    }
     public List<Product> getAllProducts() throws DAOException {
         ArrayList<Product> products = new ArrayList<>();
 
