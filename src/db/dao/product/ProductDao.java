@@ -12,4 +12,5 @@ public interface ProductDao {
     Product getProduct(String pid) throws DAOException;
     List<Product> getProductsByType(String type) throws DAOException;
     List<Product> getAllProducts() throws DAOException;
+    List<Product> getSearchProducts(String moji) throws DAOException;
 }

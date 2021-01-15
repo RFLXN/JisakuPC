@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 
 public abstract class CommandFactory {
-    public static AbstractCommand getCommand(RequestContext requestContext) {
+    public static AbstractCommand getCommand(RequestContext requestContext) throws CommandException {
 
         AbstractCommand command = null;
 
@@ -15,12 +15,8 @@ public abstract class CommandFactory {
             String name = bundle.getString(requestContext.getCommandPath());
 
             command = (AbstractCommand)Class.forName(name).newInstance();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e.getMessage(), e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e.getMessage(), e);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new CommandException(e);
         }
 
         return command;

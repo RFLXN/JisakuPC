@@ -9,15 +9,17 @@ import db.dao.product.ProductDao;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowProductsCommand extends AbstractCommand {
+public class SearchProductsCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
-        List<Product> products = new ArrayList<>();
+        List<Product> products = new ArrayList<Product>();
+
+        String productName = getRequestContext().getParameter("moji")[0];
 
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             ProductDao dao = daoFactory.getProductsDao();
-            products = dao.getAllProducts();
+            products = dao.getSearchProducts(productName);
         } catch (DAOException e) {
             throw new CommandException(e);
         }

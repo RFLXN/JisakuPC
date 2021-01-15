@@ -1,6 +1,7 @@
 package controller;
 
 import command.AbstractCommand;
+import command.CommandException;
 import command.CommandFactory;
 import context.RequestContext;
 import context.ResponseContext;
@@ -24,17 +25,22 @@ public class WebApplicationController implements ApplicationController {
     }
 
     @Override
-    public ResponseContext handleRequest(RequestContext requestContext) {
-        AbstractCommand command = CommandFactory.getCommand(requestContext);
-        command.init(requestContext);
+    public ResponseContext handleRequest(RequestContext requestContext) throws ControllerException {
+        ResponseContext responseContext = null;
 
-        ResponseContext responseContext = command.execute(new WebResponseContext());
+        try {
+            AbstractCommand command = CommandFactory.getCommand(requestContext);
+            command.init(requestContext);
+            responseContext = command.execute(new WebResponseContext());
+        } catch (CommandException e) {
+            throw new ControllerException(e);
+        }
 
         return responseContext;
     }
 
     @Override
-    public void handleResponse(RequestContext requestContext, ResponseContext responseContext) {
+    public void handleResponse(RequestContext requestContext, ResponseContext responseContext) throws ControllerException {
         HttpServletRequest request = (HttpServletRequest) requestContext.getRequest();
         HttpServletResponse response = (HttpServletResponse) responseContext.getResponse();
 
@@ -45,7 +51,7 @@ public class WebApplicationController implements ApplicationController {
         try {
             dispatcher.forward(request, response);
         } catch (ServletException | IOException e) {
-            e.printStackTrace();
+            throw new ControllerException(e);
         }
     }
 }

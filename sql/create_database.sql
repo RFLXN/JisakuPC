@@ -1,5 +1,5 @@
-CREATE DATABASE jisaku;
+CREATE DATABASE orcl;
 
-CREATE USER jisaku IDENTIFIED BY 'jisaku';
+CREATE USER info IDENTIFIED BY 'pro';
 
-GRANT ALL PRIVILEGES ON jisaku.* TO 'jisaku'@'%';
+GRANT ALL PRIVILEGES ON orcl.* TO 'info'@'%';

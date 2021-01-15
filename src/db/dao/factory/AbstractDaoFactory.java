@@ -2,6 +2,7 @@ package db.dao.factory;
 
 import db.dao.DAOException;
 import db.dao.product.ProductDao;
+import db.dao.user.UserDao;
 
 import java.io.FileInputStream;
 import java.lang.reflect.Method;
@@ -27,4 +28,5 @@ public abstract class AbstractDaoFactory {
     }
 
     public abstract ProductDao getProductsDao();
+    public abstract UserDao getUserDao();
 }

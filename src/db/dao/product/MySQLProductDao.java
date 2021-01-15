@@ -12,6 +12,7 @@ import db.selector.DBSelectException;
 import db.selector.MySQLSelector;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class MySQLProductDao implements ProductDao {
     private Connection connection;
+
     @Override
     public void addProduct(Product product) throws DAOException {
 
@@ -37,11 +39,14 @@ public class MySQLProductDao implements ProductDao {
     @Override
     public Product getProduct(String pid) throws DAOException {
         Product product = null;
-
-        String sql = "SELECT * FROM product_table WHERE product_no = " + pid;
-        ResultSet resultSet = query(sql);
+        connection = getConnection();
 
         try {
+            String sql = "SELECT * FROM product_table WHERE product_no = (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, pid);
+            ResultSet resultSet = query(statement);
+
             resultSet.next();
             product.setNo(resultSet.getString("product_no"));
             product.setName(resultSet.getString("product_name"));
@@ -50,8 +55,15 @@ public class MySQLProductDao implements ProductDao {
             product.setBrand(resultSet.getString("product_brand"));
             product.setType(resultSet.getString("product_type"));
 
-            DBCloser.closer(connection);
+            DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
+            if(connection != null) {
+                try {
+                    DBCloser.close(connection);
+                } catch (DBCloseException ce) {
+                    throw new DAOException(ce.getMessage(), ce);
+                }
+            }
             throw new DAOException(e.getMessage(), e);
         }
 
@@ -61,11 +73,15 @@ public class MySQLProductDao implements ProductDao {
     @Override
     public List<Product> getProductsByType(String type) throws DAOException {
         ArrayList<Product> products = new ArrayList<>();
-
-        String sql = "SELECT * FROM product_table WHERE type = " + type;
-        ResultSet resultSet = query(sql);
+        String sql = "SELECT * FROM product_table WHERE type = (?)";
+        connection = getConnection();
 
         try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, type);
+
+            ResultSet resultSet = query(statement);
+
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setNo(resultSet.getString("product_no"));
@@ -78,8 +94,16 @@ public class MySQLProductDao implements ProductDao {
                 products.add(product);
             }
 
-            DBCloser.closer(connection);
+            DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
+            if(connection != null) {
+                try {
+                    DBCloser.close(connection);
+                } catch (DBCloseException ce) {
+                    throw new DAOException(ce.getMessage(), ce);
+                }
+            }
+
             throw new DAOException(e.getMessage(), e);
         }
 
@@ -87,13 +111,18 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getAllProducts() throws DAOException {
+    public List<Product> getSearchProducts(String moji) throws DAOException {
         ArrayList<Product> products = new ArrayList<>();
 
-        String sql = "SELECT * FROM product_table";
-        ResultSet resultSet = query(sql);
+        String sql = "SELECT  * FROM product_table WHERE product_name LIKE ?";
 
         try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1, "%" + moji + "%");
+
+            ResultSet resultSet = query(statement);
+
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setNo(resultSet.getString("product_no"));
@@ -106,8 +135,43 @@ public class MySQLProductDao implements ProductDao {
                 products.add(product);
             }
 
-            DBCloser.closer(connection);
+            DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return products;
+    }
+    public List<Product> getAllProducts() throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+
+        String sql = "SELECT * FROM product_table";
+
+        ResultSet resultSet = query(sql);
+
+        try {
+
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            if(connection != null) {
+                try {
+                    DBCloser.close(connection);
+                } catch (DBCloseException ce) {
+                    throw new DAOException(ce.getMessage(), ce);
+                }
+            }
             throw new DAOException(e.getMessage(), e);
         }
 
@@ -134,8 +198,21 @@ public class MySQLProductDao implements ProductDao {
         ResultSet resultSet = null;
 
         try {
-            MySQLSelector selector = new MySQLSelector(connection);
-            resultSet = selector.select(querySQL);
+            MySQLSelector selector = new MySQLSelector();
+            resultSet = selector.select(connection, querySQL);
+        } catch (DBSelectException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return resultSet;
+    }
+
+    private ResultSet query(PreparedStatement statement) throws DAOException {
+        ResultSet resultSet = null;
+
+        try {
+            MySQLSelector selector = new MySQLSelector();
+            resultSet = selector.select(statement);
         } catch (DBSelectException e) {
             throw new DAOException(e.getMessage(), e);
         }

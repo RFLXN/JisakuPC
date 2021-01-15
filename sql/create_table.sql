@@ -11,7 +11,7 @@ CREATE TABLE product_table(
 CREATE TABLE user_table(
     user_no INT AUTO_INCREMENT,
     user_id VARCHAR(20) NOT NULL UNIQUE,
-    user_pw VARCHAR(20) NOT NULL,
+    user_pw VARCHAR(64) NOT NULL,
     admin BOOLEAN NOT NULL,
     PRIMARY KEY (user_no)
 );
