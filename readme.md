@@ -1,5 +1,23 @@
 # 自作パソコンサイト JisakuPC
 
+## 作業状況
+
+* 2021-01-11 ~ 2021-01-15
+    * 佐々木 陽悟
+        * SearchProductsCommandの作成
+        * MySQLMySQLProductDaoにgetSearchProductsメソッドを作成
+    * 秦佳冴
+        * キーワード検索をするjsp
+    * 藤野優樹
+        * 検索コマンド作成(値の受け渡し方の調査など)
+    * 崔峻赫
+        * MySQLUserDaoの作成
+        * ShowSignUpCommandの作成
+        * SignUpCommandの作成
+        * signup.jsp, signup.jsの作成
+
+
+
 ## やることリスト
 
 ### 1. 作成サイトの決定
@@ -206,3 +224,4 @@ source $project_root/sql/insert_dummy_data.sql
 ### 14. コマンド (とりあえず一つ作成)
 
 ### 15. テストラン
+
