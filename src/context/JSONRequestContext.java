@@ -3,11 +3,11 @@ package context;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-public class WebRequestContext implements RequestContext {
+public class JSONRequestContext implements RequestContext {
     private HttpServletRequest request;
     private Map<String, String[]> parameters;
 
-    public WebRequestContext() {}
+    public JSONRequestContext() {}
 
     @Override
     public String getCommandPath() {

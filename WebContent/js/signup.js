@@ -6,7 +6,7 @@ function signup() {
     $.ajax({
         type: "POST",
         dataType: "json",
-        url: "json/signup-check",
+        url: "signup-check.json",
         data: {
             id: userId
         },

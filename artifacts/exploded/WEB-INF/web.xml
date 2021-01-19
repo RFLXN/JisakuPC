@@ -21,7 +21,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>JSONServlet</servlet-name>
-    <url-pattern>/json/*</url-pattern>
+    <url-pattern>*.json</url-pattern>
   </servlet-mapping>
 
   <servlet>

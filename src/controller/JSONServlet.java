@@ -1,5 +1,7 @@
 package controller;
 
+import context.RequestContext;
+import context.ResponseContext;
 import db.dao.user.MySQLUserDao;
 import org.json.JSONObject;
 
@@ -12,12 +14,9 @@ import java.io.PrintWriter;
 
 public class JSONServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+        /*
         req.setCharacterEncoding("UTF-8");
 
         String id = req.getParameter("id");
@@ -39,5 +38,23 @@ public class JSONServlet extends HttpServlet {
         out.print(jsonObject.toString());
         out.flush();
         out.close();
+        */
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+
+        JSONApplicationController controller = new JSONApplicationController();
+
+        RequestContext requestContext = controller.getRequest(req);
+        ResponseContext responseContext = null;
+        try {
+            responseContext = controller.handleRequest(requestContext);
+            responseContext.setResponse(resp);
+            controller.handleResponse(requestContext, responseContext);
+        } catch (ControllerException e) {
+            throw new ServletException(e);
+        }
     }
 }
