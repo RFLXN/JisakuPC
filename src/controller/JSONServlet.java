@@ -13,29 +13,6 @@ public class JSONServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
-        /*
-        req.setCharacterEncoding("UTF-8");
-
-        String id = req.getParameter("id");
-
-        MySQLUserDao dao = new MySQLUserDao();
-        boolean al = true;
-        try {
-            al = dao.isAlreadyUsedId(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("isAlreadyUsedId", al);
-
-        resp.setCharacterEncoding("UTF-8");
-        resp.setContentType("application/json");
-        PrintWriter out = resp.getWriter();
-        out.print(jsonObject.toString());
-        out.flush();
-        out.close();
-        */
     }
 
     @Override
