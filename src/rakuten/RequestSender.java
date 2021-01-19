@@ -6,7 +6,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class RequestSender {
-    private String url;
+    private final String url;
 
     public RequestSender(String url) {
         this.url = url;
@@ -23,7 +23,7 @@ public class RequestSender {
         try {
             targetURL = new URL(url);
 
-            connection = (HttpURLConnection)targetURL.openConnection();
+            connection = (HttpURLConnection) targetURL.openConnection();
             connection.setRequestMethod(method);
             connection.connect();
 

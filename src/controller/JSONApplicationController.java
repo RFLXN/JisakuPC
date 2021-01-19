@@ -9,8 +9,6 @@ import context.WebRequestContext;
 import context.WebResponseContext;
 import org.json.JSONObject;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -46,7 +44,7 @@ public class JSONApplicationController implements ApplicationController {
         HttpServletRequest request = (HttpServletRequest) requestContext.getRequest();
         HttpServletResponse response = (HttpServletResponse) responseContext.getResponse();
 
-        JSONObject jsonData = (JSONObject)responseContext.getResult();
+        JSONObject jsonData = (JSONObject) responseContext.getResult();
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");

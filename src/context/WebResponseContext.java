@@ -8,11 +8,7 @@ public class WebResponseContext implements ResponseContext {
 
     private HttpServletResponse response;
 
-    public WebResponseContext() {}
-
-    @Override
-    public void setResult(Object bean) {
-        this.result = bean;
+    public WebResponseContext() {
     }
 
     @Override
@@ -21,8 +17,8 @@ public class WebResponseContext implements ResponseContext {
     }
 
     @Override
-    public void setTarget(String transferInfo) {
-        this.target = "/WEB-INF/jsp/" + transferInfo + ".jsp";
+    public void setResult(Object bean) {
+        this.result = bean;
     }
 
     @Override
@@ -31,12 +27,17 @@ public class WebResponseContext implements ResponseContext {
     }
 
     @Override
-    public void setResponse(Object response) {
-        this.response = (HttpServletResponse) response;
+    public void setTarget(String transferInfo) {
+        this.target = "/WEB-INF/jsp/" + transferInfo + ".jsp";
     }
 
     @Override
     public Object getResponse() {
         return response;
+    }
+
+    @Override
+    public void setResponse(Object response) {
+        this.response = (HttpServletResponse) response;
     }
 }

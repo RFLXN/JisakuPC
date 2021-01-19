@@ -4,9 +4,7 @@ import db.dao.DAOException;
 import db.dao.product.ProductDao;
 import db.dao.user.UserDao;
 
-import java.io.FileInputStream;
 import java.lang.reflect.Method;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public abstract class AbstractDaoFactory {
@@ -19,7 +17,7 @@ public abstract class AbstractDaoFactory {
             Class<?> cls = Class.forName(dao);
             Method method = cls.getMethod("getInstance");
 
-            factory = (AbstractDaoFactory)method.invoke(null, null);
+            factory = (AbstractDaoFactory) method.invoke(null, null);
         } catch (Exception e) {
             throw new DAOException(e.getMessage(), e);
         }
@@ -28,5 +26,6 @@ public abstract class AbstractDaoFactory {
     }
 
     public abstract ProductDao getProductsDao();
+
     public abstract UserDao getUserDao();
 }

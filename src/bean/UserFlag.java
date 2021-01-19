@@ -5,7 +5,8 @@ public class UserFlag {
     private boolean isAdmin;
     private String userNo;
 
-    public UserFlag() {}
+    public UserFlag() {
+    }
 
     public boolean isCorrectUser() {
         return isCorrectUser;

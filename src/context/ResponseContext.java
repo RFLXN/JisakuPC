@@ -1,11 +1,16 @@
 package context;
 
 public interface ResponseContext {
-    void setResult(Object bean);
     Object getResult();
-    void setTarget(String transferInfo);
+
+    void setResult(Object bean);
+
     String getTarget();
-    void setResponse(Object response);
+
+    void setTarget(String transferInfo);
+
     Object getResponse();
+
+    void setResponse(Object response);
 }
 

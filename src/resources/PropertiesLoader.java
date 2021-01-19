@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesLoader {
-    private String path;
-    private Properties properties;
+    private final String path;
+    private final Properties properties;
 
     public PropertiesLoader(String path) throws IOException {
         this.path = path;

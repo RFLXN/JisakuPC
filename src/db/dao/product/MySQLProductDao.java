@@ -57,7 +57,7 @@ public class MySQLProductDao implements ProductDao {
 
             DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     DBCloser.close(connection);
                 } catch (DBCloseException ce) {
@@ -96,7 +96,7 @@ public class MySQLProductDao implements ProductDao {
 
             DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     DBCloser.close(connection);
                 } catch (DBCloseException ce) {
@@ -167,7 +167,7 @@ public class MySQLProductDao implements ProductDao {
 
             DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     DBCloser.close(connection);
                 } catch (DBCloseException ce) {
@@ -181,7 +181,7 @@ public class MySQLProductDao implements ProductDao {
     }
 
     private Connection getConnection() throws DAOException {
-        MySQLDaoFactory factory = (MySQLDaoFactory)MySQLDaoFactory.getInstance();
+        MySQLDaoFactory factory = (MySQLDaoFactory) MySQLDaoFactory.getInstance();
         DBConnector connector = factory.getConnector();
         DBConnectionInfo info = factory.getConnectionInfo();
 

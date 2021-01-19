@@ -9,19 +9,16 @@ import db.dao.product.ProductDao;
 import db.dao.user.MySQLUserDao;
 import db.dao.user.UserDao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class MySQLDaoFactory extends DBDaoFactory {
     private static final MySQLDaoFactory instance;
 
-    private MySQLDaoFactory() {}
-
     static {
         instance = new MySQLDaoFactory();
+    }
+
+    private MySQLDaoFactory() {
     }
 
     public static AbstractDaoFactory getInstance() {

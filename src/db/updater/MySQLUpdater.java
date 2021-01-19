@@ -20,14 +20,14 @@ public class MySQLUpdater extends DBUpdater {
                 throw new DBUpdateException(re.getMessage(), re);
             }
         } finally {
-            if(statement != null) {
+            if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException e) {
                     throw new DBUpdateException(e.getMessage(), e);
                 }
             }
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException e) {
@@ -43,7 +43,7 @@ public class MySQLUpdater extends DBUpdater {
             statement.executeUpdate();
             statement.getConnection().commit();
         } catch (SQLException e) {
-            if(statement != null) {
+            if (statement != null) {
                 try {
                     statement.getConnection().rollback();
                 } catch (SQLException se) {

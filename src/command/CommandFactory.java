@@ -1,7 +1,7 @@
 package command;
+
 import context.RequestContext;
 
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 
@@ -14,7 +14,7 @@ public abstract class CommandFactory {
             ResourceBundle bundle = ResourceBundle.getBundle("resources.commands");
             String name = bundle.getString(requestContext.getCommandPath());
 
-            command = (AbstractCommand)Class.forName(name).newInstance();
+            command = (AbstractCommand) Class.forName(name).newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             throw new CommandException(e);
         }

@@ -17,7 +17,7 @@ public class FrontServlet extends javax.servlet.http.HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws IOException, ServletException {
         req.setCharacterEncoding("utf-8");
-        
+
         ApplicationController controller = new WebApplicationController();
 
         RequestContext requestContext = controller.getRequest(req);

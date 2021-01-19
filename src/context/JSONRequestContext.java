@@ -7,7 +7,8 @@ public class JSONRequestContext implements RequestContext {
     private HttpServletRequest request;
     private Map<String, String[]> parameters;
 
-    public JSONRequestContext() {}
+    public JSONRequestContext() {
+    }
 
     @Override
     public String getCommandPath() {
@@ -20,13 +21,13 @@ public class JSONRequestContext implements RequestContext {
     }
 
     @Override
-    public void setRequest(Object request) {
-        this.request = (HttpServletRequest)request;
-        parameters = this.request.getParameterMap();
+    public Object getRequest() {
+        return request;
     }
 
     @Override
-    public Object getRequest() {
-        return request;
+    public void setRequest(Object request) {
+        this.request = (HttpServletRequest) request;
+        parameters = this.request.getParameterMap();
     }
 }

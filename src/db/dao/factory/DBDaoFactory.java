@@ -6,5 +6,6 @@ import db.dao.DAOException;
 
 public abstract class DBDaoFactory extends AbstractDaoFactory {
     public abstract DBConnector getConnector();
+
     public abstract DBConnectionInfo getConnectionInfo() throws DAOException;
 }

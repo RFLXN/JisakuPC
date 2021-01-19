@@ -11,7 +11,6 @@ import db.dao.factory.MySQLDaoFactory;
 import db.selector.DBSelectException;
 import db.selector.MySQLSelector;
 import db.updater.DBUpdateException;
-import db.updater.DBUpdater;
 import db.updater.MySQLUpdater;
 
 import java.sql.Connection;
@@ -27,7 +26,7 @@ public class MySQLUserDao implements UserDao {
         connection = getConnection();
         try {
             String sql = "INSERT INTO user_table(user_id, user_pw, admin)"
-                    +" VALUES (?, sha2(?, 256), ?)";
+                    + " VALUES (?, sha2(?, 256), ?)";
             PreparedStatement statement = getConnection().prepareStatement(sql);
 
             statement.setString(1, id);
@@ -71,12 +70,12 @@ public class MySQLUserDao implements UserDao {
 
             resultSet.last();
 
-            if(resultSet.getRow() < 1) {
+            if (resultSet.getRow() < 1) {
                 isAlreadyUsedId = false;
             }
             DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     DBCloser.close(connection);
                 } catch (DBCloseException ce) {
@@ -103,7 +102,7 @@ public class MySQLUserDao implements UserDao {
 
             resultSet.last();
 
-            if(resultSet.getRow() < 1) {
+            if (resultSet.getRow() < 1) {
                 userFlag.setCorrectUser(false);
             } else {
                 userFlag.setUserNo(resultSet.getString("user_no"));
@@ -122,7 +121,7 @@ public class MySQLUserDao implements UserDao {
             }
             DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     DBCloser.close(connection);
                 } catch (DBCloseException ce) {
@@ -137,7 +136,7 @@ public class MySQLUserDao implements UserDao {
     }
 
     private Connection getConnection() throws DAOException {
-        MySQLDaoFactory factory = (MySQLDaoFactory)MySQLDaoFactory.getInstance();
+        MySQLDaoFactory factory = (MySQLDaoFactory) MySQLDaoFactory.getInstance();
         DBConnector connector = factory.getConnector();
         DBConnectionInfo info = factory.getConnectionInfo();
 
@@ -182,7 +181,7 @@ public class MySQLUserDao implements UserDao {
         try {
             MySQLUpdater updater = new MySQLUpdater();
             updater.update(statement);
-        } catch (DBUpdateException e)  {
+        } catch (DBUpdateException e) {
             throw new DAOException(e.getMessage(), e);
         }
     }

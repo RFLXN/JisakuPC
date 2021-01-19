@@ -20,9 +20,9 @@ public class UsedIdJsonCommand extends AbstractCommand {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             UserDao userDao = daoFactory.getUserDao();
 
-             boolean isAlreadyUsedId = userDao.isAlreadyUsedId(id);
+            boolean isAlreadyUsedId = userDao.isAlreadyUsedId(id);
 
-             jsonData.put("isAlreadyUsedId", isAlreadyUsedId);
+            jsonData.put("isAlreadyUsedId", isAlreadyUsedId);
         } catch (DAOException e) {
             throw new CommandException(e);
         }

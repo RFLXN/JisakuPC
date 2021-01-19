@@ -1,11 +1,12 @@
 package command;
+
 import context.RequestContext;
 import context.ResponseContext;
 
 public abstract class AbstractCommand {
     private RequestContext requestContext;
 
-    public void init(RequestContext requestContext){
+    public void init(RequestContext requestContext) {
         this.requestContext = requestContext;
     }
 
