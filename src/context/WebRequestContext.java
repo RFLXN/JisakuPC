@@ -6,6 +6,7 @@ import java.util.Map;
 public class WebRequestContext implements RequestContext {
     private HttpServletRequest request;
     private Map<String, String[]> parameters;
+    private String referer;
 
     public WebRequestContext() {
     }
@@ -26,8 +27,22 @@ public class WebRequestContext implements RequestContext {
     }
 
     @Override
+    public String getReferer() {
+        return referer;
+    }
+
+    @Override
     public void setRequest(Object request) {
         this.request = (HttpServletRequest) request;
         parameters = this.request.getParameterMap();
+
+        try {
+            String refererHeader = this.request.getHeader("Referer");
+            String[] ref = refererHeader.split("/");
+            referer = ref[ref.length-1];
+            System.out.println(referer);
+        } catch (NullPointerException e) {
+            referer = null;
+        }
     }
 }

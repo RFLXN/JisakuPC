@@ -1,13 +1,13 @@
 package command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bean.Product;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.product.ProductDao;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchProductsCommand extends AbstractCommand {
     @Override
@@ -19,7 +19,13 @@ public class SearchProductsCommand extends AbstractCommand {
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             ProductDao dao = daoFactory.getProductsDao();
-            products = dao.getSearchProducts(productName);
+            if(getRequestContext().getParameter("syoujunn") !=  null) {
+                products = dao.getASCSearchProducts(productName);
+            } else if(getRequestContext().getParameter("koujunn") !=  null) {
+                products = dao.getDESCSearchProducts(productName);
+            } else {
+                products = dao.getSearchProducts(productName);
+            }
         } catch (DAOException e) {
             throw new CommandException(e);
         }

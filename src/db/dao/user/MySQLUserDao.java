@@ -105,6 +105,7 @@ public class MySQLUserDao implements UserDao {
             if (resultSet.getRow() < 1) {
                 userFlag.setCorrectUser(false);
             } else {
+                userFlag.setUserId(resultSet.getString("user_id"));
                 userFlag.setUserNo(resultSet.getString("user_no"));
                 userFlag.setAdmin(resultSet.getBoolean("admin"));
 

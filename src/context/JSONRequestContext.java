@@ -26,6 +26,11 @@ public class JSONRequestContext implements RequestContext {
     }
 
     @Override
+    public String getReferer() {
+        return null;
+    }
+
+    @Override
     public void setRequest(Object request) {
         this.request = (HttpServletRequest) request;
         parameters = this.request.getParameterMap();

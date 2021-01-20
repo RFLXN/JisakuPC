@@ -28,7 +28,12 @@ public class WebResponseContext implements ResponseContext {
 
     @Override
     public void setTarget(String transferInfo) {
-        this.target = "/WEB-INF/jsp/" + transferInfo + ".jsp";
+        if(transferInfo.equals("index")) {
+            this.target = "index.jsp";
+        } else {
+            this.target = "/WEB-INF/jsp/" + transferInfo + ".jsp";
+        }
+
     }
 
     @Override

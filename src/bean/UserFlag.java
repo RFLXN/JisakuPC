@@ -4,6 +4,7 @@ public class UserFlag {
     private boolean isCorrectUser;
     private boolean isAdmin;
     private String userNo;
+    private String userId;
 
     public UserFlag() {
     }
@@ -30,5 +31,13 @@ public class UserFlag {
 
     public void setUserNo(String userNo) {
         this.userNo = userNo;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

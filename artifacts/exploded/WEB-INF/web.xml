@@ -32,4 +32,15 @@
     <servlet-name>FrontServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>filter.AuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/mypage</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
 </web-app>
