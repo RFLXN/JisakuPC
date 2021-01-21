@@ -19,13 +19,17 @@ public class SearchProductsCommand extends AbstractCommand {
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             ProductDao dao = daoFactory.getProductsDao();
-            if(getRequestContext().getParameter("syoujunn") !=  null) {
-                products = dao.getASCSearchProducts(productName);
-            } else if(getRequestContext().getParameter("koujunn") !=  null) {
-                products = dao.getDESCSearchProducts(productName);
-            } else {
+
+            String[] sort = getRequestContext().getParameter("sort-by-cost");
+
+            if(sort == null || sort[0].equals("")) {
                 products = dao.getSearchProducts(productName);
+            } else if(sort[0].equals("asc")) {
+                products = dao.getASCSearchProducts(productName);
+            } else if(sort[0].equals("desc")) {
+                products = dao.getDESCSearchProducts(productName);
             }
+
         } catch (DAOException e) {
             throw new CommandException(e);
         }

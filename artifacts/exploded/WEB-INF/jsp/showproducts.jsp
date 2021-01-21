@@ -10,12 +10,12 @@
 <body>
 <div id="search">
   <form method="get" action="searchproduct">
-    <input type="text" name="moji" value="${moji}" size="36" maxvalue="30" placeholder="キーワードで検索" maxlength="20">
+    <input type="text" name="moji" value="${param.moji}" size="36" placeholder="キーワードで検索" maxlength="20">
     <input type="submit" value="検索">
 <%-- 	<input type="submit" name="syoujunn" value="昇順" />
 	<input type="submit" name="koujunn" value="降順" />--%>
-	<input type="radio" name="syoujunn" value="昇順">昇順
-	<input type="radio" name="koujunn" value="降順">降順
+	  <label><input type="radio" name="sort-by-cost" value="asc">昇順</label>
+    <label><input type="radio" name="sort-by-cost" value="desc">降順</label>
   </form>
 </div>
 
