@@ -1,11 +1,11 @@
 CREATE TABLE product_table(
-                              product_no INT NOT NULL AUTO_INCREMENT,
-                              product_name VARCHAR(120) NOT NULL,
-                              product_price INT NOT NULL,
-                              product_spec json NOT NULL,
-                              product_brand VARCHAR(30) NOT NULL,
-                              product_type VARCHAR(12) NOT NULL,
-                              PRIMARY KEY (product_no)
+      product_no INT NOT NULL AUTO_INCREMENT,
+      product_name VARCHAR(120) NOT NULL,
+      product_price INT NOT NULL,
+      product_spec json NOT NULL,
+      product_brand VARCHAR(30) NOT NULL,
+      product_type VARCHAR(12) NOT NULL,
+      PRIMARY KEY (product_no)
 );
 
 CREATE TABLE user_table(
