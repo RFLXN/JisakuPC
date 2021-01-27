@@ -1,24 +1,20 @@
 package rakuten;
 
 import org.json.JSONObject;
-import resources.PropertiesLoader;
-
-import java.io.IOException;
 
 public class RakutenAPIWrapper {
     private final String applicationId;
     private final String searchUrl;
 
     public RakutenAPIWrapper() throws RakutenAPIException {
-        PropertiesLoader loader = null;
-        try {
-            loader = new PropertiesLoader("../resources/rakuten_api_info.properties");
-        } catch (IOException e) {
-            throw new RakutenAPIException("Failed to Load Rakuten API Information", e);
-        }
+        RakutenPropertyLoader loader = RakutenPropertyLoader.getInstance();
 
-        applicationId = loader.getProperty("applicationId");
-        searchUrl = loader.getProperty("searchItemUrl");
+        try {
+            applicationId = loader.getApiInfo("applicationId");
+            searchUrl = loader.getApiInfo("searchItemUrl");
+        } catch (IllegalArgumentException e) {
+            throw new RakutenAPIException(e);
+        }
 
         if (applicationId.equals("") || applicationId == null
                 || searchUrl.equals("") || searchUrl == null) {
@@ -26,6 +22,14 @@ public class RakutenAPIWrapper {
         }
     }
 
+    /*
+     * Search Option: String[] Type
+     *  [
+     *      "genre:GENRE_ID",       // Property Loader -> getApiParameter("GENRE_NAME")
+     *      "productName:PRODUCT_NAME",
+     *      "productId:PRODUCT_ID"
+     *  ]
+     */
     public JSONObject search(String[] option) {
         String url = getSearchUrl(option);
 
@@ -39,6 +43,7 @@ public class RakutenAPIWrapper {
         String genreId = "";
         String productName = "";
         String productId = "";
+        String page = "";
 
         StringBuilder url = new StringBuilder(searchUrl);
         for (String o : option) {
@@ -51,9 +56,12 @@ public class RakutenAPIWrapper {
             if (o.startsWith("productId:")) {
                 productId = o.replaceFirst("productId:", "");
             }
+            if(o.startsWith("page:")) {
+                page = o.replaceFirst("page:", "");
+            }
         }
 
-        url.append("format=json&applicationId=").append(applicationId);
+        url.append("format=json&formatVersion=2&applicationId=").append(applicationId);
 
         if (!genreId.equals("")) {
             url.append("&genreId=").append(genreId);
@@ -63,6 +71,9 @@ public class RakutenAPIWrapper {
         }
         if (!productName.equals("")) {
             url.append("&keyword=").append(productName);
+        }
+        if(!page.equals("")) {
+            url.append("&page=").append(page);
         }
 
         return url.toString();

@@ -1,16 +1,18 @@
-import db.dao.user.MySQLUserDao;
+import resources.csv.CsvDbInserter;
+import resources.csv.CsvProduct;
 
-import java.net.URL;
+import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
         try {
-            URL url = new URL("http://www.naver.com/test/test.html");
-            System.out.println(url.getPath());
-            System.out.println(url.getFile());
-            System.out.println(url.getRef());
+            CsvDbInserter csvDbInserter = new CsvDbInserter();
+            csvDbInserter.insertAll();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
+
 }
