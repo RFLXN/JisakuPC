@@ -22,7 +22,7 @@ public class RakutenAPIWrapper {
         }
     }
 
-    /*
+    /**
      * Search Option: String[] Type
      *  [
      *      "genre:GENRE_ID",       // Property Loader -> getApiParameter("GENRE_NAME")

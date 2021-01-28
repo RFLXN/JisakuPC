@@ -86,9 +86,12 @@ public class CsvDbInserter {
         for(String product : products) {
             String[] buff = product.split(",");
             String productName = buff[0];
-            String rawSpec = buff[1];
 
-            buff = rawSpec.split(" \\| ");
+            if(buff.length<2) {
+                buff = new String[] {""};
+            } else {
+                buff = buff[1].split(" \\| ");
+            }
 
             String clock = null;
             String boostClock = null;
@@ -168,7 +171,12 @@ public class CsvDbInserter {
         for(String rawProduct :products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
-            buff = buff[1].split(" \\| ");
+
+            if(buff.length<2) {
+                buff = new String[] {""};
+            } else {
+                buff = buff[1].split(" \\| ");
+            }
 
             String size = null;
             String volume = null;
@@ -231,7 +239,12 @@ public class CsvDbInserter {
         for(String rawProduct :products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
-            buff = buff[1].split(" \\| ");
+
+            if(buff.length<2) {
+                buff = new String[] {""};
+            } else {
+                buff = buff[1].split(" \\| ");
+            }
 
             String size = null;
             String volume = null;
@@ -296,7 +309,12 @@ public class CsvDbInserter {
         for(String rawProduct :products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
-            buff = buff[1].split(" \\| ");
+
+            if(buff.length<2) {
+                buff = new String[] {""};
+            } else {
+                buff = buff[1].split(" \\| ");
+            }
 
             String gpuName = null;
             String date = null;
@@ -359,7 +377,12 @@ public class CsvDbInserter {
         for(String rawProduct :products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
-            buff = buff[1].split(" \\| ");
+
+            if(buff.length<2) {
+                buff = new String[] {""};
+            } else {
+                buff = buff[1].split(" \\| ");
+            }
 
             String factor = null;
             String[] color = null;
@@ -430,7 +453,12 @@ public class CsvDbInserter {
         for(String rawProduct :products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
-            buff = buff[1].split(" \\| ");
+
+            if(buff.length<2) {
+                buff = new String[] {""};
+            } else {
+                buff = buff[1].split(" \\| ");
+            }
 
             String w = null;
             String[] factor = null;
@@ -508,7 +536,12 @@ public class CsvDbInserter {
         for(String rawProduct :products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
-            buff = buff[1].split(" \\| ");
+
+            if(buff.length<2) {
+                buff = new String[] {""};
+            } else {
+                buff = buff[1].split(" \\| ");
+            }
 
             String formfactor = null;
             String chipset = null;
@@ -568,7 +601,12 @@ public class CsvDbInserter {
         for(String rawProduct :products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
-            buff = buff[1].split(" \\| ");
+
+            if(buff.length<2) {
+                buff = new String[] {""};
+            } else {
+                buff = buff[1].split(" \\| ");
+            }
 
             String type = null;
             String size = null;
@@ -631,7 +669,12 @@ public class CsvDbInserter {
         for(String rawProduct :products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
-            buff = buff[1].split(" \\| ");
+
+            if(buff.length<2) {
+                buff = new String[] {""};
+            } else {
+                buff = buff[1].split(" \\| ");
+            }
 
             String size = null;
             String rpm = null;
