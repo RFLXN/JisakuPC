@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.DBConnectionInfo;
+import bean.Post;
 import bean.Product;
 import db.connector.DBCloseException;
 import db.connector.DBCloser;
@@ -17,6 +18,8 @@ import db.dao.DAOException;
 import db.dao.factory.MySQLDaoFactory;
 import db.selector.DBSelectException;
 import db.selector.MySQLSelector;
+import db.updater.DBUpdateException;
+import db.updater.MySQLUpdater;
 
 public class MySQLProductDao implements ProductDao {
     private Connection connection;
@@ -246,6 +249,117 @@ public class MySQLProductDao implements ProductDao {
         return products;
     }
 
+    @Override
+    public List<Post> getAllPosts() throws DAOException {
+        ArrayList<Post> posts = new ArrayList<>();
+
+        String sql = "SELECT * FROM build_post_table";
+
+        ResultSet resultSet = query(sql);
+
+        try {
+        	while (resultSet.next()) {
+                Post post = new Post();
+
+                post.setTitle(resultSet.getString("title"));
+                post.setDescription(resultSet.getString("description"));
+
+                posts.add(post);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return posts;
+    }
+
+
+    @Override
+    public List<Product> getPartsSearchProducts(String moji) throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+
+        String sql = "SELECT  * FROM product_table WHERE product_type LIKE ?";
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1, "%" + moji + "%");
+
+            ResultSet resultSet = query(statement);
+
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return products;
+    }
+
+    @Override
+    public void getPostBuildProducts(String title ,String description) throws DAOException {
+        ArrayList<Post> posts = new ArrayList<>();
+        String sql = "INSERT INTO build_post_table (title,description) VALUES (?,?)";
+        try {
+	        connection = getConnection();
+	        PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	        statement.setString(1,title);
+	        statement.setString(2,description);
+	        update(statement);
+
+	        DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public List<Post> getShowPostProducts() throws DAOException {
+        ArrayList<Post> posts = new ArrayList<>();
+
+        String sql = "select post_no,user_no,build_no,title,description,date from build_post_table;\n" + "";
+
+        ResultSet resultSet = query(sql);
+
+        try {
+
+            while (resultSet.next()) {
+                Post post = new Post();
+
+                post.setTitle(resultSet.getString("title"));
+                post.setDescription(resultSet.getString("description"));
+
+                posts.add(post);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            if(connection != null) {
+                try {
+                    DBCloser.close(connection);
+                } catch (DBCloseException ce) {
+                    throw new DAOException(ce.getMessage(), ce);
+                }
+            }
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return posts;
+    }
+
+
     private Connection getConnection() throws DAOException {
         MySQLDaoFactory factory = (MySQLDaoFactory)MySQLDaoFactory.getInstance();
         DBConnector connector = factory.getConnector();
@@ -288,4 +402,12 @@ public class MySQLProductDao implements ProductDao {
         return resultSet;
     }
 
+    private void update(PreparedStatement statement) throws DAOException {
+        try {
+            MySQLUpdater updater = new MySQLUpdater();
+            updater.update(statement);
+        } catch (DBUpdateException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+    }
 }

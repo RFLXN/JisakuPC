@@ -21,14 +21,27 @@ public class SearchProductsCommand extends AbstractCommand {
             ProductDao dao = daoFactory.getProductsDao();
 
             String[] sort = getRequestContext().getParameter("sort-by-cost");
+            String[] parts = getRequestContext().getParameter("parts");
 
             if(sort == null || sort[0].equals("")) {
-                products = dao.getSearchProducts(productName);
+                if(parts == null || parts[0].equals("")) {
+                    products = dao.getSearchProducts(productName);
+                } else if(parts[0].equals("cpu")) {
+                    products = dao.getPartsSearchProducts("cpu");
+                } else if(parts[0].equals("gpu")) {
+                    products = dao.getPartsSearchProducts("gpu");
+                } else if(parts[0].equals("ram")) {
+                    products = dao.getPartsSearchProducts("ram");
+                } else if(parts[0].equals("storage")) {
+                    products = dao.getPartsSearchProducts("storage");
+                }
             } else if(sort[0].equals("asc")) {
                 products = dao.getASCSearchProducts(productName);
             } else if(sort[0].equals("desc")) {
                 products = dao.getDESCSearchProducts(productName);
             }
+
+
 
         } catch (DAOException e) {
             throw new CommandException(e);

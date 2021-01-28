@@ -16,6 +16,10 @@
 	<input type="submit" name="koujunn" value="降順" />--%>
 	  <label><input type="radio" name="sort-by-cost" value="asc">昇順</label>
     <label><input type="radio" name="sort-by-cost" value="desc">降順</label>
+    	<br><input type="submit" name="parts" value="cpu" onClick="this.form.moji.value=''">
+	<br><input type="submit" name="parts" value="ram" onClick="this.form.moji.value=''">
+	<br><input type="submit" name="parts" value="gpu" onClick="this.form.moji.value=''">
+	<br><input type="submit" name="parts" value="storage" onClick="this.form.moji.value=''">
   </form>
 </div>
 
