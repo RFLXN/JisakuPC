@@ -7,7 +7,7 @@ import bean.Post;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
-import db.dao.product.ProductDao;
+import db.dao.post.PostDao;
 
 public class PostBuildCommand extends AbstractCommand {
     @Override
@@ -16,15 +16,16 @@ public class PostBuildCommand extends AbstractCommand {
 
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
-            ProductDao dao = daoFactory.getProductsDao();
+            PostDao dao = daoFactory.getPostsDao();
             String title = getRequestContext().getParameter("title")[0];
             String description = getRequestContext().getParameter("description")[0];
-            dao.getPostBuildProducts(title,description);
+            dao.insertPostBuildProducts(title,description);
+            posts = dao.getAllPosts();
         } catch (DAOException e) {
             throw new CommandException(e);
         }
 
-        //responseContext.setResult(posts);
+        responseContext.setResult(posts);
         responseContext.setTarget("post");
 
         return responseContext;

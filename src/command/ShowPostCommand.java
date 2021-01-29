@@ -7,7 +7,7 @@ import bean.Post;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
-import db.dao.product.ProductDao;
+import db.dao.post.PostDao;
 
 public class ShowPostCommand extends AbstractCommand {
     @Override
@@ -16,7 +16,7 @@ public class ShowPostCommand extends AbstractCommand {
 
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
-            ProductDao dao = daoFactory.getProductsDao();
+            PostDao dao = daoFactory.getPostsDao();
             posts = dao.getAllPosts();
         } catch (DAOException e) {
             throw new CommandException(e);

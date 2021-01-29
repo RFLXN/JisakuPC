@@ -1,11 +1,12 @@
 package db.dao.factory;
 
-import db.dao.DAOException;
-import db.dao.product.ProductDao;
-import db.dao.user.UserDao;
-
 import java.lang.reflect.Method;
 import java.util.ResourceBundle;
+
+import db.dao.DAOException;
+import db.dao.post.PostDao;
+import db.dao.product.ProductDao;
+import db.dao.user.UserDao;
 
 public abstract class AbstractDaoFactory {
     public static AbstractDaoFactory getFactory() throws DAOException {
@@ -28,4 +29,6 @@ public abstract class AbstractDaoFactory {
     public abstract ProductDao getProductsDao();
 
     public abstract UserDao getUserDao();
+
+    public abstract PostDao getPostsDao();
 }
