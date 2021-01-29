@@ -2,6 +2,7 @@ import bean.RakutenProduct;
 import org.json.JSONObject;
 import rakuten.ProductJSONParser;
 import rakuten.RakutenAPIWrapper;
+import rakuten.RakutenPropertyLoader;
 import resources.csv.CsvDbInserter;
 
 import java.util.List;
@@ -9,16 +10,16 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
         try {
-            CsvDbInserter inserter = new CsvDbInserter();
-            inserter.insertAll();
+            RakutenAPIWrapper api = new RakutenAPIWrapper();
+            RakutenPropertyLoader properties = RakutenPropertyLoader.getInstance();
 
-            /*RakutenAPIWrapper api = new RakutenAPIWrapper();
-            JSONObject result = api.search(new String[]{"productName:AMD EPYC 7551P"});
-            ProductJSONParser parser = new ProductJSONParser(result);
-            List<RakutenProduct> productList = parser.getProductList();
-            for(RakutenProduct product : productList) {
-                System.out.println(product.getProductName() + " : " + product.getAveragePrice());
-            }*/
+            String cpu = properties.getApiParameter("genre-cpu");
+
+            JSONObject result = api.search(new String[]{"productName:Ryzen 5600", "genre:" + cpu});
+
+            System.out.println(result.toString(2));
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

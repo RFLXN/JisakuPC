@@ -12,7 +12,7 @@ public class ProductJSONParser {
 
     public ProductJSONParser(JSONObject jsonData) {
         JSONObject root = jsonData;
-        JSONArray products = root.getJSONArray("Products");
+        JSONArray products = root.getJSONArray("Items");
         ArrayList<RakutenProduct> productList = new ArrayList<>();
         data = new ArrayList<>();
 
