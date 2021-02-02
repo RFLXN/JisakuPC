@@ -7,20 +7,23 @@ import java.net.URLEncoder;
 
 public class RakutenAPIWrapper {
     private final String applicationId;
-    private final String searchUrl;
+    private final String itemSearchUrl;
+    private final String productSearchUrl;
 
     public RakutenAPIWrapper() throws RakutenAPIException {
         RakutenPropertyLoader loader = RakutenPropertyLoader.getInstance();
 
         try {
             applicationId = loader.getApiInfo("applicationId");
-            searchUrl = loader.getApiInfo("searchItemUrl");
+            itemSearchUrl = loader.getApiInfo("searchItemUrl");
+            productSearchUrl = loader.getApiInfo("searchProductUrl");
         } catch (IllegalArgumentException e) {
             throw new RakutenAPIException(e);
         }
 
         if (applicationId.equals("") || applicationId == null
-                || searchUrl.equals("") || searchUrl == null) {
+                || itemSearchUrl.equals("") || itemSearchUrl == null
+                || productSearchUrl.equals("") || productSearchUrl == null) {
             throw new RakutenAPIException("Failed to Load Rakuten API Information");
         }
     }
@@ -33,10 +36,10 @@ public class RakutenAPIWrapper {
      *      "productId:PRODUCT_ID"
      *  ]
      */
-    public JSONObject search(String[] option) throws RakutenAPIException {
+    public JSONObject searchItem(String[] option) throws RakutenAPIException {
         String rawData = "";
         try {
-            String url = getSearchUrl(option);
+            String url = getItemSearchUrl(option);
 
             System.out.println(url);
 
@@ -50,13 +53,38 @@ public class RakutenAPIWrapper {
         return new JSONObject(rawData);
     }
 
-    private String getSearchUrl(String[] option) throws UnsupportedEncodingException {
+    public JSONObject searchProduct(String[] option) throws RakutenAPIException {
+        String rawData = "";
+        try {
+            String url = getProductSearchUrl(option);
+
+            System.out.println(url);
+
+            RequestSender sender = new RequestSender(url);
+
+            rawData = sender.get();
+        } catch (UnsupportedEncodingException e) {
+            throw new RakutenAPIException(e);
+        }
+
+        return new JSONObject(rawData);
+    }
+
+    private String getItemSearchUrl(String[] option) throws UnsupportedEncodingException {
+        return getSearchUrl(itemSearchUrl, option);
+    }
+
+    private String getProductSearchUrl(String[] option) throws UnsupportedEncodingException {
+        return getSearchUrl(productSearchUrl, option);
+    }
+
+    private String getSearchUrl(String baseUrl, String[] option) throws UnsupportedEncodingException {
         String genreId = "";
         String productName = "";
         String productId = "";
         String page = "";
 
-        StringBuilder url = new StringBuilder(searchUrl);
+        StringBuilder url = new StringBuilder(baseUrl);
         for (String o : option) {
             if (o.startsWith("genreId:")) {
                 genreId = o.replaceFirst("genreId:", "");
@@ -72,7 +100,7 @@ public class RakutenAPIWrapper {
             }
         }
 
-        url.append("format=json&formatVersion=2&applicationId=").append(applicationId);
+        url.append("format=json&formatVersion=2&field=1&applicationId=").append(applicationId);
 
         if (!genreId.equals("")) {
             url.append("&genreId=").append(genreId);
@@ -81,7 +109,7 @@ public class RakutenAPIWrapper {
             url.append("&productId=").append(productId);
         }
         if (!productName.equals("")) {
-            productName = URLEncoder.encode(productName, "UTF-8").replaceAll("\\+", "%20");
+            productName = URLEncoder.encode(productName, "UTF-8");
             url.append("&keyword=").append(productName);
         }
         if(!page.equals("")) {

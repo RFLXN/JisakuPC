@@ -11,8 +11,6 @@ public class ShowSpecificProductCommand extends AbstractCommand {
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         String productNo = getRequestContext().getParameter("pid")[0];
 
-        System.out.println(productNo);
-
         try {
             AbstractDaoFactory factory = AbstractDaoFactory.getFactory();
             ProductDao dao = factory.getProductsDao();

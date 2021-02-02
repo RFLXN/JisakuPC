@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <html>
 <head>
   <title>Sign Up</title>
@@ -13,7 +13,8 @@
   <form id="signup-form" method="post" action="signup-result">
     ID <input id="signup-id" type="text" name="id"><br>
     PASSWORD <input id="signup-password" type="text" name="password">
-  </form><br>
+  </form>
+  <br>
   <div id="already-used-warning">
     <p id="warning-text"></p>
   </div>

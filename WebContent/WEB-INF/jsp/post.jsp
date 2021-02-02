@@ -1,24 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-<title>掲示板</title>
+
+  <script type="text/javascript">
+
+      function check() {
+          var flag = 0;
+
+          if (document.form1.name.value == "") {
+              flag = 1;
+          } else if (document.form1.comment.value == "") {
+              flag = 1;
+          }
+
+          if (flag) {
+              window.alert('タイトルとコメントを入力してください');
+              return false; // 送信を中止
+          } else {
+              return true; // 送信を実行
+          }
+      }
+  </script>
+
+  <title>掲示板</title>
 </head>
 <body>
-<form action="deletepost" method="post">
-  <c:forEach var="post" items="${data}">
-  <table border="1">
-    <tr><th>post_no</th><th>user_id</th><th>build_id</th><th>タイトル</th><th>説明</th><th>投稿日</th></tr>
-    <tr><td>${post.no}</td><td>${post.userno}</td><td>${post.buildno}</td><td>${post.title}</td><td>${post.description}</td><td>${post.date}</td></tr>
-    </table>
-	<input type="hidden" name="postno" value="${3}">
-    <input type="submit" name="delete" value="削除">
-    <!-- 戻るボタンみたいなの作る -->
-  </c:forEach>
+<form action="postbuild" method="post" name="form1" onSubmit="return check()">
+  <p>タイトル:<input type="text" name="title"></p>
+  <p>コメント:</ br>
+  <textarea name="description" rows="5" cols="40"></textarea>
+  </p>
+  <p><input type="submit" value="送信"><input type="reset" value="リセット">
+  </p>
 </form>
+
+<c:forEach var="list" items="${data}">
+  <p>タイトル:<c:out value="${list.title}"/><br>
+    説明:<c:out value="${list.description}"/></p>
+</c:forEach>
+
 </body>
 </html>
