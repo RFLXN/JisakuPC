@@ -2,6 +2,9 @@ package rakuten;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class RakutenAPIWrapper {
     private final String applicationId;
     private final String searchUrl;
@@ -30,16 +33,24 @@ public class RakutenAPIWrapper {
      *      "productId:PRODUCT_ID"
      *  ]
      */
-    public JSONObject search(String[] option) {
-        String url = getSearchUrl(option);
+    public JSONObject search(String[] option) throws RakutenAPIException {
+        String rawData = "";
+        try {
+            String url = getSearchUrl(option);
 
-        RequestSender sender = new RequestSender(url);
+            System.out.println(url);
 
-        String rawData = sender.get();
+            RequestSender sender = new RequestSender(url);
+
+            rawData = sender.get();
+        } catch (UnsupportedEncodingException e) {
+            throw new RakutenAPIException(e);
+        }
+
         return new JSONObject(rawData);
     }
 
-    private String getSearchUrl(String[] option) {
+    private String getSearchUrl(String[] option) throws UnsupportedEncodingException {
         String genreId = "";
         String productName = "";
         String productId = "";
@@ -70,6 +81,7 @@ public class RakutenAPIWrapper {
             url.append("&productId=").append(productId);
         }
         if (!productName.equals("")) {
+            productName = URLEncoder.encode(productName, "UTF-8").replaceAll("\\+", "%20");
             url.append("&keyword=").append(productName);
         }
         if(!page.equals("")) {
