@@ -35,8 +35,29 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public void updateProduct(String pid, Product product) throws DAOException {
+    public void updateProduct(Product product) throws DAOException {
+        connection = getConnection();
 
+        try {
+            String sql = "UPDATE product_table " +
+                    "SET product_name = (?), product_price = (?), " +
+                    "product_spec = (?), product_brand = (?), product_type = (?) " +
+                    "WHERE product_no = (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, product.getName());
+            statement.setInt(2, Integer.parseInt(product.getPrice()));
+            statement.setString(3, product.getSpec());
+            statement.setString(4, product.getBrand());
+            statement.setString(5, product.getType());
+            statement.setInt(6, Integer.parseInt(product.getNo()));
+
+            update(statement);
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e);
+        }
     }
 
     @Override
