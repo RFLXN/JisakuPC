@@ -256,7 +256,7 @@ public class MySQLProductDao implements ProductDao {
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            statement.setString(1, "%" + moji + "%");
+            statement.setString(1, "%" + moji);
 
             ResultSet resultSet = query(statement);
 

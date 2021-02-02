@@ -9,7 +9,7 @@ import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.post.PostDao;
 
-public class ShowPostCommand extends AbstractCommand {
+public class DeletePostCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         List<Post> posts = new ArrayList<>();
@@ -18,14 +18,14 @@ public class ShowPostCommand extends AbstractCommand {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             PostDao dao = daoFactory.getPostsDao();
             String postno = getRequestContext().getParameter("postno")[0];
-            System.out.println("showpostno=" + postno);
-            posts = dao.getSearchPost(postno);
+            System.out.println("postno=" + postno);
+            dao.deletePost(postno);
         } catch (DAOException e) {
             throw new CommandException(e);
         }
 
         responseContext.setResult(posts);
-        responseContext.setTarget("post");
+        responseContext.setTarget("deletepostcomplete");
 
         return responseContext;
     }

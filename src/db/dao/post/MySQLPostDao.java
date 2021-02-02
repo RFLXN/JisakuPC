@@ -35,8 +35,12 @@ public class MySQLPostDao implements PostDao {
         	while (resultSet.next()) {
                 Post post = new Post();
 
+                post.setNo(resultSet.getString("post_no"));
+                post.setUserno(resultSet.getString("user_no"));
+                post.setBuildno(resultSet.getString("build_no"));
                 post.setTitle(resultSet.getString("title"));
                 post.setDescription(resultSet.getString("description"));
+                post.setDate(resultSet.getString("date"));
 
                 posts.add(post);
             }
@@ -58,6 +62,22 @@ public class MySQLPostDao implements PostDao {
 	        PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	        statement.setString(1,title);
 	        statement.setString(2,description);
+	        update(statement);
+
+	        DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+    }
+
+
+    @Override
+    public void deletePost(String postno) throws DAOException {
+        String sql = "DELETE FROM build_post_table WHERE post_no = ?";
+        try {
+	        connection = getConnection();
+	        PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	        statement.setString(1,postno);
 	        update(statement);
 
 	        DBCloser.close(connection);
@@ -100,6 +120,39 @@ public class MySQLPostDao implements PostDao {
         return posts;
     }
 
+    @Override
+    public List<Post> getSearchPost(String postno) throws DAOException {
+        ArrayList<Post> posts = new ArrayList<>();
+
+        String sql = "SELECT  * FROM build_post_table WHERE post_no = ?";
+
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1,postno);
+
+            ResultSet resultSet = query(statement);
+
+        	while (resultSet.next()) {
+                Post post = new Post();
+
+                post.setNo(resultSet.getString("post_no"));
+                post.setUserno(resultSet.getString("user_no"));
+                post.setBuildno(resultSet.getString("build_no"));
+                post.setTitle(resultSet.getString("title"));
+                post.setDescription(resultSet.getString("description"));
+                post.setDate(resultSet.getString("date"));
+
+                posts.add(post);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return posts;
+    }
 
     private Connection getConnection() throws DAOException {
         MySQLDaoFactory factory = (MySQLDaoFactory)MySQLDaoFactory.getInstance();

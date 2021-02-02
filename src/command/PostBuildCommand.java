@@ -20,13 +20,13 @@ public class PostBuildCommand extends AbstractCommand {
             String title = getRequestContext().getParameter("title")[0];
             String description = getRequestContext().getParameter("description")[0];
             dao.insertPostBuildProducts(title,description);
-            posts = dao.getAllPosts();
+
         } catch (DAOException e) {
             throw new CommandException(e);
         }
 
         responseContext.setResult(posts);
-        responseContext.setTarget("post");
+        responseContext.setTarget("buildpostcomplete");
 
         return responseContext;
     }

@@ -20,5 +20,12 @@
 		<input type="submit" value="検索">
 	</form>
 </div>
+
+<div id="post">
+    <form method="get" action="post">
+        <input type="submit" value="作成">
+    </form>
+</div>
+
 </body>
 </html>

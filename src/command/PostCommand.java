@@ -9,7 +9,7 @@ import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.post.PostDao;
 
-public class ShowPostCommand extends AbstractCommand {
+public class PostCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         List<Post> posts = new ArrayList<>();
@@ -17,15 +17,16 @@ public class ShowPostCommand extends AbstractCommand {
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             PostDao dao = daoFactory.getPostsDao();
-            String postno = getRequestContext().getParameter("postno")[0];
-            System.out.println("showpostno=" + postno);
-            posts = dao.getSearchPost(postno);
+            posts = dao.getAllPosts();
         } catch (DAOException e) {
             throw new CommandException(e);
         }
 
         responseContext.setResult(posts);
-        responseContext.setTarget("post");
+
+        responseContext.setTarget("showpost");
+        //responseContext.setTarget("postbuild");
+        //本来は下になるがいちいち作成するのがめんどくさい為上のルートにしている
 
         return responseContext;
     }

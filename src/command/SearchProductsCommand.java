@@ -15,7 +15,7 @@ public class SearchProductsCommand extends AbstractCommand {
         List<Product> products = new ArrayList<Product>();
 
         String productName = getRequestContext().getParameter("moji")[0];
-
+        System.out.println(productName);
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             ProductDao dao = daoFactory.getProductsDao();
