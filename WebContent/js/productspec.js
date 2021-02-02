@@ -31,7 +31,11 @@ function updatePrice(pid, price) {
             price: String(price)
         },
         success: (data) => {
-            console.log("update Price: Successfully Updated!");
+            if(data.isUpdated) {
+                console.log("update Price: Successfully Updated!");
+            } else {
+                console.log("update: Price: Failed to Update");
+            }
         },
         error: (data) => {
             console.log("update: Price: Failed to Update");
