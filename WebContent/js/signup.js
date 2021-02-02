@@ -1,6 +1,5 @@
 function signup() {
     const userId = $("#signup-id").val();
-    console.log(userId);
 
     // ユーザーIDがもう使われているかをチェックする ajax処理
     $.ajax({
@@ -13,9 +12,7 @@ function signup() {
         success: function (data) {
             const result = data.isAlreadyUsedId;
 
-            console.log(result);
-
-            if(result) {        // もう使われている場合 エラーメッセージを出力
+            if (result) {        // もう使われている場合 エラーメッセージを出力
                 $("#warning-text").text("もう使われているIDです。");
             } else {            // 問題ない場合 転送する
                 submitForm();

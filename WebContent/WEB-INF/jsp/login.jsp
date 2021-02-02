@@ -9,20 +9,20 @@
   <title>LOGIN</title>
 </head>
 <body>
-  <h1>LOGIN</h1>
+<h1>LOGIN</h1>
 
-  <form method="post" action="login-process">
-    ID <input type="text" name="id"><br>
-    PASSWORD <input type="password" name="password"><br>
-    <%
-      UserFlag user = (UserFlag) request.getAttribute("data");
-      if(user != null) {
-        if(!user.isCorrectUser()) {
-            out.print("Login Error");
-        }
+<form method="post" action="login-process">
+  ID <input type="text" name="id"><br>
+  PASSWORD <input type="password" name="password"><br>
+  <%
+    UserFlag user = (UserFlag) request.getAttribute("data");
+    if (user != null) {
+      if (!user.isCorrectUser()) {
+        out.print("Login Error");
       }
-    %>
-    <input type="submit" name="LOGIN">
-  </form>
+    }
+  %>
+  <input type="submit" name="LOGIN">
+</form>
 </body>
 </html>

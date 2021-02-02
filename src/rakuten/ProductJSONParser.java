@@ -1,5 +1,6 @@
 package rakuten;
 
+import bean.RakutenItem;
 import bean.RakutenProduct;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,33 +13,33 @@ public class ProductJSONParser {
 
     public ProductJSONParser(JSONObject jsonData) {
         JSONObject root = jsonData;
-        JSONArray products = root.getJSONArray("Items");
-        ArrayList<RakutenProduct> productList = new ArrayList<>();
+        JSONArray products = root.getJSONArray("Products");
         data = new ArrayList<>();
 
         for(Object p : products) {
             JSONObject product = (JSONObject) p;
-            RakutenProduct productBean = new RakutenProduct();
-            productBean.setProductName(product.getString("productName"));
-            productBean.setProductId(product.getString("productId"));
-            productBean.setGenreId(product.getString("genreId"));
-            productBean.setMaxPrice(product.getInt("maxPrice"));
-            productBean.setMinPrice(product.getInt("minPrice"));
-            productBean.setAveragePrice(product.getInt("averagePrice"));
-            productBean.setProductUrlPc(product.getString("productUrlPC"));
-            productBean.setProductUrlMobile(product.getString("productUrlMobile"));
-            productBean.setSmallImageUrl(product.getString("smallImageUrl"));
-            productBean.setMediumImageUrl(product.getString("mediumImageUrl"));
+            RakutenProduct rakutenProduct = new RakutenProduct();
 
-            data.add(productBean);
+            rakutenProduct.setGenreId(product.getString("genreId"));
+            rakutenProduct.setProductName(product.getString("productName"));
+            rakutenProduct.setProductId(product.getString("productId"));
+            rakutenProduct.setProductUrlPc(product.getString("productUrlPC"));
+            rakutenProduct.setProductUrlMobile(product.getString("productUrlMobile"));
+            rakutenProduct.setMediumImageUrl(product.getString("mediumImageUrl"));
+            rakutenProduct.setSmallImageUrl(product.getString("smallImageUrl"));
+            rakutenProduct.setMaxPrice(product.getInt("maxPrice"));
+            rakutenProduct.setMinPrice(product.getInt("minPrice"));
+            rakutenProduct.setAveragePrice(product.getInt("averagePrice"));
+
+            data.add(rakutenProduct);
         }
     }
 
-    public List<RakutenProduct> getProductList() {
+    public List<RakutenProduct> getItemList() {
         return data;
     }
 
-    public RakutenProduct getProduct(int index) {
+    public RakutenProduct getItem(int index) {
         return data.get(index);
     }
 }
