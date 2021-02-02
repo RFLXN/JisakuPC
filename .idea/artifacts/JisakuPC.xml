@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="JisakuPC">
+    <output-path>$PROJECT_DIR$/artifacts/WAR</output-path>
+    <root id="archive" name="JisakuPC.war">
+      <element id="artifact" artifact-name="exploded" />
+    </root>
+  </artifact>
+</component>
