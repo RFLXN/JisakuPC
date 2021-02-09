@@ -9,16 +9,20 @@
 <title>掲示板</title>
 </head>
 <body>
-<form action="deletepost" method="post">
-  <c:forEach var="post" items="${data}">
-  <table border="1">
-    <tr><th>post_no</th><th>user_id</th><th>build_id</th><th>タイトル</th><th>説明</th><th>投稿日</th></tr>
-    <tr><td>${post.no}</td><td>${post.userno}</td><td>${post.buildno}</td><td>${post.title}</td><td>${post.description}</td><td>${post.date}</td></tr>
-    </table>
-	<input type="hidden" name="postno" value="${3}">
-    <input type="submit" name="delete" value="削除">
-    <!-- 戻るボタンみたいなの作る -->
-  </c:forEach>
-</form>
+	<div>
+		<jsp:include page="postbuild.jsp" flush="true"/>
+	</div>
+	<div>
+		<c:forEach var="post" items="${data}">
+			<form action="showpost" method="post" name="form1" onSubmit="return check()">
+				<table border="1">
+					<tr><th>タイトル</th></tr>
+					<tr><td>${post.title}</td></tr>
+				</table>
+				<input type="hidden" name="postno" value="${post.no}">
+				<input type="submit" value="詳細">
+			</form>
+		</c:forEach>
+	</div>
 </body>
 </html>

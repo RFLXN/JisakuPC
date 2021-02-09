@@ -1,6 +1,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Post implements Serializable{
 
@@ -10,6 +11,10 @@ public class Post implements Serializable{
 	private String title;
 	private String description;
 	private String date;
+	private String pname;
+	private String productno;
+	private String userid;
+	private ArrayList<?> list;
 
 	public Post() {
     }
@@ -28,6 +33,14 @@ public class Post implements Serializable{
 
     public void setUserno(String userno) {
         this.userno = userno;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getBuildno() {
@@ -60,5 +73,29 @@ public class Post implements Serializable{
 
 	public void setDate(String date) {
 			this.date = date;
+	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+			this.pname = pname;
+	}
+
+	public String getProductno() {
+		return productno;
+	}
+
+	public void setProductno(String productno) {
+			this.productno = productno;
+	}
+
+	public ArrayList<?> getList() {
+		return list;
+	}
+
+	public void setList(ArrayList<?> list) {
+		this.list = list;
 	}
 }

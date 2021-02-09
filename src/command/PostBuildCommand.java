@@ -19,7 +19,9 @@ public class PostBuildCommand extends AbstractCommand {
             PostDao dao = daoFactory.getPostsDao();
             String title = getRequestContext().getParameter("title")[0];
             String description = getRequestContext().getParameter("description")[0];
-            dao.insertPostBuildProducts(title,description);
+            String buildno = getRequestContext().getParameter("buildno")[0];
+            String userno = getRequestContext().getParameter("userno")[0];
+            dao.insertPostBuildProducts(title,description,buildno,userno);
 
         } catch (DAOException e) {
             throw new CommandException(e);

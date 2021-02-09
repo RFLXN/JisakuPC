@@ -6,12 +6,14 @@
 
 <html>
 <head>
+  <link href="css/login.css" rel="stylesheet" type="text/css" />
   <title>LOGIN</title>
 </head>
 <body>
+  <div class="loginbody">
   <h1>LOGIN</h1>
-
   <form method="post" action="login-process">
+  <div class="form-item">
     ID <input type="text" name="id"><br>
     PASSWORD <input type="password" name="password"><br>
     <%
@@ -22,7 +24,11 @@
         }
       }
     %>
+   </div>
+   <div class="loginsubmit">
     <input type="submit" name="LOGIN">
+   </div>
   </form>
+  </div>
 </body>
 </html>

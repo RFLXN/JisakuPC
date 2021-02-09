@@ -12,20 +12,21 @@ import db.dao.post.PostDao;
 public class ShowPostCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
-        List<Post> posts = new ArrayList<>();
+    	List<Post> posts = new ArrayList<>();
 
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             PostDao dao = daoFactory.getPostsDao();
             String postno = getRequestContext().getParameter("postno")[0];
             System.out.println("showpostno=" + postno);
-            posts = dao.getSearchPost(postno);
+            //posts = dao.getSearchPost(postno);
+            posts = dao.getPostData(postno);
         } catch (DAOException e) {
             throw new CommandException(e);
         }
 
         responseContext.setResult(posts);
-        responseContext.setTarget("post");
+        responseContext.setTarget("showpost");
 
         return responseContext;
     }

@@ -29,6 +29,7 @@ public class MySQLPostDao implements PostDao {
 
         String sql = "SELECT * FROM build_post_table";
 
+
         ResultSet resultSet = query(sql);
 
         try {
@@ -44,7 +45,6 @@ public class MySQLPostDao implements PostDao {
 
                 posts.add(post);
             }
-
             DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
             throw new DAOException(e.getMessage(), e);
@@ -54,14 +54,16 @@ public class MySQLPostDao implements PostDao {
     }
 
     @Override
-    public void insertPostBuildProducts(String title ,String description) throws DAOException {
-        ArrayList<Post> posts = new ArrayList<>();
-        String sql = "INSERT INTO build_post_table (title,description) VALUES (?,?)";
+    public void insertPostBuildProducts(String title ,String description,String buildno,String userno) throws DAOException {
+        //ArrayList<Post> posts = new ArrayList<>();
+        String sql = "INSERT INTO build_post_table (title,description,build_no,user_no) VALUES (?,?,?,?)";
         try {
 	        connection = getConnection();
 	        PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 	        statement.setString(1,title);
 	        statement.setString(2,description);
+	        statement.setString(3,buildno);
+	        statement.setString(4,userno);
 	        update(statement);
 
 	        DBCloser.close(connection);
@@ -95,7 +97,6 @@ public class MySQLPostDao implements PostDao {
         ResultSet resultSet = query(sql);
 
         try {
-
             while (resultSet.next()) {
                 Post post = new Post();
 
@@ -121,10 +122,11 @@ public class MySQLPostDao implements PostDao {
     }
 
     @Override
-    public List<Post> getSearchPost(String postno) throws DAOException {
+    public List<Post> getPostData(String postno) throws DAOException {
         ArrayList<Post> posts = new ArrayList<>();
 
-        String sql = "SELECT  * FROM build_post_table WHERE post_no = ?";
+        String sql = "SELECT bpt.post_no,ut.user_id,bpt.title,bpt.description,bpt.date FROM build_post_table bpt INNER JOIN user_table ut ON bpt.user_no = ut.user_no WHERE bpt.post_no = ?;";
+        String sql1 = "SELECT pt.product_no,pt.product_name FROM build_post_table bpt INNER JOIN build_table bt INNER JOIN product_table pt INNER JOIN user_table ut ON bpt.user_no = ut.user_no AND bt.build_no = bpt.build_no WHERE pt.product_no IN (cpu_product_no,gpu_product_no,ram_product_no,storage_product_no,motherboard_product_no,cooler_product_no,case_product_no,etc_product_no) AND bpt.post_no = ?;";
 
         try {
             connection = getConnection();
@@ -133,17 +135,31 @@ public class MySQLPostDao implements PostDao {
 
             ResultSet resultSet = query(statement);
 
-        	while (resultSet.next()) {
-                Post post = new Post();
 
+
+            PreparedStatement statement1 = connection.prepareStatement(sql1, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement1.setString(1,postno);
+
+            ResultSet resultSet1 = query(statement1);
+
+            while (resultSet.next()) {
+				Post post = new Post();
+                post.setUserid(resultSet.getString("user_id"));
                 post.setNo(resultSet.getString("post_no"));
-                post.setUserno(resultSet.getString("user_no"));
-                post.setBuildno(resultSet.getString("build_no"));
                 post.setTitle(resultSet.getString("title"));
                 post.setDescription(resultSet.getString("description"));
                 post.setDate(resultSet.getString("date"));
+                ArrayList<Post> list = new ArrayList<>();
+	        	while (resultSet1.next()) {
 
-                posts.add(post);
+	        		Post post2 = new Post();
+	                post2.setProductno(resultSet1.getString("product_no"));
+	                post2.setPname(resultSet1.getString("product_name"));
+	                list.add(post2);
+
+	            }
+	        	post.setList(list);
+	        	posts.add(post);
             }
 
             DBCloser.close(connection);
