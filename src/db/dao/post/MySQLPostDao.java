@@ -36,8 +36,8 @@ public class MySQLPostDao implements PostDao {
                 Post post = new Post();
 
                 post.setNo(resultSet.getString("post_no"));
-                post.setUserno(resultSet.getString("user_no"));
-                post.setBuildno(resultSet.getString("build_no"));
+                post.setUserNo(resultSet.getString("user_no"));
+                post.setBuildNo(resultSet.getString("build_no"));
                 post.setTitle(resultSet.getString("title"));
                 post.setDescription(resultSet.getString("description"));
                 post.setDate(resultSet.getString("date"));
@@ -137,8 +137,8 @@ public class MySQLPostDao implements PostDao {
                 Post post = new Post();
 
                 post.setNo(resultSet.getString("post_no"));
-                post.setUserno(resultSet.getString("user_no"));
-                post.setBuildno(resultSet.getString("build_no"));
+                post.setUserNo(resultSet.getString("user_no"));
+                post.setBuildNo(resultSet.getString("build_no"));
                 post.setTitle(resultSet.getString("title"));
                 post.setDescription(resultSet.getString("description"));
                 post.setDate(resultSet.getString("date"));

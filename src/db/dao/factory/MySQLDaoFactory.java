@@ -6,6 +6,8 @@ import bean.DBConnectionInfo;
 import db.connector.DBConnector;
 import db.connector.MySQLConnector;
 import db.dao.DAOException;
+import db.dao.build.BuildDao;
+import db.dao.build.MySQLBuildDao;
 import db.dao.post.MySQLPostDao;
 import db.dao.post.PostDao;
 import db.dao.product.MySQLProductDao;
@@ -40,6 +42,11 @@ public class MySQLDaoFactory extends DBDaoFactory {
     @Override
     public PostDao getPostsDao() {
         return new MySQLPostDao();
+    }
+
+    @Override
+    public BuildDao getBuildDao() {
+        return new MySQLBuildDao();
     }
 
     @Override

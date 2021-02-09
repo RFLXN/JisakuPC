@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.util.ResourceBundle;
 
 import db.dao.DAOException;
+import db.dao.build.BuildDao;
 import db.dao.post.PostDao;
 import db.dao.product.ProductDao;
 import db.dao.user.UserDao;
@@ -31,4 +32,6 @@ public abstract class AbstractDaoFactory {
     public abstract UserDao getUserDao();
 
     public abstract PostDao getPostsDao();
+
+    public abstract BuildDao getBuildDao();
 }

@@ -12,7 +12,7 @@ import db.dao.post.PostDao;
 public class PostCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
-        List<Post> posts = new ArrayList<>();
+        List<Post> posts = null;
 
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();

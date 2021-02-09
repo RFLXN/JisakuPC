@@ -16,7 +16,7 @@
     <tr><td>${post.title}</td></tr>
     </table>
     <%-- <input type="hidden" name="postno" value="${post.no}"> --%>
-    <input type="hidden" name="postno" value="${3}">
+    <input type="hidden" name="postno" value="${post.no}">
     <input type="submit" value="詳細">
   </c:forEach>
 </form>

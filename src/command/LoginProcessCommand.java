@@ -5,8 +5,6 @@ package command;
  *      -> セッションにログインフラグを登録するため
  */
 
-
-
 import bean.UserFlag;
 import context.ResponseContext;
 import db.dao.DAOException;
@@ -30,7 +28,7 @@ public class LoginProcessCommand extends AbstractCommand {
 
             if(user.isCorrectUser()) {
                 HttpServletRequest servletRequest = (HttpServletRequest)getRequestContext().getRequest();
-                servletRequest.getSession().setAttribute("login-flag", user);
+                servletRequest.getSession().setAttribute("loginFlag", user);
 
                 String source = (String) servletRequest.getSession().getAttribute("source");
 

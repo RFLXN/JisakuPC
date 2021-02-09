@@ -19,16 +19,15 @@ CREATE TABLE user_table(
 CREATE TABLE build_table(
     build_no INT AUTO_INCREMENT,
     user_no INT REFERENCES user_table(user_no),
-    cpu_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    gpu_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    ram_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    storage_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    motherboard_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    cooler_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    case_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    etc_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
+    build_name VARCHAR(120) NOT NULL,
     PRIMARY KEY (build_no)
 );
+
+CREATE TABLE build_parts_table(
+    build_no INT REFERENCES build_table(build_no),
+    product_no INT REFERENCES product_table(product_no)
+);
+
 
 CREATE TABLE build_post_table(
     post_no INT AUTO_INCREMENT,

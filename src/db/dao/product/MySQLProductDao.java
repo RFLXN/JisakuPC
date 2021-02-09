@@ -25,7 +25,24 @@ public class MySQLProductDao implements ProductDao {
 
     @Override
     public void addProduct(Product product) throws DAOException {
+        connection = getConnection();
 
+        try {
+            String sql = "INSERT INTO product_table (product_name, product_price, product_spec, " +
+                    "product_brand, product_type) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, product.getName());
+            statement.setInt(2, Integer.parseInt(product.getPrice()));
+            statement.setString(3, product.getSpec());
+            statement.setString(4, product.getBrand());
+            statement.setString(5, product.getType());
+
+            update(statement);
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e);
+        }
     }
 
     @Override
@@ -300,7 +317,6 @@ public class MySQLProductDao implements ProductDao {
 
         return products;
     }
-
 
     private Connection getConnection() throws DAOException {
         MySQLDaoFactory factory = (MySQLDaoFactory)MySQLDaoFactory.getInstance();
