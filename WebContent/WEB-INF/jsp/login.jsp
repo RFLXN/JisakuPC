@@ -6,23 +6,29 @@
 
 <html>
 <head>
+  <link href="css/login.css" rel="stylesheet" type="text/css" />
   <title>LOGIN</title>
 </head>
 <body>
-<h1>LOGIN</h1>
-
-<form method="post" action="login-process">
-  ID <input type="text" name="id"><br>
-  PASSWORD <input type="password" name="password"><br>
-  <%
-    UserFlag user = (UserFlag) request.getAttribute("data");
-    if (user != null) {
-      if (!user.isCorrectUser()) {
-        out.print("Login Error");
+  <div class="loginbody">
+  <h1>LOGIN</h1>
+  <form method="post" action="login-process">
+  <div class="form-item">
+    ID <input type="text" name="id"><br>
+    PASSWORD <input type="password" name="password"><br>
+    <%
+      UserFlag user = (UserFlag) request.getAttribute("data");
+      if(user != null) {
+        if(!user.isCorrectUser()) {
+            out.print("Login Error");
+        }
       }
-    }
-  %>
-  <input type="submit" name="LOGIN">
-</form>
+    %>
+   </div>
+   <div class="loginsubmit">
+    <input type="submit" name="LOGIN">
+   </div>
+  </form>
+  </div>
 </body>
 </html>

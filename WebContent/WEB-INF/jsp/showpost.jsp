@@ -9,16 +9,21 @@
 <title>掲示板</title>
 </head>
 <body>
-<form action="showpost" method="post" name="form1" onSubmit="return check()">
-  <c:forEach var="post" items="${data}">
-  <table border="1">
-    <tr><th>タイトル</th></tr>
-    <tr><td>${post.title}</td></tr>
-    </table>
-    <%-- <input type="hidden" name="postno" value="${post.no}"> --%>
-    <input type="hidden" name="postno" value="${post.no}">
-    <input type="submit" value="詳細">
-  </c:forEach>
-</form>
+	<form action="deletepost" method="post">
+		<c:forEach var="post" items="${data}">
+		  <h1>${post.title}</h1>
+		  <h3>${post.userid}</h3>
+			<h3>${post.date}</h3>
+			<h3>${post.description}</h3>
+			<table border="1">
+			<tr><th>商品番号</th><th>商品名</th></tr>
+			<c:forEach var="posts" items="${post.list}">
+			<tr><td>${posts.productno}</td><td>${posts.pname}</td></tr>
+			</c:forEach>
+			<input type="hidden" name="postno" value="${post.no}">
+			<input type="submit" name="delete" value="削除">
+			</table>
+		</c:forEach>
+	</form>
 </body>
 </html>

@@ -10,14 +10,12 @@
 </head>
 <body>
 <form action="postbuild" method="post">
-<p>タイトル:<input type="text" name="title"></p>
-<p>コメント:<br>
-<textarea name="description" rows="5" cols="40"></textarea>
-</p>
-<p><input type="submit" value="送信"><input type="reset" value="リセット">
-</p>
+<p>タイトル:<input type="text" name="title" required></p>
+<p>コメント:<textarea name="description" rows="5" cols="40" required></textarea></p>
+<p>build_no:<input type="text" name="buildno" required></p>
+<p>user_no:<input type="text" name="userno" required></p>
+<input type="hidden" name="userno" value="${post.userno}">
+<p><input type="submit" value="送信"></p>
 </form>
-
-
 </body>
 </html>

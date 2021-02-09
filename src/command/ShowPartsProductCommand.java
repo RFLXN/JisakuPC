@@ -20,7 +20,7 @@ public class ShowPartsProductCommand extends AbstractCommand {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             ProductDao dao = daoFactory.getProductsDao();
 
-            String[] sort = getRequestContext().getParameter("sort-by-cost");
+            //String[] sort = getRequestContext().getParameter("sort-by-cost");
             String[] parts = getRequestContext().getParameter("parts");
 
 //            if(sort == null || sort[0].equals("")) {

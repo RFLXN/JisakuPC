@@ -15,17 +15,16 @@
     </form>
 </div>
 <div id="search">
-	<form method="get" action="showproducts">
-		<input type="text" name="search" value size="36" maxvalue="30" placeholder="キーワードで検索" maxlength="20">
-		<input type="submit" value="検索">
+	<form method="get" action="login">
+		<input type="submit" value="login">
 	</form>
 </div>
 
 <div id="post">
     <form method="get" action="post">
+	<input type="hidden" name="userno" value="${param.userno}">
         <input type="submit" value="作成">
     </form>
 </div>
-
 </body>
 </html>
