@@ -1,6 +1,5 @@
 package command;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import bean.Post;
@@ -17,8 +16,6 @@ public class PostCommand extends AbstractCommand {
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             PostDao dao = daoFactory.getPostsDao();
-            String userno = getRequestContext().getParameter("userno")[0];
-            System.out.println(userno);
             posts = dao.getAllPosts();
         } catch (DAOException e) {
             throw new CommandException(e);

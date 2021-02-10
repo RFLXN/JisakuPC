@@ -47,7 +47,17 @@ public class MySQLProductDao implements ProductDao {
 
     @Override
     public void deleteProduct(String pid) throws DAOException {
+        String sql = "DELETE FROM product_table WHERE product_no = ?";
+        try {
+	        connection = getConnection();
+	        PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	        statement.setString(1,pid);
+	        update(statement);
 
+	        DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
     }
 
     @Override

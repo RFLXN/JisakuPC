@@ -12,5 +12,9 @@
   Product Type: <input type="text" name="productType"><br>
   <input type="submit">
 </form>
+<form method="post" action="deleteproduct">
+  Delete Product No: <input type="text" name="productNo"><br>
+  <input type="submit">
+</form>
 </body>
 </html>
