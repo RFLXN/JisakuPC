@@ -20,4 +20,5 @@ public interface ProductDao {
     List<Post> getShowPostProducts() throws DAOException;
     List<Post> getAllPosts() throws DAOException;
     List<Product> getPartsSearchProducts(String moji) throws DAOException;
+    List<Product> getAddBuildProducts(String name, String spec, String brand, String type) throws DAOException;
 }

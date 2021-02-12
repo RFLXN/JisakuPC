@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="css/post.css" rel="stylesheet" type="text/css" />
 
 
 <script type="text/javascript">
@@ -32,6 +33,8 @@ function check(){
 <title>掲示板</title>
 </head>
 <body>
+<jsp:include page="/header.jsp" />
+<div class="post-body">
 <form action="postbuild" method="post" name="form1" onSubmit="return check()">
 <p>タイトル:<input type="text" name="title"></p>
 <p>コメント:</ br>
@@ -45,6 +48,7 @@ function check(){
 <p>タイトル:<c:out value="${list.title}"/><br>
 説明:<c:out value="${list.description}"/></p>
 </c:forEach>
-
+</div>
+<jsp:include page="/footer.jsp" />
 </body>
 </html>
