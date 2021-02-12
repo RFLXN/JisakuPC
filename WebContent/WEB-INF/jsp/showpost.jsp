@@ -16,9 +16,9 @@
 			<h3>${post.date}</h3>
 			<h3>${post.description}</h3>
 			<table border="1">
-			<tr><th>商品番号</th><th>商品名</th></tr>
+			<tr><th>分類</th><th>商品名</th><th>値段</th><th>商品番号</th></tr>
 			<c:forEach var="posts" items="${post.list}">
-			<tr><td>${posts.productno}</td><td>${posts.pname}</td></tr>
+			<tr><td>${posts.type}</td><td>${posts.pname}</td><td>${posts.price}</td><td>${posts.productno}</td></tr>
 			</c:forEach>
 			<input type="hidden" name="postno" value="${post.no}">
 			<input type="submit" name="delete" value="削除">

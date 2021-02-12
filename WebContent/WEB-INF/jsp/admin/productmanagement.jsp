@@ -16,5 +16,9 @@
   Delete Product No: <input type="text" name="productNo"><br>
   <input type="submit">
 </form>
+<form method="post" action="deletepostadmin">
+  Delete Post No: <input type="text" name="postno"><br>
+  <input type="submit">
+</form>
 </body>
 </html>

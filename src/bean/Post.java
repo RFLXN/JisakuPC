@@ -15,6 +15,8 @@ public class Post implements Serializable{
 	private String productno;
 	private String userid;
 	private ArrayList<?> list;
+	private String type;
+	private String price;
 
 	public Post() {
     }
@@ -97,5 +99,21 @@ public class Post implements Serializable{
 
 	public void setList(ArrayList<?> list) {
 		this.list = list;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
 	}
 }

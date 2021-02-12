@@ -128,7 +128,7 @@ public class MySQLPostDao implements PostDao {
         String sql = "SELECT bpt.post_no,ut.user_id,bpt.title,bpt.description,bpt.date "
         		+ "FROM build_post_table bpt INNER JOIN user_table ut ON bpt.user_no = ut.user_no "
         		+ "WHERE bpt.post_no = ?;";
-        String sql1 = "SELECT pt.product_no,pt.product_name "
+        String sql1 = "SELECT pt.product_type,pt.product_no,pt.product_name,pt.product_price "
         		+ "FROM build_post_table bpot INNER JOIN build_table bt "
         		+ "INNER JOIN build_parts_table bpat INNER JOIN product_table pt "
         		+ "ON bpot.build_no=bt.build_no AND bt.build_no=bpat.build_no "
@@ -161,6 +161,9 @@ public class MySQLPostDao implements PostDao {
 	        		Post post2 = new Post();
 	                post2.setProductno(resultSet1.getString("product_no"));
 	                post2.setPname(resultSet1.getString("product_name"));
+	                post2.setPrice(resultSet1.getString("product_price"));
+	                post2.setType(resultSet1.getString("product_type"));
+	                
 	                list.add(post2);
 
 	            }
