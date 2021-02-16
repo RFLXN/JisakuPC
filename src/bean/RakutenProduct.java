@@ -12,7 +12,8 @@ public class RakutenProduct {
     private String mediumImageUrl;
     private String smallImageUrl;
 
-    public RakutenProduct() {}
+    public RakutenProduct() {
+    }
 
     public String getMediumImageUrl() {
         return mediumImageUrl;

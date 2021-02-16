@@ -7,7 +7,7 @@ public interface RequestContext {
 
     Object getRequest();
 
-    String getReferer();
-
     void setRequest(Object request);
+
+    String getReferer();
 }

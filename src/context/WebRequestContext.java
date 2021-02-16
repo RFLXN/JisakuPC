@@ -27,11 +27,6 @@ public class WebRequestContext implements RequestContext {
     }
 
     @Override
-    public String getReferer() {
-        return referer;
-    }
-
-    @Override
     public void setRequest(Object request) {
         this.request = (HttpServletRequest) request;
         parameters = this.request.getParameterMap();
@@ -39,10 +34,15 @@ public class WebRequestContext implements RequestContext {
         try {
             String refererHeader = this.request.getHeader("Referer");
             String[] ref = refererHeader.split("/");
-            referer = ref[ref.length-1];
+            referer = ref[ref.length - 1];
             System.out.println(referer);
         } catch (NullPointerException e) {
             referer = null;
         }
+    }
+
+    @Override
+    public String getReferer() {
+        return referer;
     }
 }

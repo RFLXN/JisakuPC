@@ -1,6 +1,8 @@
 package rakuten;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class StringDataWriter {
     private final BufferedOutputStream out;

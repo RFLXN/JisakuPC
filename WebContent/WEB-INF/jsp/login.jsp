@@ -16,19 +16,21 @@
 
   <form method="post" action="login-process">
   <div class="form-item">
-    ID <input type="text" name="id"><br>
-    PASSWORD <input type="password" name="password"><br>
-    <%
-      UserFlag user = (UserFlag) request.getAttribute("data");
-      if(user != null) {
-        if(!user.isCorrectUser()) {
-            out.print("Login Error");
+    ID <input type="text" name="id" required><br>
+    PASSWORD <input type="password" name="password" required><br>
+    <div class="login-error-container">
+      <%
+        UserFlag user = (UserFlag) request.getAttribute("data");
+        if(user != null) {
+          if(!user.isCorrectUser()) {
+              out.print("<p class=\"login-error-text\">正しいIDまたはPASSWORDを入力してください。</p>");
+          }
         }
-      }
-    %>
+      %>
+    </div>
    </div>
    <div class="loginsubmit">
-    <input type="submit" name="LOGIN">
+    <input type="submit" name="LOGIN" value="ログイン">
    </div>
   </form>
   </div>

@@ -1,7 +1,5 @@
 package db.dao.factory;
 
-import java.util.ResourceBundle;
-
 import bean.DBConnectionInfo;
 import db.connector.DBConnector;
 import db.connector.MySQLConnector;
@@ -14,6 +12,8 @@ import db.dao.product.MySQLProductDao;
 import db.dao.product.ProductDao;
 import db.dao.user.MySQLUserDao;
 import db.dao.user.UserDao;
+
+import java.util.ResourceBundle;
 
 public class MySQLDaoFactory extends DBDaoFactory {
     private static final MySQLDaoFactory instance;

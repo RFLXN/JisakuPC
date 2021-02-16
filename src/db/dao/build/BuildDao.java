@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface BuildDao {
     String addBuild(String userNo, String buildName) throws DAOException;
+
     List<Build> getUserBuilds(String userNo) throws DAOException;
+
     void deleteBuild(String buildNo) throws DAOException;
+
     void updateBuild(Build build) throws DAOException;
 }

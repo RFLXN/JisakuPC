@@ -1,13 +1,13 @@
 package command;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import bean.Product;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.product.ProductDao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShowPartsProductCommand extends AbstractCommand {
     @Override
@@ -32,11 +32,11 @@ public class ShowPartsProductCommand extends AbstractCommand {
 //            }
 
 
-            if(parts == null || parts[0].equals("")) {
+            if (parts == null || parts[0].equals("")) {
                 products = dao.getPartsSearchProducts(productName);
-            } else if(parts[0].equals("cpu")) {
+            } else if (parts[0].equals("cpu")) {
                 products = dao.getPartsSearchProducts(productName);
-            } else if(parts[0].equals("gpu")) {
+            } else if (parts[0].equals("gpu")) {
                 products = dao.getPartsSearchProducts(productName);
             }
 

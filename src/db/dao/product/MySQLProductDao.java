@@ -1,12 +1,5 @@
 package db.dao.product;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import bean.DBConnectionInfo;
 import bean.Product;
 import db.connector.DBCloseException;
@@ -19,6 +12,13 @@ import db.selector.DBSelectException;
 import db.selector.MySQLSelector;
 import db.updater.DBUpdateException;
 import db.updater.MySQLUpdater;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MySQLProductDao implements ProductDao {
     private Connection connection;
@@ -49,12 +49,12 @@ public class MySQLProductDao implements ProductDao {
     public void deleteProduct(String pid) throws DAOException {
         String sql = "DELETE FROM product_table WHERE product_no = ?";
         try {
-	        connection = getConnection();
-	        PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-	        statement.setString(1,pid);
-	        update(statement);
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1, pid);
+            update(statement);
 
-	        DBCloser.close(connection);
+            DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
             throw new DAOException(e.getMessage(), e);
         }
@@ -107,7 +107,7 @@ public class MySQLProductDao implements ProductDao {
 
             DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     DBCloser.close(connection);
                 } catch (DBCloseException ce) {
@@ -146,7 +146,7 @@ public class MySQLProductDao implements ProductDao {
 
             DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     DBCloser.close(connection);
                 } catch (DBCloseException ce) {
@@ -283,7 +283,7 @@ public class MySQLProductDao implements ProductDao {
 
             DBCloser.close(connection);
         } catch (SQLException | DBCloseException e) {
-            if(connection != null) {
+            if (connection != null) {
                 try {
                     DBCloser.close(connection);
                 } catch (DBCloseException ce) {
@@ -299,12 +299,16 @@ public class MySQLProductDao implements ProductDao {
     @Override
     public List<Product> getPartsSearchProducts(String moji) throws DAOException {
         ArrayList<Product> products = new ArrayList<>();
-
-        String sql = "SELECT  * FROM product_table WHERE product_type LIKE ?";
+        System.out.println(moji);
+        String sql = "SELECT  * FROM product_table WHERE product_type = ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
             statement.setString(1, "%" + moji);
+
+            statement.setString(1, moji);
+
 
             ResultSet resultSet = query(statement);
 
@@ -329,7 +333,7 @@ public class MySQLProductDao implements ProductDao {
     }
 
     private Connection getConnection() throws DAOException {
-        MySQLDaoFactory factory = (MySQLDaoFactory)MySQLDaoFactory.getInstance();
+        MySQLDaoFactory factory = (MySQLDaoFactory) MySQLDaoFactory.getInstance();
         DBConnector connector = factory.getConnector();
         DBConnectionInfo info = factory.getConnectionInfo();
 
@@ -377,5 +381,42 @@ public class MySQLProductDao implements ProductDao {
         } catch (DBUpdateException e) {
             throw new DAOException(e.getMessage(), e);
         }
+    }
+
+    public List<Product> getAddBuildProducts(String name, String spec, String brand, String type) throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+        Product product = new Product();
+        connection = getConnection();
+
+        try {
+            String sql = "SELECT * FROM product_table WHERE product_no = (?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            statement.setString(2, spec);
+            statement.setString(3, brand);
+            statement.setString(4, type);
+            ResultSet resultSet = query(statement);
+
+            resultSet.next();
+            product.setNo(resultSet.getString("product_no"));
+            product.setName(resultSet.getString("product_name"));
+            product.setPrice(resultSet.getString("product_price"));
+            product.setSpec(resultSet.getString("product_spec"));
+            product.setBrand(resultSet.getString("product_brand"));
+            product.setType(resultSet.getString("product_type"));
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            if (connection != null) {
+                try {
+                    DBCloser.close(connection);
+                } catch (DBCloseException ce) {
+                    throw new DAOException(ce.getMessage(), ce);
+                }
+            }
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return products;
     }
 }

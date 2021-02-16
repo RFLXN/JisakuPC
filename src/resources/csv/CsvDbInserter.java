@@ -22,7 +22,7 @@ public class CsvDbInserter {
 
         ArrayList<CsvProduct> cpuList = new ArrayList<>();
 
-        for(String product: products) {
+        for (String product : products) {
             String[] buffer = product.split(",");
             String productName = buffer[0];
             String rawProductSpec = buffer[1];
@@ -53,22 +53,22 @@ public class CsvDbInserter {
             }
 
             JSONObject object = new JSONObject();
-            if(core != null) {
+            if (core != null) {
                 object.put("core", Integer.parseInt(core));
             }
-            if(thread != null) {
+            if (thread != null) {
                 object.put("thread", Integer.parseInt(thread));
             }
-            if(frequency != null) {
+            if (frequency != null) {
                 object.put("frequency", Double.parseDouble(frequency));
             }
-            if(socket != null) {
+            if (socket != null) {
                 object.put("socket", socket);
             }
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
-            if(tdp != null) {
+            if (tdp != null) {
                 object.put("tdp", Integer.parseInt(tdp));
             }
 
@@ -77,18 +77,19 @@ public class CsvDbInserter {
 
         return cpuList;
     }
+
     public List<CsvProduct> getRAMs() throws IOException {
         String data = readFile("src/resources/csv/memory.csv");
         String[] products = data.split("\n");
 
         ArrayList<CsvProduct> ramList = new ArrayList<>();
 
-        for(String product : products) {
+        for (String product : products) {
             String[] buff = product.split(",");
             String productName = buff[0];
 
-            if(buff.length<2) {
-                buff = new String[] {""};
+            if (buff.length < 2) {
+                buff = new String[]{""};
             } else {
                 buff = buff[1].split(" \\| ");
             }
@@ -99,15 +100,15 @@ public class CsvDbInserter {
             String dimmType = null;
             String date = null;
 
-            for(String spec: buff) {
-                if(spec.contains("S.O.DIMM")) {
+            for (String spec : buff) {
+                if (spec.contains("S.O.DIMM")) {
                     dimmType = "S.O.DIMM";
-                } else if(spec.contains("DIMM")) {
+                } else if (spec.contains("DIMM")) {
                     dimmType = "DIMM";
                 }
 
-                if(spec.contains("DDR")) {
-                    if(spec.contains("(")) {
+                if (spec.contains("DDR")) {
+                    if (spec.contains("(")) {
                         String[] b = spec.split("\\(");
 
                         String[] b2 = b[0].split("-");
@@ -123,7 +124,7 @@ public class CsvDbInserter {
                     }
                 }
 
-                if(spec.contains("発売")) {
+                if (spec.contains("発売")) {
                     date = spec.replace("発売", "").replace("\r", "");
                 }
             }
@@ -135,23 +136,23 @@ public class CsvDbInserter {
             ram.setProductName(productName);
             ram.setBrand(productName.split(" ")[0]);
 
-            if(clock != null) {
+            if (clock != null) {
                 object.put("clock", Integer.parseInt(clock));
             }
 
-            if(boostClock != null) {
+            if (boostClock != null) {
                 object.put("boostClock", Integer.parseInt(boostClock));
             }
 
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
 
-            if(ddrType != null) {
+            if (ddrType != null) {
                 object.put("ddr", ddrType);
             }
 
-            if(dimmType != null) {
+            if (dimmType != null) {
                 object.put("dimm", dimmType);
             }
 
@@ -162,18 +163,19 @@ public class CsvDbInserter {
 
         return ramList;
     }
+
     public List<CsvProduct> getHDDs() throws IOException {
         String rawData = readFile("src/resources/csv/hdd.csv");
         String[] products = rawData.split("\n");
 
         ArrayList<CsvProduct> list = new ArrayList<>();
 
-        for(String rawProduct :products) {
+        for (String rawProduct : products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
 
-            if(buff.length<2) {
-                buff = new String[] {""};
+            if (buff.length < 2) {
+                buff = new String[]{""};
             } else {
                 buff = buff[1].split(" \\| ");
             }
@@ -184,7 +186,7 @@ public class CsvDbInserter {
             String serial = null;
             String date = null;
 
-            for(String spec : buff) {
+            for (String spec : buff) {
                 if (spec.contains("容量")) {
                     volume = spec.replace("容量 ", "");
                 } else if (spec.contains("rpm")) {
@@ -200,23 +202,23 @@ public class CsvDbInserter {
 
             JSONObject object = new JSONObject();
 
-            if(volume != null) {
+            if (volume != null) {
                 object.put("volume", volume);
             }
 
-            if(size != null) {
+            if (size != null) {
                 object.put("size", size);
             }
 
-            if(speed != null) {
+            if (speed != null) {
                 object.put("speed", Integer.parseInt(speed));
             }
 
-            if(serial != null) {
+            if (serial != null) {
                 object.put("serial", serial);
             }
 
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
 
@@ -230,18 +232,19 @@ public class CsvDbInserter {
 
         return list;
     }
+
     public List<CsvProduct> getSSDs() throws IOException {
         String rawData = readFile("src/resources/csv/ssd.csv");
         String[] products = rawData.split("\n");
 
         ArrayList<CsvProduct> list = new ArrayList<>();
 
-        for(String rawProduct :products) {
+        for (String rawProduct : products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
 
-            if(buff.length<2) {
-                buff = new String[] {""};
+            if (buff.length < 2) {
+                buff = new String[]{""};
             } else {
                 buff = buff[1].split(" \\| ");
             }
@@ -252,7 +255,7 @@ public class CsvDbInserter {
             String serial = null;
             String date = null;
 
-            for(String spec : buff) {
+            for (String spec : buff) {
                 if (spec.contains("容量")) {
                     volume = spec.replace("容量 ", "");
                 } else if (spec.contains("MLC") | spec.contains("TLC") | spec.contains("QLC")) {
@@ -270,23 +273,23 @@ public class CsvDbInserter {
 
             JSONObject object = new JSONObject();
 
-            if(volume != null) {
+            if (volume != null) {
                 object.put("volume", volume);
             }
 
-            if(size != null) {
+            if (size != null) {
                 object.put("size", size);
             }
 
-            if(flashMemoryType != null) {
+            if (flashMemoryType != null) {
                 object.put("flashMemoryType", flashMemoryType);
             }
 
-            if(serial != null) {
+            if (serial != null) {
                 object.put("serial", serial);
             }
 
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
 
@@ -300,18 +303,19 @@ public class CsvDbInserter {
 
         return list;
     }
+
     public List<CsvProduct> getGPUs() throws IOException {
         String rawData = readFile("src/resources/csv/gpu.csv");
         String[] products = rawData.split("\n");
 
         ArrayList<CsvProduct> list = new ArrayList<>();
 
-        for(String rawProduct :products) {
+        for (String rawProduct : products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
 
-            if(buff.length<2) {
-                buff = new String[] {""};
+            if (buff.length < 2) {
+                buff = new String[]{""};
             } else {
                 buff = buff[1].split(" \\| ");
             }
@@ -321,13 +325,13 @@ public class CsvDbInserter {
             String memoryType = null;
             String memorySize = null;
 
-            for(String spec : buff) {
+            for (String spec : buff) {
                 if (spec.contains("GB")) {
                     String[] b = spec.split(" ");
-                    for(String b2:b) {
-                        if(b2.contains("GDDR")) {
+                    for (String b2 : b) {
+                        if (b2.contains("GDDR")) {
                             memoryType = b2.replace("\r", "");
-                        } else if(b2.contains("GB")) {
+                        } else if (b2.contains("GB")) {
                             memorySize = b2.replace("GB", "").replace("\r", "");
                         }
                     }
@@ -340,21 +344,21 @@ public class CsvDbInserter {
 
             JSONObject object = new JSONObject();
 
-            if(gpuName != null) {
+            if (gpuName != null) {
                 object.put("gpu", gpuName);
             }
 
 
-            if(memorySize != null) {
+            if (memorySize != null) {
                 object.put("memorySize", Integer.parseInt(memorySize));
             }
 
 
-            if(memoryType != null) {
+            if (memoryType != null) {
                 object.put("memoryType", memoryType);
             }
 
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
 
@@ -368,18 +372,19 @@ public class CsvDbInserter {
 
         return list;
     }
+
     public List<CsvProduct> getCases() throws IOException {
         String rawData = readFile("src/resources/csv/case.csv");
         String[] products = rawData.split("\n");
 
         ArrayList<CsvProduct> list = new ArrayList<>();
 
-        for(String rawProduct :products) {
+        for (String rawProduct : products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
 
-            if(buff.length<2) {
-                buff = new String[] {""};
+            if (buff.length < 2) {
+                buff = new String[]{""};
             } else {
                 buff = buff[1].split(" \\| ");
             }
@@ -388,11 +393,11 @@ public class CsvDbInserter {
             String[] color = null;
             String date = null;
 
-            for(String spec: buff) {
-                if(spec.contains("ATX") | spec.contains("ITX") | spec.contains("STX")
-                        |spec.contains("SSI") | spec.contains("DTX")) {
+            for (String spec : buff) {
+                if (spec.contains("ATX") | spec.contains("ITX") | spec.contains("STX")
+                        | spec.contains("SSI") | spec.contains("DTX")) {
                     factor = spec.replace("\r", "");
-                } else if(spec.contains("発売")) {
+                } else if (spec.contains("発売")) {
                     date = spec.replace("発売", "").replace("\r", "");
                 } else {
                     color = spec.split("/");
@@ -403,7 +408,7 @@ public class CsvDbInserter {
             csvProduct.setProductName(productName);
 
             String bname = productName.split(" ")[0];
-            if(bname.equals("Lian")) {
+            if (bname.equals("Lian")) {
                 bname = "Lian Li";
             } else if (bname.equals("Fractal")) {
                 bname = "Fractal Design";
@@ -422,10 +427,10 @@ public class CsvDbInserter {
 
             JSONObject object = new JSONObject();
 
-            if(factor != null) {
+            if (factor != null) {
                 object.put("factor", factor);
             }
-            if(color != null && color.length>0) {
+            if (color != null && color.length > 0) {
                 JSONArray array = new JSONArray();
                 for (String c : color) {
                     array.put(c.replace("\r", ""));
@@ -433,7 +438,7 @@ public class CsvDbInserter {
 
                 object.put("color", array);
             }
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
 
@@ -444,18 +449,19 @@ public class CsvDbInserter {
 
         return list;
     }
+
     public List<CsvProduct> getPowers() throws IOException {
         String rawData = readFile("src/resources/csv/power.csv");
         String[] products = rawData.split("\n");
 
         ArrayList<CsvProduct> list = new ArrayList<>();
 
-        for(String rawProduct :products) {
+        for (String rawProduct : products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
 
-            if(buff.length<2) {
-                buff = new String[] {""};
+            if (buff.length < 2) {
+                buff = new String[]{""};
             } else {
                 buff = buff[1].split(" \\| ");
             }
@@ -466,7 +472,7 @@ public class CsvDbInserter {
             boolean plugin = false;
             String date = null;
 
-            for(String spec : buff) {
+            for (String spec : buff) {
                 if (spec.contains("ATX") | spec.contains("BTX") | spec.contains("EPS") |
                         spec.contains("SFX") | spec.contains("TFX")) {
                     factor = spec.split("/");
@@ -483,30 +489,30 @@ public class CsvDbInserter {
 
             JSONObject object = new JSONObject();
 
-            if(factor != null && factor.length>0) {
+            if (factor != null && factor.length > 0) {
                 JSONArray array = new JSONArray();
-                for(String f: factor) {
+                for (String f : factor) {
                     array.put(f.replace("\r", ""));
                 }
                 object.put("factor", array);
             }
 
-            if(w != null) {
+            if (w != null) {
                 object.put("W", Integer.parseInt(w));
             }
 
-            if(plus80 != null) {
+            if (plus80 != null) {
                 object.put("80PLUS", plus80);
             }
 
             object.put("plugin", plugin);
 
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
 
             String bname = productName.split(" ")[0];
-            if(bname.equals("Lian")) {
+            if (bname.equals("Lian")) {
                 bname = "Lian Li";
             } else if (bname.equals("Fractal")) {
                 bname = "Fractal Design";
@@ -527,18 +533,19 @@ public class CsvDbInserter {
 
         return list;
     }
+
     public List<CsvProduct> getMotherBoards() throws IOException {
         String rawData = readFile("src/resources/csv/board.csv");
         String[] products = rawData.split("\n");
 
         ArrayList<CsvProduct> list = new ArrayList<>();
 
-        for(String rawProduct :products) {
+        for (String rawProduct : products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
 
-            if(buff.length<2) {
-                buff = new String[] {""};
+            if (buff.length < 2) {
+                buff = new String[]{""};
             } else {
                 buff = buff[1].split(" \\| ");
             }
@@ -571,16 +578,16 @@ public class CsvDbInserter {
             }
 
             JSONObject object = new JSONObject();
-            if(formfactor != null) {
+            if (formfactor != null) {
                 object.put("formfactor", formfactor);
             }
-            if(chipset != null) {
+            if (chipset != null) {
                 object.put("chipset", chipset);
             }
-            if(socket != null) {
+            if (socket != null) {
                 object.put("socket", socket);
             }
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
             object.put("wifi", wifi);
@@ -592,18 +599,19 @@ public class CsvDbInserter {
 
         return list;
     }
+
     public List<CsvProduct> getCPUCoolers() throws IOException {
         String rawData = readFile("src/resources/csv/cpucooler.csv");
         String[] products = rawData.split("\n");
 
         ArrayList<CsvProduct> list = new ArrayList<>();
 
-        for(String rawProduct :products) {
+        for (String rawProduct : products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
 
-            if(buff.length<2) {
-                buff = new String[] {""};
+            if (buff.length < 2) {
+                buff = new String[]{""};
             } else {
                 buff = buff[1].split(" \\| ");
             }
@@ -613,7 +621,7 @@ public class CsvDbInserter {
             String date = null;
             String airVolume = null;
 
-            for(String spec : buff) {
+            for (String spec : buff) {
                 if (spec.contains("mm")) {
                     size = spec.replace("\r", "");
                 } else if (spec.contains("CFM")) {
@@ -626,22 +634,22 @@ public class CsvDbInserter {
             }
 
             JSONObject object = new JSONObject();
-            if(size != null) {
+            if (size != null) {
                 object.put("size", size);
             }
-            if(airVolume != null) {
+            if (airVolume != null) {
                 object.put("airVolume", Double.parseDouble(airVolume));
             }
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
-            if(type != null) {
+            if (type != null) {
                 object.put("type", type);
             }
 
             String bname = productName.split(" ")[0];
 
-            if(bname.equals("Fractal")) {
+            if (bname.equals("Fractal")) {
                 bname = "Fractal Design";
             } else if (bname.equals("Be")) {
                 bname = "Be Quiet";
@@ -660,18 +668,19 @@ public class CsvDbInserter {
 
         return list;
     }
+
     public List<CsvProduct> getCaseFans() throws IOException {
         String rawData = readFile("src/resources/csv/casefan.csv");
         String[] products = rawData.split("\n");
 
         ArrayList<CsvProduct> list = new ArrayList<>();
 
-        for(String rawProduct :products) {
+        for (String rawProduct : products) {
             String[] buff = rawProduct.split(",");
             String productName = buff[0];
 
-            if(buff.length<2) {
-                buff = new String[] {""};
+            if (buff.length < 2) {
+                buff = new String[]{""};
             } else {
                 buff = buff[1].split(" \\| ");
             }
@@ -681,8 +690,8 @@ public class CsvDbInserter {
             String sound = null;
             String date = null;
 
-            for(String spec: buff) {
-                if(spec.contains("mm")) {
+            for (String spec : buff) {
+                if (spec.contains("mm")) {
                     size = spec.replace(" mm", "").replace("\r", "");
                 } else if (spec.contains("rpm")) {
                     rpm = spec.replace(" rpm", "").replace("\r", "");
@@ -695,16 +704,16 @@ public class CsvDbInserter {
 
             JSONObject object = new JSONObject();
 
-            if(size != null) {
+            if (size != null) {
                 object.put("size", Integer.parseInt(size));
             }
-            if(rpm != null) {
+            if (rpm != null) {
                 object.put("rpm", Integer.parseInt(rpm));
             }
-            if(sound != null) {
+            if (sound != null) {
                 object.put("noiseLevel", Double.parseDouble(sound));
             }
-            if(date != null) {
+            if (date != null) {
                 object.put("date", date);
             }
 
@@ -734,9 +743,9 @@ public class CsvDbInserter {
         return list;
     }
 
-    public void insert(List<CsvProduct> productList, String productType) throws Exception{
+    public void insert(List<CsvProduct> productList, String productType) throws Exception {
         DBConnectionInfo info
-                = ((MySQLDaoFactory)MySQLDaoFactory.getInstance()).getConnectionInfo();
+                = ((MySQLDaoFactory) MySQLDaoFactory.getInstance()).getConnectionInfo();
         Connection connection
                 = MySQLConnector.getInstance().getConnection(info.getHost(),
                 info.getUserName(), info.getPassword());
@@ -748,7 +757,7 @@ public class CsvDbInserter {
 
         statement.setString(4, productType);
 
-        for(CsvProduct product: productList) {
+        for (CsvProduct product : productList) {
             System.out.println("INSERT : " + product.getProductName() + " / " + product.getSpec());
             statement.setString(1, product.getProductName());
             statement.setString(2, product.getSpec());

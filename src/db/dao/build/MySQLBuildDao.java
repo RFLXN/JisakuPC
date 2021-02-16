@@ -70,9 +70,9 @@ public class MySQLBuildDao implements BuildDao {
                         , resultSet.getString("build_name"));
             }
 
-            Set<Integer> b =  buildNoBuff.keySet();
+            Set<Integer> b = buildNoBuff.keySet();
 
-            for(int buildNo: b) {
+            for (int buildNo : b) {
                 sql = "select build_no, product_table.product_no AS 'product_no', " +
                         "product_name, product_type,product_brand, product_spec, product_price " +
                         "from build_parts_table join product_table " +
@@ -155,7 +155,7 @@ public class MySQLBuildDao implements BuildDao {
             statement = connection.prepareStatement(sql);
             statement.setInt(1, Integer.parseInt(build.getBuildNo()));
 
-            for(Product part: build.getProducts()) {
+            for (Product part : build.getProducts()) {
                 statement.setInt(2, Integer.parseInt(part.getNo()));
                 update(statement);
             }

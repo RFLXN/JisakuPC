@@ -14,12 +14,12 @@ public class AdminFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest)servletRequest;
-        HttpServletResponse response = (HttpServletResponse)servletResponse;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        UserFlag loginFlag = (UserFlag)request.getSession().getAttribute("loginFlag");
+        UserFlag loginFlag = (UserFlag) request.getSession().getAttribute("loginFlag");
 
-        if(loginFlag == null || (!loginFlag.isCorrectUser())) {
+        if (loginFlag == null || (!loginFlag.isCorrectUser())) {
             request.getSession().setAttribute("source", request.getServletPath().substring(1));
 
             servletRequest.getRequestDispatcher("/login").forward(servletRequest, servletResponse);

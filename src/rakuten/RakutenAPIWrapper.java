@@ -30,11 +30,11 @@ public class RakutenAPIWrapper {
 
     /**
      * Search Option: String[] Type
-     *  [
-     *      "genre:GENRE_ID",       // Property Loader -> getApiParameter("GENRE_NAME")
-     *      "productName:PRODUCT_NAME",
-     *      "productId:PRODUCT_ID"
-     *  ]
+     * [
+     * "genre:GENRE_ID",       // Property Loader -> getApiParameter("GENRE_NAME")
+     * "productName:PRODUCT_NAME",
+     * "productId:PRODUCT_ID"
+     * ]
      */
     public JSONObject searchItem(String[] option) throws RakutenAPIException {
         String rawData = "";
@@ -95,7 +95,7 @@ public class RakutenAPIWrapper {
             if (o.startsWith("productId:")) {
                 productId = o.replaceFirst("productId:", "");
             }
-            if(o.startsWith("page:")) {
+            if (o.startsWith("page:")) {
                 page = o.replaceFirst("page:", "");
             }
         }
@@ -112,7 +112,7 @@ public class RakutenAPIWrapper {
             productName = URLEncoder.encode(productName, "UTF-8");
             url.append("&keyword=").append(productName);
         }
-        if(!page.equals("")) {
+        if (!page.equals("")) {
             url.append("&page=").append(page);
         }
 

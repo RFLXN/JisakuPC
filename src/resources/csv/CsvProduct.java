@@ -7,7 +7,8 @@ public class CsvProduct implements Serializable {
     private String spec;
     private String brand;
 
-    public CsvProduct() {}
+    public CsvProduct() {
+    }
 
     public CsvProduct(String productName, String spec, String brand) {
         this.productName = productName;

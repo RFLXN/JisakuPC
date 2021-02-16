@@ -26,16 +26,16 @@ public class LoginProcessCommand extends AbstractCommand {
 
             UserFlag user = dao.getUser(id, password);
 
-            if(user.isCorrectUser()) {
-                HttpServletRequest servletRequest = (HttpServletRequest)getRequestContext().getRequest();
+            if (user.isCorrectUser()) {
+                HttpServletRequest servletRequest = (HttpServletRequest) getRequestContext().getRequest();
                 servletRequest.getSession().setAttribute("loginFlag", user);
 
                 String source = (String) servletRequest.getSession().getAttribute("source");
 
-                if(source == null) {
+                if (source == null) {
                     responseContext.setTarget("index");
                 } else {
-                    if(source.equals("")) {
+                    if (source.equals("")) {
                         responseContext.setTarget("index");
                     } else {
                         responseContext.setTarget(source);

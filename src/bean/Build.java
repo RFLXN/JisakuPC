@@ -9,7 +9,8 @@ public class Build implements Serializable {
     private String buildName;
     private List<Product> products;
 
-    public Build() {}
+    public Build() {
+    }
 
     public String getBuildNo() {
         return buildNo;

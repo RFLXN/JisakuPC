@@ -12,7 +12,7 @@ import java.util.List;
 public class ShowMyPageCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
-        String userNo = ((UserFlag)((HttpServletRequest) getRequestContext().getRequest())
+        String userNo = ((UserFlag) ((HttpServletRequest) getRequestContext().getRequest())
                 .getSession().getAttribute("loginFlag")).getUserNo();
 
         try {

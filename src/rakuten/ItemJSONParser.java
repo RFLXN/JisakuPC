@@ -1,7 +1,6 @@
 package rakuten;
 
 import bean.RakutenItem;
-import bean.RakutenProduct;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -16,7 +15,7 @@ public class ItemJSONParser {
         JSONArray products = root.getJSONArray("Items");
         data = new ArrayList<>();
 
-        for(Object p : products) {
+        for (Object p : products) {
             JSONObject product = (JSONObject) p;
             RakutenItem item = new RakutenItem();
             item.setGenreId(product.getString("genreId"));
@@ -26,14 +25,14 @@ public class ItemJSONParser {
 
             JSONArray array = product.getJSONArray("mediumImageUrls");
             String[] strArr = new String[array.length()];
-            for(int i=0 ; i<array.length() ; i++) {
+            for (int i = 0; i < array.length(); i++) {
                 strArr[i] = array.getString(i);
             }
             item.setMediumImageUrls(strArr);
 
             array = product.getJSONArray("smallImageUrls");
             strArr = new String[array.length()];
-            for(int i=0 ; i<array.length() ; i++) {
+            for (int i = 0; i < array.length(); i++) {
                 strArr[i] = array.getString(i);
             }
             item.setSmallImageUrls(strArr);

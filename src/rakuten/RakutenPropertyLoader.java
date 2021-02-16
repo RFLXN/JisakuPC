@@ -6,10 +6,11 @@ import java.util.ResourceBundle;
 public class RakutenPropertyLoader {
     private static final RakutenPropertyLoader instance;
 
-    private RakutenPropertyLoader() {}
-
     static {
         instance = new RakutenPropertyLoader();
+    }
+
+    private RakutenPropertyLoader() {
     }
 
     public static RakutenPropertyLoader getInstance() {

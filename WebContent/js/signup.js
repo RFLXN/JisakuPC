@@ -11,6 +11,7 @@ function signup() {
         },
         success: function (data) {
             const result = data.isAlreadyUsedId;
+            console.log(data);
 
             if (result) {        // もう使われている場合 エラーメッセージを出力
                 $("#warning-text").text("もう使われているIDです。");

@@ -1,6 +1,5 @@
 package rakuten;
 
-import bean.RakutenItem;
 import bean.RakutenProduct;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,7 +15,7 @@ public class ProductJSONParser {
         JSONArray products = root.getJSONArray("Products");
         data = new ArrayList<>();
 
-        for(Object p : products) {
+        for (Object p : products) {
             JSONObject product = (JSONObject) p;
             RakutenProduct rakutenProduct = new RakutenProduct();
 
