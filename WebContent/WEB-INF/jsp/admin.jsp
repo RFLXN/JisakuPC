@@ -4,8 +4,8 @@
   <title>Admin Page</title>
 </head>
 <body>
-  <form method="get" action="productmanagement">
-    <input type="submit" name="Go To Product Management">
-  </form>
+<form method="get" action="productmanagement">
+  <input type="submit" name="Go To Product Management">
+</form>
 </body>
 </html>

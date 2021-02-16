@@ -16,13 +16,13 @@ public class AddPartsToBuildCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         HttpSession session = ((HttpServletRequest) getRequestContext().getRequest()).getSession();
-        String productNo = getRequestContext().getParameter("productNo")[0];
+        String productNo = getRequestContext().getParameter("pid")[0];
 
         try {
             ProductDao dao = AbstractDaoFactory.getFactory().getProductsDao();
             Product product = dao.getProduct(productNo);
 
-            if (session.getAttribute("build") == null | session.getAttribute("build").equals("")) {
+            if (session.getAttribute("build") == null || session.getAttribute("build").equals("")) {
                 ArrayList<Product> products = new ArrayList<Product>();
                 products.add(product);
                 Build build = new Build();
@@ -38,7 +38,7 @@ public class AddPartsToBuildCommand extends AbstractCommand {
             throw new CommandException(e);
         }
 
-        responseContext.setTarget("build");
+        responseContext.setTarget("addbuild");
         return responseContext;
     }
 }

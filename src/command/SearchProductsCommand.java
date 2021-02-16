@@ -14,7 +14,12 @@ public class SearchProductsCommand extends AbstractCommand {
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         List<Product> products = new ArrayList<Product>();
 
-        String productName = getRequestContext().getParameter("moji")[0];
+        String[] pn = getRequestContext().getParameter("moji");
+        String productName = null;
+
+        if (!(pn == null || pn.length < 1)) {
+            productName = pn[0];
+        }
         System.out.println(productName);
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
@@ -34,6 +39,16 @@ public class SearchProductsCommand extends AbstractCommand {
                     products = dao.getPartsSearchProducts("ram");
                 } else if (parts[0].equals("storage")) {
                     products = dao.getPartsSearchProducts("storage");
+                } else if (parts[0].equals("cpu_cooler")) {
+                    products = dao.getPartsSearchProducts("cpu_cooler");
+                } else if (parts[0].equals("case")) {
+                    products = dao.getPartsSearchProducts("case");
+                } else if (parts[0].equals("mother_board")) {
+                    products = dao.getPartsSearchProducts("mother_board");
+                } else if (parts[0].equals("power_supply")) {
+                    products = dao.getPartsSearchProducts("power_supply");
+                } else if (parts[0].equals("case_fan")) {
+                    products = dao.getPartsSearchProducts("case_fan");
                 }
             } else if (sort[0].equals("asc")) {
                 products = dao.getASCSearchProducts(productName);

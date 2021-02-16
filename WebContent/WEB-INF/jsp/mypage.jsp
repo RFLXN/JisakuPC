@@ -14,9 +14,16 @@ User No : ${sessionScope.loginFlag.userNo}
 
 <c:forEach var="build" items="${data}">
   <table>
-    <tr><th>${build.buildNo}</th><th>${build.buildName}</th></tr>
+    <tr>
+      <th>${build.buildNo}</th>
+      <th>${build.buildName}</th>
+    </tr>
     <c:forEach var="part" items="${build.products}">
-      <tr><td>${part.no}</td><td>${part.name}</td><td>${part.price}</td></tr>
+      <tr>
+        <td>${part.no}</td>
+        <td>${part.name}</td>
+        <td>${part.price}</td>
+      </tr>
     </c:forEach>
   </table>
 </c:forEach>

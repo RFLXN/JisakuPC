@@ -14,7 +14,7 @@ function signup() {
             console.log(data);
 
             if (result) {        // もう使われている場合 エラーメッセージを出力
-                $("#warning-text").text("もう使われているIDです。");
+                $(".warning-text").text("もう使われているIDです。");
             } else {            // 問題ない場合 転送する
                 submitForm();
             }
