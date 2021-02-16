@@ -5,7 +5,7 @@ body {
   color: #5e5e5e;
   font: 400 87.5%/1.5em 'Open Sans', sans-serif;
 }
-div.loginbody{
+.signup-body{
   background: #ffffff;
   box-sizing: border-box;
   margin: 8em auto 3em;
@@ -20,13 +20,13 @@ form {
   padding: 0 1.5em;
 }
 
-.form-item {
+#signup-area {
   margin-bottom: 0.75em;
   width: 100%;
   height: 200px;
 }
 
-.form-item input {
+#signup-area input {
   background: #fafafa;
   border: none;
   border-bottom: 2px solid #e9e9e9;
@@ -38,12 +38,12 @@ form {
   width: 100%;
 }
 
-.form-item input:focus {
+#signup-area input:focus {
   border-bottom: 2px solid #c0c0c0;
   outline: none;
 }
 
-.loginsubmit input {
+.signup-submit #signup-btn {
   background: #f16272;
   border: none;
   color: #fff;
@@ -59,6 +59,6 @@ form {
 
 }
 
-.loginsubmit input:hover {
+ .signup-submit #signup-btn:hover {
   background: #ee3e52;
 }

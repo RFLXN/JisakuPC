@@ -6,29 +6,36 @@
 <head>
   <meta charset="UTF-8">
   <title>商品</title>
+  <link href="css/showproducts.css" rel="stylesheet" type="text/css" />
 </head>
+<jsp:include page="/header.jsp" />
 <body>
-<div id="search">
+<div class="search">
   <form method="get" action="searchproduct">
     <input type="text" name="moji" value="${param.moji}" size="36" placeholder="キーワードで検索" maxlength="20">
     <input type="submit" value="検索">
-<%-- 	<input type="submit" name="syoujunn" value="昇順" />
-	<input type="submit" name="koujunn" value="降順" />--%>
-	  <label><input type="radio" name="sort-by-cost" value="asc">昇順</label>
+</div>
+<div class="search-sort">
+	<label><input type="radio" name="sort-by-cost" value="asc">昇順</label>
     <label><input type="radio" name="sort-by-cost" value="desc">降順</label>
     <br><input type="submit" name="parts" value="cpu" onClick="this.form.moji.value=''">
 	<br><input type="submit" name="parts" value="ram" onClick="this.form.moji.value=''">
 	<br><input type="submit" name="parts" value="gpu" onClick="this.form.moji.value=''">
 	<br><input type="submit" name="parts" value="storage" onClick="this.form.moji.value=''">
+</div>
   </form>
 </div>
 
 <h1>商品一覧</h1>
-<table border="1">
-  <tr><th>商品番号</th><th>商品名</th><th>値段</th><th>スペック</th><th>ブランド</th><th>商品タイプ</th></tr>
+<table width="100%" class="show">
+  <tr><th>商品名</th><th>値段</th><th>詳細</th><th>見積りへ</th></tr>
   <c:forEach var="product" items="${data}">
-    <tr><td>${product.no}</td><td>${product.name}</td><td>${product.price}</td><td>${product.spec}</td><td>${product.brand}</td><td>${product.type}</td></tr>
+    <tr><td align="center" width="70%">${product.name}</td><td align="center" width="10%">${product.price}</td>
+    <td align="center" width="10%"><form action="details"><input type="submit" value="詳細"></form></td>
+    <td align="center" width="10%"><form action="add"><input type="submit" value="追加"></form></td>
+    </tr>
   </c:forEach>
 </table>
 </body>
+<jsp:include page="/footer.jsp" />
 </html>

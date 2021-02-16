@@ -10,8 +10,10 @@
   <title>LOGIN</title>
 </head>
 <body>
+  <jsp:include page="/header.jsp" />
   <div class="loginbody">
   <h1>LOGIN</h1>
+
   <form method="post" action="login-process">
   <div class="form-item">
     ID <input type="text" name="id"><br>
@@ -30,5 +32,6 @@
    </div>
   </form>
   </div>
+  <jsp:include page="/footer.jsp" />
 </body>
 </html>

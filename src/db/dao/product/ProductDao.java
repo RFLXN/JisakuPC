@@ -16,4 +16,5 @@ public interface ProductDao {
     List<Product> getASCSearchProducts(String moji) throws DAOException;
     List<Product> getDESCSearchProducts(String moji) throws DAOException;
     List<Product> getPartsSearchProducts(String moji) throws DAOException;
+    List<Product> getAddBuildProducts(String name, String spec, String brand, String type) throws DAOException;
 }
