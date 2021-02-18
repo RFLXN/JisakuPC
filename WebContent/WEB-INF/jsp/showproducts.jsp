@@ -38,8 +38,9 @@
   </tr>
   <c:forEach var="product" items="${data}">
     <tr>
-      <td align="center" width="70%">${product.name}</td>
+      <td align="center" width="60%">${product.name}</td>
       <td align="center" width="10%">${product.price}</td>
+      <td align="center" width="10%">${product.spec}</td>
       <td align="center" width="10%">
         <form method="get" action="productspec">
           <input type="hidden" name="pid" value="${product.no}">

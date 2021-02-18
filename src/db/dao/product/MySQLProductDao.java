@@ -1,5 +1,12 @@
 package db.dao.product;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import bean.DBConnectionInfo;
 import bean.Product;
 import db.connector.DBCloseException;
@@ -12,13 +19,6 @@ import db.selector.DBSelectException;
 import db.selector.MySQLSelector;
 import db.updater.DBUpdateException;
 import db.updater.MySQLUpdater;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MySQLProductDao implements ProductDao {
     private Connection connection;
@@ -312,6 +312,204 @@ public class MySQLProductDao implements ProductDao {
 
             ResultSet resultSet = query(statement);
 
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<Product> getWordSearchProducts(String word) throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+        System.out.println(word);
+        String sql = "SELECT  * FROM product_table WHERE product_name LIKE ?";
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            statement.setString(1, "%" + word + "%");
+
+            ResultSet resultSet = query(statement);
+
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<Product> getSpecSearchProducts(String word) throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+        System.out.println(word);
+        String sql = "SELECT * FROM product_table WHERE product_spec LIKE ?";
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            statement.setString(1, "%" + word + "%");
+
+            ResultSet resultSet = query(statement);
+
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<Product> getSpecialSearchProducts(String ddr,String clock) throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+        String sql = "SELECT * FROM product_table WHERE product_spec LIKE ? AND product_spec LIKE ?";
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            statement.setString(1, "%" + ddr + "%");
+            statement.setString(2, "%" + clock + "%");
+
+            ResultSet resultSet = query(statement);
+
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<Product> getVolumeSearchProducts(String under,String over) throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+
+        String sql = " select * from product_table WHERE JSON_UNQUOTE(JSON_EXTRACT(product_spec,'$.volume')) BETWEEN ? AND ? ";
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            statement.setInt(1,Integer.parseInt(under));
+            statement.setInt(2,Integer.parseInt(over));
+
+            ResultSet resultSet = query(statement);
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+
+        return products;
+    }
+
+    @Override
+    public List<Product> getWSizeSearchProducts(String under,String over) throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+
+        String sql = " select * from product_table WHERE JSON_UNQUOTE(JSON_EXTRACT(product_spec,'$.W')) BETWEEN ? AND ? ";
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            statement.setInt(1,Integer.parseInt(under));
+            statement.setInt(2,Integer.parseInt(over));
+
+            ResultSet resultSet = query(statement);
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e.getMessage(), e);
+        }
+
+        return products;
+    }
+
+    @Override
+    public List<Product> getSizeSearchProducts(String size) throws DAOException {
+        ArrayList<Product> products = new ArrayList<>();
+
+        String sql = " select * from product_table WHERE JSON_UNQUOTE(JSON_EXTRACT(product_spec,'$.size')) = ?";
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            statement.setDouble(1,Double.parseDouble(size));
+
+            ResultSet resultSet = query(statement);
             while (resultSet.next()) {
                 Product product = new Product();
                 product.setNo(resultSet.getString("product_no"));
