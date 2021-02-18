@@ -113,6 +113,94 @@ public class MySQLBuildDao implements BuildDao {
     }
 
     @Override
+    public Build getBuild(String buildNo) throws DAOException {
+        Build build = new Build();
+        try {
+            connection = getConnection();
+            String sql = "select build_no, product_table.product_no AS 'product_no', " +
+                    "product_name, product_type,product_brand, product_spec, product_price " +
+                    "from build_parts_table join product_table " +
+                    "on build_parts_table.product_no = product_table.product_no " +
+                    "where build_no = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, Integer.parseInt(buildNo));
+            ResultSet resultSet = query(statement);
+            ArrayList<Product> products = new ArrayList<>();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setType(resultSet.getString("product_type"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setPrice(Integer.toString(resultSet.getInt("product_price")));
+                products.add(product);
+            }
+            build.setProducts(products);
+            build.setBuildNo(buildNo);
+
+            sql = "SELECT user_no FROM build_table WHERE build_no = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, Integer.parseInt(buildNo));
+            resultSet = query(statement);
+            resultSet.next();
+            build.setUserNo(Integer.toString(resultSet.getInt("user_no")));
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e);
+        }
+
+        return build;
+    }
+
+    @Override
+    public Build getBuildByName(String buildName) throws DAOException {
+        Build build = new Build();
+        try {
+            connection = getConnection();
+
+            String sql = "SELECT * FROM build_table WHERE build_name = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, buildName);
+            ResultSet resultSet = query(statement);
+            resultSet.next();
+            int buildNo = resultSet.getInt("build_no");
+            String userNo = Integer.toString(resultSet.getInt("user_no"));
+
+            sql = "select build_no, product_table.product_no AS 'product_no', " +
+                    "product_name, product_type,product_brand, product_spec, product_price " +
+                    "from build_parts_table join product_table " +
+                    "on build_parts_table.product_no = product_table.product_no " +
+                    "where build_no = ?";
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, buildNo);
+            resultSet = query(statement);
+
+            ArrayList<Product> products = new ArrayList<>();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setType(resultSet.getString("product_type"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setPrice(Integer.toString(resultSet.getInt("product_price")));
+                products.add(product);
+            }
+            build.setProducts(products);
+            build.setBuildNo(Integer.toString(buildNo));
+            build.setBuildName(buildName);
+            build.setUserNo(userNo);
+
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+
+        return build;
+    }
+
+    @Override
     public void deleteBuild(String buildNo) throws DAOException {
         connection = getConnection();
 

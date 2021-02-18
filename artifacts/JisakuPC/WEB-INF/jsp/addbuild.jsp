@@ -1,8 +1,24 @@
+<%@ page import="bean.UserFlag" %>
+<%@ page import="bean.Build" %>
+<%@ page import="db.dao.factory.AbstractDaoFactory" %>
+<%@ page import="db.dao.DAOException" %>
+<%@ page import="db.dao.build.BuildDao" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
 
+<%
+  UserFlag user = (UserFlag)session.getAttribute("loginFlag");
+  List<Build> buildList = null;
+  if(user != null && user.getUserNo() != null && !user.getUserNo().equals("")) {
+      try {
+          BuildDao dao = AbstractDaoFactory.getFactory().getBuildDao();
+          buildList = dao.getUserBuilds(user.getUserNo());
+          pageContext.setAttribute("buildList", buildList);
+      } catch (DAOException ignored) {
+      }
+  }
 %>
 
 <html>
@@ -13,12 +29,27 @@
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
-<form method="get" action="searchproduct">
+
   <div class="page">
     <h1>自作PCを作成</h1>
     <br>
     <h3>パーツリスト</h3>
-
+    <br>
+    <div id="build-select-section">
+      <c:if test="${not empty pageScope.buildList}">
+        <c:if test="${pageScope.buildList.size() gt 0}">
+          <form method="get" action="selectbuild">
+            <label for="builds">見積りを選択</label>
+            <select id="builds" name="buildName">
+              <c:forEach var="build" items="${buildList}">
+                <option value="${build.buildNo}"><c:out value="${build.buildName}" /></option>
+              </c:forEach>
+            </select>
+            <input type="submit" value="選択">
+          </form>
+        </c:if>
+      </c:if>
+    </div>
     <table width="100%" cellpadding="30">
       <form method="get" action="addbuild">
         <input type="hidden" name="parts" value="cpu">
@@ -174,6 +205,13 @@
         </div>
       </form>
     </table>
+    <br>
+    <div id="build-action-pannel">
+      <form method="get" action="savebuild">
+        見積り名 <input type="text" name="buildName" class="build-action-input">
+        <input type="submit" value="保存">
+      </form>
+    </div>
 
   </div>
 
@@ -184,5 +222,6 @@
    </form>
   </div>--%>
   <jsp:include page="/footer.jsp"/>
+
 </body>
 </html>

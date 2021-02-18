@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -19,16 +20,28 @@
           <a href="post">投稿</a>
         </div>
       </td>
-      <td width="25%" align="center">
-        <div id="login">
-          <a href="login">ログイン</a>
-        </div>
-      </td>
-      <td width="25%" align="center">
-        <div id="signup">
-          <a href="signup">新規登録</a>
-        </div>
-      </td>
+      <c:choose>
+        <c:when test="${sessionScope.loginFlag.correctUser}">
+          <td width="50%" align="center">
+            <div id="user-info">
+              <a href="mypage">${sessionScope.loginFlag.userId} 様</a>
+            </div>
+          </td>
+        </c:when>
+        <c:otherwise>
+          <td width="25%" align="center">
+            <div id="login">
+              <a href="login">ログイン</a>
+            </div>
+          </td>
+          <td width="25%">
+            <div id="signup">
+              <a href="signup">新規登録</a>
+            </div>
+          </td>
+        </c:otherwise>
+      </c:choose>
+
     </tr>
   </table>
 </footer>

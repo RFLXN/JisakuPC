@@ -19,21 +19,6 @@ public class MySQLUpdater extends DBUpdater {
             } catch (SQLException re) {
                 throw new DBUpdateException(re.getMessage(), re);
             }
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    throw new DBUpdateException(e.getMessage(), e);
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    throw new DBUpdateException(e.getMessage(), e);
-                }
-            }
         }
     }
 
@@ -51,15 +36,6 @@ public class MySQLUpdater extends DBUpdater {
                 }
             }
             throw new DBUpdateException(e.getMessage(), e);
-        } finally {
-            try {
-                Connection connection = statement.getConnection();
-                statement.close();
-                connection.close();
-            } catch (SQLException e) {
-                throw new DBUpdateException(e.getMessage(), e);
-            }
-
         }
     }
 }

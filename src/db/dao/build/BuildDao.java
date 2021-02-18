@@ -10,6 +10,10 @@ public interface BuildDao {
 
     List<Build> getUserBuilds(String userNo) throws DAOException;
 
+    Build getBuild(String buildNo) throws DAOException;
+
+    Build getBuildByName(String buildName) throws DAOException;
+
     void deleteBuild(String buildNo) throws DAOException;
 
     void updateBuild(Build build) throws DAOException;
