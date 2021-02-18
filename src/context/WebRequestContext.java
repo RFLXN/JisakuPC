@@ -1,7 +1,8 @@
 package context;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class WebRequestContext implements RequestContext {
     private HttpServletRequest request;
@@ -44,5 +45,9 @@ public class WebRequestContext implements RequestContext {
     @Override
     public String getReferer() {
         return referer;
+    }
+
+    public Object getSessionAttribute(String key) {
+    	return (Object) request.getSession().getAttribute(key);
     }
 }
