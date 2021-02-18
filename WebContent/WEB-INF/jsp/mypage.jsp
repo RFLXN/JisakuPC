@@ -26,6 +26,13 @@
       <h3>見積りリスト</h3><br>
       <c:forEach var="build" items="${data}">
         <p>見積り名: ${build.buildName}</p>
+        <form>
+          <button class="btn btn-default" formmethod="get" formaction=""
+                      name="buildNo" value="${build.buildNo}">投稿</button>
+
+          <button class="btn btn-danger" formmethod="get" formaction="deletebuild"
+                      name="buildNo" value="${build.buildNo}">削除</button>
+        </form>
         <table class="table table-hover">
           <tbody>
             <tr>
@@ -34,7 +41,7 @@
               <th>値段</th>
             </tr>
             <c:forEach var="part" items="${build.products}">
-              <tr>
+              <tr onclick="location.href='productspec?pid=${part.no}'">
                 <td>${part.no}</td>
                 <td>${part.name}</td>
                 <td>${part.price}</td>

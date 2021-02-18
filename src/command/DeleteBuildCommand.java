@@ -1,6 +1,6 @@
 package command;
 
-import bean.Build;
+import bean.UserFlag;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.build.BuildDao;
@@ -9,26 +9,19 @@ import db.dao.factory.AbstractDaoFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class SelectBuildCommand extends AbstractCommand {
+public class DeleteBuildCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         String buildNo = getRequestContext().getParameter("buildNo")[0];
-        HttpSession session = ((HttpServletRequest)(getRequestContext().getRequest())).getSession();
-        responseContext.setTarget("addbuild");
-
-        if(buildNo == null || buildNo.equals("")) {
-            return responseContext;
-        }
-
         try {
             BuildDao dao = AbstractDaoFactory.getFactory().getBuildDao();
-            Build build = dao.getBuild(buildNo);
-
-            session.setAttribute("build", build);
+            dao.deleteBuild(buildNo);
+            UserFlag user = (UserFlag)(((HttpServletRequest)(getRequestContext().getRequest())).getSession()).getAttribute("loginFlag");
+            responseContext.setResult(dao.getUserBuilds(user.getUserNo()));
         } catch (DAOException e) {
             throw new CommandException(e);
         }
-
+        responseContext.setTarget("mypage");
         return responseContext;
     }
 }
