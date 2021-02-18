@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+}
+
+div.page {
+    margin-top: 100px;
+    padding-left: 100px;
+    position: relative;
+    z-index: auto;
+
+}
+
+input {
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #CC0000;
+    border: solid 2px #CC0000;
+    border-radius: 3px;
+    transition: .4s;
+    font-size: 20px;
+}
+
+input:hover {
+    background: #CC0000;
+    color: white;
+}
+
+h1 {
+    padding: .25em 0 .25em .75em;
+    border-left: 6px solid #ccc;
+}
+
+h3 {
+    font-size: 15px;
+    margin: 0 0 0 20px;
+}

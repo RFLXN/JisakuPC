@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+
+%>
 
 <html>
 <head>
@@ -22,8 +25,15 @@
         <div id="cpu">
           <tr>
             <td width="20%">CPU</td>
-            <td width="20%"><input type="submit" value="追加"></td>
-            <td width="60%">おすすめ:Ryzen5 Core i9 Corei7</td>
+            <td width="60%">
+              <input type="submit" value="追加"> <br>
+              <c:forEach var="part" items="${sessionScope.build.products}">
+                <c:if test="${part.type eq 'cpu'}">
+                  <c:out value="${part.name}" />: <c:out value="${part.price}" /> <br>
+                </c:if>
+              </c:forEach>
+            </td>
+            <td width="20%">おすすめ:Ryzen5 Core i9 Corei7</td>
           </tr>
         </div>
       </form>
@@ -32,8 +42,15 @@
         <div id="gpu">
           <tr>
             <td width="20%">GPU</td>
-            <td width="20%"><input type="submit" value="追加"></td>
-            <td width="60%">おすすめ:RTX3070 RTX2070 Super RX 5700 XT</td>
+            <td width="60%">
+              <input type="submit" value="追加"> <br>
+              <c:forEach var="part" items="${sessionScope.build.products}">
+                <c:if test="${part.type eq 'gpu'}">
+                  <c:out value="${part.name}" />: <c:out value="${part.price}" /> <br>
+                </c:if>
+              </c:forEach>
+            </td>
+            <td width="20%">おすすめ:RTX3070 RTX2070 Super RX 5700 XT</td>
           </tr>
         </div>
       </form>
@@ -42,7 +59,14 @@
         <div id="ram">
           <tr>
             <td width="20%">メモリ</td>
-            <td width="20%"><input type="submit" value="追加"></td>
+            <td width="60%">
+              <input type="submit" value="追加"> <br>
+              <c:forEach var="part" items="${sessionScope.build.products}">
+                <c:if test="${part.type eq 'ram'}">
+                  <c:out value="${part.name}" />: <c:out value="${part.price}" /> <br>
+                </c:if>
+              </c:forEach>
+            </td>
             <td width="60%">おすすめ:DDR4-2666 16GB×2 8GB×2</td>
           </tr>
         </div>
@@ -52,7 +76,14 @@
         <div id="cpu_cooler">
           <tr>
             <td width="20%">クーラー</td>
-            <td width="20%"><input type="submit" value="追加"></td>
+            <td width="60%">
+              <input type="submit" value="追加"> <br>
+              <c:forEach var="part" items="${sessionScope.build.products}">
+                <c:if test="${part.type eq 'cpu_cooler'}">
+                  <c:out value="${part.name}" />: <c:out value="${part.price}" /> <br>
+                </c:if>
+              </c:forEach>
+            </td>
             <td width="60%">おすすめ:Noctua Socket AM4 LGA1200</td>
           </tr>
         </div>
@@ -62,7 +93,14 @@
         <div id="case">
           <tr>
             <td width="20%">ケース</td>
-            <td width="20%"><input type="submit" value="追加"></td>
+            <td width="60%">
+              <input type="submit" value="追加"> <br>
+              <c:forEach var="part" items="${sessionScope.build.products}">
+                <c:if test="${part.type eq 'case'}">
+                  <c:out value="${part.name}" />: <c:out value="${part.price}" /> <br>
+                </c:if>
+              </c:forEach>
+            </td>
             <td width="60%">おすすめ:MicroATX ATX Mini-ATX</td>
           </tr>
         </div>
@@ -72,7 +110,14 @@
         <div id="mother_board">
           <tr>
             <td width="20%">マザーボード</td>
-            <td width="20%"><input type="submit" value="追加"></td>
+            <td width="60%">
+              <input type="submit" value="追加"> <br>
+              <c:forEach var="part" items="${sessionScope.build.products}">
+                <c:if test="${part.type eq 'mother_board'}">
+                  <c:out value="${part.name}" />: <c:out value="${part.price}" /> <br>
+                </c:if>
+              </c:forEach>
+            </td>
             <td width="60%">おすすめ:Mini ITX B550 Z490</td>
           </tr>
         </div>
@@ -82,7 +127,14 @@
         <div id="storage">
           <tr>
             <td width="20%">ストレージ</td>
-            <td width="20%"><input type="submit" value="追加"></td>
+            <td width="60%">
+              <input type="submit" value="追加"> <br>
+              <c:forEach var="part" items="${sessionScope.build.products}">
+                <c:if test="${part.type eq 'storage'}">
+                  <c:out value="${part.name}" />: <c:out value="${part.price}" /> <br>
+                </c:if>
+              </c:forEach>
+            </td>
             <td width="60%">おすすめ:M.2(Type2280) 480GB~512GB未満 2.5インチ</td>
           </tr>
         </div>
@@ -92,7 +144,14 @@
         <div id="power_supply">
           <tr>
             <td width="20%">電源</td>
-            <td width="20%"><input type="submit" value="追加"></td>
+            <td width="60%">
+              <input type="submit" value="追加"> <br>
+              <c:forEach var="part" items="${sessionScope.build.products}">
+                <c:if test="${part.type eq 'power_supply'}">
+                  <c:out value="${part.name}" />: <c:out value="${part.price}" /> <br>
+                </c:if>
+              </c:forEach>
+            </td>
             <td width="60%">おすすめ:SFX 300W~600W未満 600W~800W未満</td>
           </tr>
         </div>
@@ -102,7 +161,14 @@
         <div id="case_fan">
           <tr>
             <td width="20%">ケースファン</td>
-            <td width="20%"><input type="submit" value="追加"></td>
+            <td width="60%">
+              <input type="submit" value="追加"> <br>
+              <c:forEach var="part" items="${sessionScope.build.products}">
+                <c:if test="${part.type eq 'case_fan'}">
+                  <c:out value="${part.name}" />: <c:out value="${part.price}" /> <br>
+                </c:if>
+              </c:forEach>
+            </td>
             <td width="60%">おすすめ:140mm角 120mm角 クーラーマスター Corsair</td>
           </tr>
         </div>

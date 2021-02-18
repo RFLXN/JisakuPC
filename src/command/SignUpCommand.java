@@ -7,6 +7,8 @@ import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.user.UserDao;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class SignUpCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
@@ -22,6 +24,9 @@ public class SignUpCommand extends AbstractCommand {
             userDao.addUser(id, password);
 
             UserFlag user = userDao.getUser(id, password);
+
+            HttpServletRequest servletRequest = (HttpServletRequest)(requestContext.getRequest());
+            servletRequest.getSession().setAttribute("loginFlag", user);
 
             responseContext.setResult(user);
         } catch (DAOException e) {
