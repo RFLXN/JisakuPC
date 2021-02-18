@@ -35,17 +35,21 @@
 <div class="post-body">
   <form action="postbuild" method="post" name="form1" onSubmit="return check()">
     <p>タイトル:<input type="text" name="title"></p>
-    <p>コメント:</ br>
+    <p>コメント:<br>
     <textarea name="description" rows="5" cols="40"></textarea>
     </p>
+
+    <c:forEach var="list" items="${ data }">
+    <p>見積もりを選択：<input type="radio" name="buildno" value="${list.buildNo }" required>
+    	${list.buildName}
+    </p>
+    </c:forEach>
+
     <p><input type="submit" value="送信"><input type="reset" value="リセット">
     </p>
   </form>
 
-  <c:forEach var="list" items="${data}">
-    <p>タイトル:<c:out value="${list.title}"/><br>
-      説明:<c:out value="${list.description}"/></p>
-  </c:forEach>
+<!-- 0218 坂入 見積もりをforEachするので削除 -->
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>
