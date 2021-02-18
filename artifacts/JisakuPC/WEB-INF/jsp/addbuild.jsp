@@ -84,7 +84,14 @@
                 <input type="submit" formaction="addbuild" formmethod="get" value="追加">
               </form>
             </td>
-            <td width="20%">おすすめ:Ryzen5 Core i9 Corei7</td>
+            <form method="get" action="sortproduct">
+              <input type="hidden" name="word" value="a">
+              <td width="60%">おすすめ:123
+                <input type="submit" name="words" value="Ryzen 5">
+                <input type="submit" name="words" value="Core i9">
+                <input type="submit" name="words" value="Core i7">
+              </td>
+            </form>
           </tr>
         </div>
 
@@ -109,7 +116,14 @@
                 <input type="submit" formaction="addbuild" formmethod="get" value="追加">
               </form>
             </td>
-            <td width="20%">おすすめ:RTX3070 RTX2070 Super RX 5700 XT</td>
+            <form method="get" action="sortproduct">
+              <input type="hidden" name="word" value="a">
+              <td width="60%">おすすめ:123
+                <input type="submit" name="words" value="RTX 3070">
+                <input type="submit" name="words" value="RTX 2070 SUPER">
+                <input type="submit" name="words" value="RX 5700 XT">
+              </td>
+            </form>
           </tr>
         </div>
 
@@ -134,7 +148,14 @@
                 <input type="submit" formaction="addbuild" formmethod="get" value="追加">
               </form>
             </td>
-            <td width="60%">おすすめ:DDR4-2666 16GB×2 8GB×2</td>
+            <form method="get" action="sortproduct">
+              <input type="hidden" name="word" value="a">
+              <td width="60%">おすすめ:boostClockとか
+                <input type="submit" name="words" value="DDR4-2666">
+                <input type="submit" name="words" value="!16GB×2">
+                <input type="submit" name="words" value="!8GB×2">
+              </td>
+            </form>
           </tr>
         </div>
 
@@ -159,7 +180,14 @@
                 <input type="submit" formaction="addbuild" formmethod="get" value="追加">
               </form>
             </td>
-            <td width="60%">おすすめ:Noctua Socket AM4 LGA1200</td>
+            <form method="get" action="sortproduct">
+              <input type="hidden" name="word" value="a">
+              <td width="60%">おすすめ:1
+                <input type="submit" name="words" value="Noctua">
+                <input type="submit" name="words" value="!Socket AM4">
+                <input type="submit" name="words" value="!LGA1200">
+              </td>
+            </form>
           </tr>
         </div>
 
@@ -184,7 +212,14 @@
                 <input type="submit" formaction="addbuild" formmethod="get" value="追加">
               </form>
             </td>
-            <td width="60%">おすすめ:MicroATX ATX Mini-ATX</td>
+            <form method="get" action="sortproduct">
+              <input type="hidden" name="word" value="a">
+              <td width="60%">おすすめ:123
+                <input type="submit" name="words" value="MicroATX">
+                <input type="submit" name="words" value="ATX">
+                <input type="submit" name="words" value="Mini-ITX">
+              </td>
+            </form>
           </tr>
         </div>
 
@@ -209,7 +244,14 @@
                 <input type="submit" formaction="addbuild" formmethod="get" value="追加">
               </form>
             </td>
-            <td width="60%">おすすめ:Mini ITX B550 Z490</td>
+            <form method="get" action="sortproduct">
+              <input type="hidden" name="word" value="formfactor">
+              <td width="60%">おすすめ:123
+                <input type="submit" name="words" value="Mini ITX">
+                <input type="submit" name="words" value="B550">
+                <input type="submit" name="words" value="Z490">
+              </td>
+            </form>
           </tr>
         </div>
 
@@ -234,7 +276,17 @@
                 <input type="submit" formaction="addbuild" formmethod="get" value="追加">
               </form>
             </td>
-            <td width="60%">おすすめ:M.2(Type2280) 480GB~512GB未満 2.5インチ</td>
+            <form method="get" action="sortproduct">
+              <input type="hidden" name="word" value="a">
+              <td width="60%">おすすめ:1
+                <input type="submit" name="words" value="M.2 (Type2280)">
+                <input type="submit" name="words" value="2.5インチ">
+                <form method="get" action="sortproduct">
+                  <input type="hidden" name="word" value="volume">
+                  <input type="submit" name="words" value="480GB~512GB未満">
+                </form>
+              </td>
+            </form>
           </tr>
         </div>
 
@@ -259,7 +311,16 @@
                 <input type="submit" formaction="addbuild" formmethod="get" value="追加">
               </form>
             </td>
-            <td width="60%">おすすめ:SFX 300W~600W未満 600W~800W未満</td>
+            <form method="get" action="sortproduct">
+              <input type="hidden" name="word" value="a">
+              <td width="60%">おすすめ:1
+                <input type="submit" name="words" value="SFX">
+                <input type="hidden" name="word" value="W">
+                <input type="submit" name="words" value="300W~600W未満">
+                <input type="hidden" name="word" value="W">
+                <input type="submit" name="words" value="600W~800W未満">
+              </td>
+            </form>
           </tr>
         </div>
 
@@ -284,7 +345,15 @@
                 <input type="submit" formaction="addbuild" formmethod="get" value="追加">
               </form>
             </td>
-            <td width="60%">おすすめ:140mm角 120mm角 クーラーマスター Corsair</td>
+            <form method="get" action="sortproduct">
+              <input type="hidden" name="word" value="a">
+              <td width="60%">おすすめ:34
+                <input type="submit" name="words" value="140mm角">
+                <input type="submit" name="words" value="120mm角">
+                <input type="submit" name="words" value="クーラーマスター">
+                <input type="submit" name="words" value="Corsair">
+              </td>
+            </form>
           </tr>
         </div>
 
