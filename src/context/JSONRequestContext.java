@@ -1,7 +1,8 @@
 package context;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class JSONRequestContext implements RequestContext {
     private HttpServletRequest request;
@@ -34,5 +35,9 @@ public class JSONRequestContext implements RequestContext {
     @Override
     public String getReferer() {
         return null;
+    }
+
+    public Object getSessionAttribute(String key) {
+    	return null;
     }
 }

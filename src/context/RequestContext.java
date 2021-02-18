@@ -10,4 +10,6 @@ public interface RequestContext {
     void setRequest(Object request);
 
     String getReferer();
+
+    Object getSessionAttribute(String key);
 }
