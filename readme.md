@@ -211,3 +211,15 @@ source $project_root/sql/create_database.sql
 source $project_root/sql/create_table.sql
 source $project_root/sql/insert_dummy_data.sql
 ```
+
+### 外部ライブラリ
+
+* WebContent/WEB-INF/lib/
+    * [json-20201115.jar: JSON-java ライブラリ](https://github.com/stleary/JSON-java)
+    
+* WebContent/css/
+    * [bootstrap.css: bootstrap css ライブラリ](http://bootstrapk.com/)
+
+* WebContent/js/
+    * [bootstrap.js: bootstrap js ライブラリ](http://bootstrapk.com/)
+    * [jquery-3.5.1.min.js: jQuery ライブラリ](https://jquery.com/)
