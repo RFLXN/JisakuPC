@@ -26,17 +26,7 @@ public class LoginProcessCommand extends AbstractCommand {
             if (user.isCorrectUser()) {
                 getRequestContext().setSessionAttribute("loginFlag", user);
 
-                String source = (String) getRequestContext().getSessionAttribute("source");
-
-                if (source == null) {
-                    responseContext.setTarget("index");
-                } else {
-                    if (source.equals("")) {
-                        responseContext.setTarget("index");
-                    } else {
-                        responseContext.setTarget(source);
-                    }
-                }
+                responseContext.setTarget("index");
 
             } else {
                 responseContext.setResult(user);

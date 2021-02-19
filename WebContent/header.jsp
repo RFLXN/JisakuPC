@@ -26,7 +26,7 @@
         </td>
         <td width="20%">
           <div id="post">
-            <a href="post">投稿</a>
+            <a href="postlist">投稿</a>
           </div>
         </td>
         <c:choose>

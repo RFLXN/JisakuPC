@@ -92,7 +92,7 @@ public class MySQLPostDao implements PostDao {
     public List<Post> getShowPostProducts() throws DAOException {
         ArrayList<Post> posts = new ArrayList<>();
 
-        String sql = "select post_no,user_no,build_no,title,description,date from build_post_table;\n" + "";
+        String sql = "select post_no,user_no,build_no,title,description,date from build_post_table";
 
         ResultSet resultSet = query(sql);
 
