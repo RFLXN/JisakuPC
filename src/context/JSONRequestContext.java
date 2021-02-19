@@ -37,7 +37,11 @@ public class JSONRequestContext implements RequestContext {
         return null;
     }
 
+    @Override
     public Object getSessionAttribute(String key) {
     	return null;
     }
+
+    @Override
+    public void setSessionAttribute(String key, Object value) {}
 }

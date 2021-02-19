@@ -47,7 +47,13 @@ public class WebRequestContext implements RequestContext {
         return referer;
     }
 
+    @Override
     public Object getSessionAttribute(String key) {
     	return (Object) request.getSession().getAttribute(key);
+    }
+
+    @Override
+    public void setSessionAttribute(String key, Object value) {
+        request.getSession().setAttribute(key, value);
     }
 }

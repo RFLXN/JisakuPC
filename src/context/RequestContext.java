@@ -12,4 +12,6 @@ public interface RequestContext {
     String getReferer();
 
     Object getSessionAttribute(String key);
+
+    void setSessionAttribute(String key, Object value);
 }
