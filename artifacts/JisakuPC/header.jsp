@@ -16,7 +16,7 @@
       <tr>
         <td width="20%">
           <div id="logo">
-            <a href="/JisakuPC/index.jsp">JisakuPC</a>
+            <a href="${pageContext.request.contextPath}/">JisakuPC</a>
           </div>
         </td>
         <td width="20%">
@@ -50,7 +50,6 @@
             </td>
           </c:otherwise>
         </c:choose>
-
       </tr>
     </div>
   </table>

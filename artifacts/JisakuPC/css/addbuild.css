@@ -5,8 +5,8 @@ body {
 }
 
 div.page {
-    margin-top: 100px;
-    padding-left: 100px;
+    margin-top: 8em;
+    padding-left: 7em;
     position: relative;
     z-index: auto;
 

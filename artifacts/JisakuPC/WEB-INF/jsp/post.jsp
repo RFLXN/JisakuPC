@@ -6,8 +6,6 @@
 <head>
   <meta charset="UTF-8">
   <link href="css/post.css" rel="stylesheet" type="text/css"/>
-
-
   <script type="text/javascript">
 
       function check() {
