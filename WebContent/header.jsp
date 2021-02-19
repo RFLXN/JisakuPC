@@ -16,7 +16,7 @@
       <tr>
         <td width="20%">
           <div id="logo">
-            <a href="/JisakuPC/index.jsp">JisakuPC</a>
+            <a href="/JisakuPC/index.jsp"><img src="/image/logo.png"></a>
           </div>
         </td>
         <td width="20%">
