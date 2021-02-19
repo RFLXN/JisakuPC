@@ -1,36 +1,17 @@
 # 自作パソコンサイト JisakuPC
 
-## 作業状況
-
-* 2021-01-11 ~ 2021-01-15
-    * 佐々木 陽悟
-        * SearchProductsCommandの作成
-        * MySQLMySQLProductDaoにgetSearchProductsメソッドを作成
-    * 秦佳冴
-        * キーワード検索をするjsp
-    * 藤野優樹
-        * 検索コマンド作成(値の受け渡し方の調査など)
-    * 崔峻赫
-        * MySQLUserDaoの作成
-        * ShowSignUpCommandの作成
-        * SignUpCommandの作成
-        * signup.jsp, signup.jsの作成
-
-
-
-## やることリスト
-
-### 1. 作成サイトの決定
+### 作成サイト
 * 自作パソコンサイト
 
-### 2. 元サイトの選定
+### 元サイト
 * [https://jisaku.com/](https://jisaku.com/)
 
-### 3. 使用対象者の設定 (ペルソナ)
+### 使用対象者 (ペルソナ)
     * PCパーツの知識があり（普段自作でPCを作る位）自作PCの見積もりを一括で簡単に作りたい人。
     * また作成を自慢したり、他の人の作成を見たい人
 
-### 4. 扱う機能 ・ データの選定
+### 扱う機能・データ
+
 #### 機能
     * 検索
      * キーワードでパーツ検索
@@ -69,7 +50,7 @@
      * 見積説明
      * 見積タイトル
 
-### 5. データ構造の設定
+### データ構造の設定
 > [HY000][1681] Integer display width is deprecated and will be removed in a future release.
     
     MySQLの定数型はサイズを決めることが非推奨です。
@@ -86,14 +67,14 @@
     
 product_table
 
-| Column Name   | Data Type   | Constraints                |
-| ------------- | ----------- | -------------------------- |
-| product_no    | INT         | PRIMARY KEY AUTO_INCREMENT |
-| product_name  | VARCHAR(60) | NOT NULL                   |
-| product_price | INT         | NOT NULL                   |
-| product_spec  | JSON        | NOT NULL                   |
-| product_brand | VARCHAR(30) | NOT NULL                   |
-| product_type  | VARCHAR(12) | NOT NULL                   |
+| Column Name   | Data Type    | Constraints                |
+| ------------- | ------------ | -------------------------- |
+| product_no    | INT          | PRIMARY KEY AUTO_INCREMENT |
+| product_name  | VARCHAR(120) | NOT NULL                   |
+| product_price | INT          | NOT NULL                   |
+| product_spec  | JSON         | NOT NULL                   |
+| product_brand | VARCHAR(30)  | NOT NULL                   |
+| product_type  | VARCHAR(12)  | NOT NULL                   |
 
 
 user_table
@@ -102,25 +83,24 @@ user_table
 | ----------- | ----------- | -------------------------- |
 | user_no     | INT         | PRIMARY KEY AUTO_INCREMENT |
 | user_id     | VARCHAR(20) | NOT NULL UNIQUE            |
-| user_pw     | VARCHAR(20) | NOT NULL                   |
+| user_pw     | VARCHAR(64) | NOT NULL                   |
 | admin       | BOOLEAN     | NOT NULL                   |
 
 
 build_table
 
-| Column Name            | Data Type | Constraints                                       |
-| ---------------------- | --------- | ------------------------------------------------- |
-| build_no               | INT       | PRIMARY KEY AUTO_INCREMENT                        |
-| user_no                | INT       | REFERENCES user_table(user_no)                    |
-| cpu_product_no         | INT       | DEFAULT NULL REFERENCES product_table(product_no) |
-| gpu_product_no         | INT       | DEFAULT NULL REFERENCES product_table(product_no) |
-| ram_product_no         | INT       | DEFAULT NULL REFERENCES product_table(product_no) |
-| storage_product_no     | INT       | DEFAULT NULL REFERENCES product_table(product_no) |
-| motherboard_product_no | INT       | DEFAULT NULL REFERENCES product_table(product_no) |
-| cooler_product_no      | INT       | DEFAULT NULL REFERENCES product_table(product_no) |
-| case_product_no        | INT       | DEFAULT NULL REFERENCES product_table(product_no) |
-| etc_product_no         | INT       | DEFAULT NULL REFERENCES product_table(product_no) |
+| Column Name            | Data Type    | Constraints                    |
+| ---------------------- | ------------ | ------------------------------ |
+| build_no               | INT          | PRIMARY KEY AUTO_INCREMENT     |
+| user_no                | INT          | REFERENCES user_table(user_no) |
+| build_name             | VARCHAR(120) | NOT NULL                       |
 
+build_parts_table
+
+| Column Name | Data Type | Constraints                          |
+| ----------- | --------- | ------------------------------------ |
+| build_no    | INT       | REFERENCES build_table(build_no)     |
+| product_no  | INT       | REFERENCES product_table(product_no) |
 
 build_post_table
 
@@ -133,16 +113,14 @@ build_post_table
 | description | VARCHAR(1000) | NOT NULL                         |
 
 
-### 6. データベース設計
-
-### 7. データベースSQLの作成
+### データベースSQL
 
 ```mysql
 CREATE TABLE product_table(
     product_no INT NOT NULL AUTO_INCREMENT,
-    product_name VARCHAR(60) NOT NULL,
+    product_name VARCHAR(120) NOT NULL,
     product_price INT NOT NULL,
-    product_spec JSON NOT NULL,
+    product_spec json NOT NULL,
     product_brand VARCHAR(30) NOT NULL,
     product_type VARCHAR(12) NOT NULL,
     PRIMARY KEY (product_no)
@@ -151,7 +129,7 @@ CREATE TABLE product_table(
 CREATE TABLE user_table(
     user_no INT AUTO_INCREMENT,
     user_id VARCHAR(20) NOT NULL UNIQUE,
-    user_pw VARCHAR(20) NOT NULL,
+    user_pw VARCHAR(64) NOT NULL,
     admin BOOLEAN NOT NULL,
     PRIMARY KEY (user_no)
 );
@@ -159,16 +137,15 @@ CREATE TABLE user_table(
 CREATE TABLE build_table(
     build_no INT AUTO_INCREMENT,
     user_no INT REFERENCES user_table(user_no),
-    cpu_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    gpu_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    ram_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    storage_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    motherboard_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    cooler_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    case_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
-    etc_product_no INT DEFAULT NULL REFERENCES product_table(product_no),
+    build_name VARCHAR(120) NOT NULL,
     PRIMARY KEY (build_no)
 );
+
+CREATE TABLE build_parts_table(
+    build_no INT REFERENCES build_table(build_no),
+    product_no INT REFERENCES product_table(product_no)
+);
+
 
 CREATE TABLE build_post_table(
     post_no INT AUTO_INCREMENT,
@@ -181,27 +158,48 @@ CREATE TABLE build_post_table(
 );
 ```
 
-### 8. サンプル挿入SQLの作成
+### サンプル挿入SQL
 
 ```mysql
-INSERT INTO product_table
-    (product_name, product_price, product_spec, product_brand, product_type)
-VALUES
-    ('dummy cpu', 9999, '{"dummy spec":"dummy spec"}', 'dummy brand', 'cpu'),
-    ('dummy ram', 9999, '{"dummy spec":"dummy spec"}', 'dummy brand', 'ram'),
-    ('dummy gpu', 9999, '{"dummy spec":"dummy spec"}', 'dummy brand', 'gpu'),
-    ('dummy ssd', 9999, '{"dummy spec":"dummy spec"}', 'dummy brand', 'storage');
-
 INSERT INTO user_table
     (user_id, user_pw, admin)
 VALUES
-    ('userid1', 'userpass1', false),
-    ('userid2', 'userpass2', false),
-    ('admin', 'adminpass', true);
+    ('userid1', sha2('userpass1', 256), false),
+    ('userid2', sha2('userpass2', 256), false),
+    ('admin', sha2('adminpass', 256), true);
 
+
+INSERT INTO build_table
+    (user_no, build_name)
+VALUES
+    (1, 'build1'),
+    (2, 'build2');
+
+
+INSERT INTO build_parts_table
+    (build_no, product_no)
+VALUES
+    (1, 1),
+    (1, 381),
+    (1, 1743),
+    (1, 2323),
+    (1, 2923),
+    (1, 3846),
+    (1, 4492),
+    (1, 4937),
+    (1, 5413),
+    (2, 1),
+    (2, 381),
+    (2, 1743),
+    (2, 2323),
+    (2, 2923),
+    (2, 3846),
+    (2, 4492),
+    (2, 4937),
+    (2, 5413);
 ```
 
-### 9. テストDBの作成
+### DBの作成
 in MySQL Console
 ```mysql
 # $project_root = プロジェクトのルートパス
@@ -213,15 +211,3 @@ source $project_root/sql/create_database.sql
 source $project_root/sql/create_table.sql
 source $project_root/sql/insert_dummy_data.sql
 ```
-### 10. Gitによるプロジェクトの作成 ・ 共有
-
-### 11. EclipseによるGitとの連携 ・ 設定
-
-### 12. 必要技術の調査 ・ 選定 (特にUI周り)
-
-### 13. J2EEパターンの適用
-
-### 14. コマンド (とりあえず一つ作成)
-
-### 15. テストラン
-
