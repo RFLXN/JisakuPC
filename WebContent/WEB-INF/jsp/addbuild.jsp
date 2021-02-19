@@ -10,7 +10,6 @@
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
-<form method="get" action="searchproduct">
   <div class="page">
     <h1>自作PCを作成</h1>
     <br>

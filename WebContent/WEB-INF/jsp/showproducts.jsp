@@ -18,8 +18,15 @@
     <input type="submit" value="検索">
   </div>
   <div class="search-sort">
-    <label><input type="radio" name="sort-by-cost" value="asc">昇順</label>
-    <label><input type="radio" name="sort-by-cost" value="desc">降順</label>
+    <input type="radio" id="sort-asc" name="sort-by-cost" value="asc">
+    <label for="sort-asc" class="sort">昇順</label>
+    <input type="radio" id="sort-desc" name="sort-by-cost" value="desc">
+    <label for="sort-desc" class="sort">降順</label>
+
+  <!--   <input type="radio" name="sort-by-cost" value="asc">
+    <label>昇順</label>
+    <input type="radio" name="sort-by-cost" value="desc">
+    <label>降順</label>-->
     <br><input type="submit" name="parts" value="cpu">
     <br><input type="submit" name="parts" value="ram">
     <br><input type="submit" name="parts" value="gpu">
@@ -27,7 +34,7 @@
   </div>
 </form>
 
-
+<div class="products">
 <h1>商品一覧</h1>
 <table width="100%" class="show">
   <tr>
@@ -37,24 +44,30 @@
     <th>見積りへ</th>
   </tr>
   <c:forEach var="product" items="${data}">
+    <div class="button">
     <tr>
       <td align="center" width="70%">${product.name}</td>
       <td align="center" width="10%">${product.price}</td>
       <td align="center" width="10%">
         <form method="get" action="productspec">
+        <div class="details-button">
           <input type="hidden" name="pid" value="${product.no}">
           <input type="submit" value="詳細">
+        </div>
         </form>
       </td>
       <td align="center" width="10%">
         <form method="get" action="addbuildpart">
+        <div class="add-button">
           <input type="hidden" name="pid" value="${product.no}">
           <input type="submit" value="追加">
+        </div>
         </form>
       </td>
     </tr>
   </c:forEach>
 </table>
+</div>
 </body>
 <jsp:include page="/footer.jsp"/>
 </html>

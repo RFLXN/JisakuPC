@@ -33,19 +33,29 @@
 <body>
 <jsp:include page="/header.jsp"/>
 <div class="post-body">
-  <form action="postbuild" method="post" name="form1" onSubmit="return check()">
-    <p>タイトル:<input type="text" name="title"></p>
+  <form action="postbuild" class="post"  method="post" name="form1" onSubmit="return check()">
+  	<h3>新規投稿</h3>
+    <p>タイトル:<input type="text" name="title" placeholder="自作PC"></p>
     <p>コメント:</ br>
-    <textarea name="description" rows="5" cols="40"></textarea>
+    <textarea name="description" rows="5" cols="40" placeholder="Intel Core i9 9900KF BOX..."></textarea>
     </p>
-    <p><input type="submit" value="送信"><input type="reset" value="リセット">
+
+    <p><div class="button"><input type="submit" value="送信"><input type="reset" value="リセット"></div>
     </p>
   </form>
-
+	<div class="page">
+	<h1>みんなの自作PC</h1>
+	</div>
+	<div class="page2">
+	<table width="100%" cellpadding="30">
   <c:forEach var="list" items="${data}">
     <p>タイトル:<c:out value="${list.title}"/><br>
       説明:<c:out value="${list.description}"/></p>
   </c:forEach>
+  	</table>
+  	</div>
+
+
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>

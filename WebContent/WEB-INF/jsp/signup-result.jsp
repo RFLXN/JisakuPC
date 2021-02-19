@@ -2,9 +2,14 @@
          pageEncoding="UTF-8" %>
 <html>
 <head>
+  <link href="css/signup-result.css" rel="stylesheet" type="text/css"/>
   <title>Sign Up Result</title>
 </head>
 <body>
-${data.correctUser}
+<jsp:include page="/header.jsp"/>
+<div class="signup-success">
+  ${data.correctUser}
+</div>
+<jsp:include page="/footer.jsp"/>
 </body>
 </html>
