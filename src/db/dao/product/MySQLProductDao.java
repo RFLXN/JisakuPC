@@ -121,14 +121,26 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getProductsByType(String type) throws DAOException {
+    public List<Product> getProductsByType(String type, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM product_table WHERE type = (?)";
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE product_type = ?) product_table " +
+                "LIMIT ?, ?";
         connection = getConnection();
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, type);
+            statement.setInt(2, frontPageNum);
+            statement.setInt(3, backPageNum);
 
             ResultSet resultSet = query(statement);
 
@@ -161,15 +173,26 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getSearchProducts(String moji) throws DAOException {
+    public List<Product> getSearchProducts(String moji, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
 
-        String sql = "SELECT  * FROM product_table WHERE product_name LIKE ?";
-
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE product_name LIKE ?) product_table " +
+                "LIMIT ?, ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.setString(1, "%" + moji + "%");
+            statement.setInt(2, frontPageNum);
+            statement.setInt(3, backPageNum);
 
             ResultSet resultSet = query(statement);
 
@@ -194,15 +217,27 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getASCSearchProducts(String moji) throws DAOException {
+    public List<Product> getASCSearchProducts(String moji, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
 
-        String sql = "SELECT  * FROM product_table WHERE product_name LIKE ? ORDER BY product_price ASC";
-
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE product_name LIKE ? " +
+                "ORDER BY product_price ASC) product_table " +
+                "LIMIT ?, ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.setString(1, "%" + moji + "%");
+            statement.setInt(2, frontPageNum);
+            statement.setInt(3, backPageNum);
 
             ResultSet resultSet = query(statement);
 
@@ -227,15 +262,28 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getDESCSearchProducts(String moji) throws DAOException {
+    public List<Product> getDESCSearchProducts(String moji, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
 
-        String sql = "SELECT  * FROM product_table WHERE product_name LIKE ? ORDER BY product_price DESC";
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE product_name LIKE ? " +
+                "ORDER BY product_price DESC) product_table " +
+                "LIMIT ?, ?";
 
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.setString(1, "%" + moji + "%");
+            statement.setInt(2, frontPageNum);
+            statement.setInt(3, backPageNum);
 
             ResultSet resultSet = query(statement);
 
@@ -297,17 +345,27 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getPartsSearchProducts(String moji) throws DAOException {
+    public List<Product> getPartsSearchProducts(String moji, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
         System.out.println(moji);
-        String sql = "SELECT  * FROM product_table WHERE product_type = ?";
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE product_type = ?) product_table " +
+                "LIMIT ?, ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-
-            statement.setString(1, "%" + moji);
 
             statement.setString(1, moji);
+            statement.setInt(2, frontPageNum);
+            statement.setInt(3, backPageNum);
 
 
             ResultSet resultSet = query(statement);
@@ -333,15 +391,27 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getWordSearchProducts(String word) throws DAOException {
+    public List<Product> getWordSearchProducts(String word, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
         System.out.println(word);
-        String sql = "SELECT  * FROM product_table WHERE product_name LIKE ?";
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE product_name LIKE ?) product_table " +
+                "LIMIT ?, ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             statement.setString(1, "%" + word + "%");
+            statement.setInt(2, frontPageNum);
+            statement.setInt(3, backPageNum);
 
             ResultSet resultSet = query(statement);
 
@@ -366,15 +436,27 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getSpecSearchProducts(String word) throws DAOException {
+    public List<Product> getSpecSearchProducts(String word, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
         System.out.println(word);
-        String sql = "SELECT * FROM product_table WHERE product_spec LIKE ?";
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE product_spec LIKE ?) product_table " +
+                "LIMIT ?, ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             statement.setString(1, "%" + word + "%");
+            statement.setInt(2, frontPageNum);
+            statement.setInt(3, backPageNum);
 
             ResultSet resultSet = query(statement);
 
@@ -399,15 +481,27 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getSpecialSearchProducts(String ddr,String clock) throws DAOException {
+    public List<Product> getSpecialSearchProducts(String ddr,String clock, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
-        String sql = "SELECT * FROM product_table WHERE product_spec LIKE ? AND product_spec LIKE ?";
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE product_spec LIKE ? AND product_spec LIKE ?) product_table " +
+                "LIMIT ?, ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             statement.setString(1, "%" + ddr + "%");
             statement.setString(2, "%" + clock + "%");
+            statement.setInt(3, frontPageNum);
+            statement.setInt(4, backPageNum);
 
             ResultSet resultSet = query(statement);
 
@@ -432,16 +526,28 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getVolumeSearchProducts(String under,String over) throws DAOException {
+    public List<Product> getVolumeSearchProducts(String under,String over, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
 
-        String sql = " select * from product_table WHERE JSON_UNQUOTE(JSON_EXTRACT(product_spec,'$.volume')) BETWEEN ? AND ? ";
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.volume')) BETWEEN ? AND ?) product_table " +
+                "LIMIT ?, ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             statement.setInt(1,Integer.parseInt(under));
             statement.setInt(2,Integer.parseInt(over));
+            statement.setInt(3, frontPageNum);
+            statement.setInt(4, backPageNum);
 
             ResultSet resultSet = query(statement);
             while (resultSet.next()) {
@@ -466,16 +572,28 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getWSizeSearchProducts(String under,String over) throws DAOException {
+    public List<Product> getWSizeSearchProducts(String under,String over, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
 
-        String sql = " select * from product_table WHERE JSON_UNQUOTE(JSON_EXTRACT(product_spec,'$.W')) BETWEEN ? AND ? ";
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.W')) BETWEEN ? AND ?) product_table " +
+                "LIMIT ?, ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             statement.setInt(1,Integer.parseInt(under));
             statement.setInt(2,Integer.parseInt(over));
+            statement.setInt(3, frontPageNum);
+            statement.setInt(4, backPageNum);
 
             ResultSet resultSet = query(statement);
             while (resultSet.next()) {
@@ -499,15 +617,27 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getSizeSearchProducts(String size) throws DAOException {
+    public List<Product> getSizeSearchProducts(String size, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
         ArrayList<Product> products = new ArrayList<>();
 
-        String sql = " select * from product_table WHERE JSON_UNQUOTE(JSON_EXTRACT(product_spec,'$.size')) = ?";
+        String sql = "SELECT product_table.* FROM (" +
+                "SELECT * FROM product_table WHERE JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.size')) = ?) product_table " +
+                "LIMIT ?, ?";
         try {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
             statement.setDouble(1,Double.parseDouble(size));
+            statement.setInt(2, frontPageNum);
+            statement.setInt(3, backPageNum);
 
             ResultSet resultSet = query(statement);
             while (resultSet.next()) {
