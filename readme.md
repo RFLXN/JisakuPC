@@ -7,48 +7,49 @@
 * [https://jisaku.com/](https://jisaku.com/)
 
 ### 使用対象者 (ペルソナ)
-    * PCパーツの知識があり（普段自作でPCを作る位）自作PCの見積もりを一括で簡単に作りたい人。
-    * また作成を自慢したり、他の人の作成を見たい人
+* PCパーツの知識があり（普段自作でPCを作る位）自作PCの見積もりを一括で簡単に作りたい人。
+* また作成を自慢したり、他の人の作成を見たい人
 
 ### 扱う機能・データ
 
 #### 機能
-    * 検索
-     * キーワードでパーツ検索
-     * Rakutenからの価格データでパーツをソート
-     * 自作PC構成の各パーツを選択
-     * スペックで検索
-
-    * 投稿・閲覧
-     * 投稿の閲覧
-     * 各パーツ一覧を閲覧
-     * 実際に自作したPCの画像、説明を投稿
-
-    * その他
-     * 購入時、アマゾンに転送
-     * 部品の合計金額を総計
-     * ユーザー名、パスワードでログイン
-     * 作成した見積もりを保存
-     * 商品の追加、削除
-     * 投稿の削除
+* 検索
+  * キーワードでパーツ検索
+  * Rakutenからの価格データでパーツをソート
+  * 自作PC構成の各パーツを選択
+  * スペックで検索
+     
+* 投稿・閲覧
+  * 投稿の閲覧
+  * 各パーツ一覧を閲覧
+  * 実際に自作したPCの画像、説明を投稿
+     
+* その他
+  * 購入時、アマゾンに転送
+  * 部品の合計金額を総計
+  * ユーザー名、パスワードでログイン
+  * 作成した見積もりを保存
+  * 商品の追加、削除
+  * 投稿の削除
 
 #### データ
-    * 商品
-    　* 商品名
-    　* 商品のスペック
-    　* 商品の値段
-    　* 商品の簡単な説明
-    　* 商品分類
 
-    * ユーザー
-     * ユーザー ID
-     * ユーザーのパスワード
-     * 管理者かどうか
-
-    * 見積
-     * 選んだパーツ
-     * 見積説明
-     * 見積タイトル
+* 商品
+　* 商品名
+　* 商品のスペック
+　* 商品の値段
+　* 商品の簡単な説明
+　* 商品分類
+     
+* ユーザー
+  * ユーザー ID
+  * ユーザーのパスワード
+  * 管理者かどうか
+     
+* 見積
+  * 選んだパーツ
+  * 見積説明
+  * 見積タイトル
 
 ### データ構造の設定
 > [HY000][1681] Integer display width is deprecated and will be removed in a future release.
@@ -126,6 +127,7 @@ CREATE TABLE product_table(
     PRIMARY KEY (product_no)
 );
 
+
 CREATE TABLE user_table(
     user_no INT AUTO_INCREMENT,
     user_id VARCHAR(20) NOT NULL UNIQUE,
@@ -134,12 +136,14 @@ CREATE TABLE user_table(
     PRIMARY KEY (user_no)
 );
 
+
 CREATE TABLE build_table(
     build_no INT AUTO_INCREMENT,
     user_no INT REFERENCES user_table(user_no),
     build_name VARCHAR(120) NOT NULL,
     PRIMARY KEY (build_no)
 );
+
 
 CREATE TABLE build_parts_table(
     build_no INT REFERENCES build_table(build_no),
