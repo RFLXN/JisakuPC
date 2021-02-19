@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import bean.DBConnectionInfo;
 import bean.Product;
@@ -658,6 +660,152 @@ public class MySQLProductDao implements ProductDao {
         }
 
         return products;
+    }
+
+    /**
+     * パーツ検索メソッド
+     * @param options (key, value) ->
+     *                ("productName", String), ("productType", String),
+     *                ("productBrand", String), ("priceRange", int[] = [最小値, 最大値]),
+     *                ("specOptions", Map<String, String> = ["jsonKey", "jsonValue"])
+     * @param page (始まる結果の番号, 結果個数) or (結果個数)
+     * @return 検索結果のリスト
+     * @throws DAOException
+     */
+    @Override
+    public List<Product> searchProducts(Map<String, Object> options, int... page) throws DAOException {
+        int frontPageNum = 0;
+        int backPageNum = 10;
+
+        if(page.length == 1) {
+            backPageNum = page[0];
+        } else if (page.length == 2) {
+            frontPageNum = page[0];
+            backPageNum = page[1];
+        }
+
+        String sql = createOptionSearchSql(options);
+        List<Product> products = new ArrayList<>();
+
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, frontPageNum);
+            statement.setInt(2, backPageNum);
+
+            ResultSet resultSet = query(statement);
+
+            while (resultSet.next()) {
+                Product product = new Product();
+
+                product.setNo(resultSet.getString("product_no"));
+                product.setName(resultSet.getString("product_name"));
+                product.setPrice(resultSet.getString("product_price"));
+                product.setSpec(resultSet.getString("product_spec"));
+                product.setBrand(resultSet.getString("product_brand"));
+                product.setType(resultSet.getString("product_type"));
+
+                products.add(product);
+            }
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException e) {
+            throw new DAOException(e);
+        }
+
+        return products;
+    }
+
+    private String createOptionSearchSql(Map<String, Object> options) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("SELECT product_table.* FROM (")
+                .append("SELECT * FROM product_table WHERE ");
+
+        if(options.containsKey("productName")) {
+            if(builder.toString().endsWith("WHERE ")) {
+                builder.append("product_name LIKE '%").append((String)options.get("productName"))
+                        .append("%'");
+            } else {
+                builder.append(" AND product_name LIKE '%").append((String)options.get("productName"))
+                        .append("%'");
+            }
+        }
+
+        if(options.containsKey("productType")) {
+            if(builder.toString().endsWith("WHERE ")) {
+                builder.append("product_type = '").append(options.get("productType"))
+                .append("'");
+            } else {
+                builder.append(" AND product_type = '").append(options.get("productType"))
+                        .append("'");
+            }
+        }
+
+        if(options.containsKey("priceRange")) {
+            int[] range = (int[])options.get("priceRange");
+            if(builder.toString().endsWith("WHERE ")) {
+                builder.append("(product_price BETWEEN ").append(range[0])
+                .append(" AND ").append(range[1]).append(")");
+            } else {
+                builder.append(" AND (product_price BETWEEN ").append(range[0])
+                        .append(" AND ").append(range[1]).append(")");
+            }
+        }
+
+        if(options.containsKey("productBrand")) {
+            if(builder.toString().endsWith("WHERE ")) {
+                builder.append("product_brand = '").append((String)options.get("productBrand"))
+                .append("'");
+            } else {
+                builder.append(" AND product_brand = '").append((String)options.get("productBrand"))
+                        .append("'");
+            }
+        }
+
+        if(options.containsKey("specOptions")) {
+            Map<String, String> specOptions = (Map<String, String>)options.get("specOptions");
+            specOptions.forEach((String key, String value) -> {
+                boolean isNum = false;
+
+                try {
+                    Integer.parseInt(value);
+                    isNum = true;
+                } catch (NumberFormatException e) {
+                    isNum = false;
+                }
+
+                if(builder.toString().endsWith("WHERE ")) {
+                    builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                            .append(key).append("')) = ");
+                } else {
+                    builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                            .append(key).append("')) = ");
+                }
+                if(isNum) {
+                    builder.append(value);
+                } else {
+                    builder.append("'").append(value).append("'");
+                }
+            });
+        }
+
+        if(options.containsKey("orderBy")) {
+            if(builder.toString().endsWith("WHERE ")) {
+                builder.delete(builder.length()-6, builder.length());
+                builder.append("ORDER BY product_price ").append((String)options.get("orderBy"));
+            } else {
+                builder.append(" ORDER BY product_price ").append((String)options.get("orderBy"));
+            }
+        }
+
+        if(builder.toString().endsWith("WHERE ")) {
+            builder.delete(builder.length()-7, builder.length());
+        }
+        builder.append(") product_table LIMIT ?, ?");
+
+        System.out.println(builder.toString());
+
+        return builder.toString();
     }
 
     private Connection getConnection() throws DAOException {

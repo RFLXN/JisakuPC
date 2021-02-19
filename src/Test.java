@@ -1,33 +1,33 @@
 import bean.Product;
 import db.dao.factory.AbstractDaoFactory;
+import db.dao.product.ProductDao;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
         try {
-            Product product = AbstractDaoFactory.getFactory().getProductsDao().getProduct("1");
-            String spec = product.getSpec();
+            ProductDao dao = AbstractDaoFactory.getFactory().getProductsDao();
+            HashMap<String, Object> options = new HashMap<>();
 
-            System.out.println(spec);
+            HashMap<String, String> specOptions = new HashMap<>();
+            specOptions.put("tdp", "65");
+            specOptions.put("socket", "Socket AM4");
+
+            options.put("specOptions", specOptions);
 
 
-            //JSONデータを持っているStringでJSONObjectをnewする
-            JSONObject object = new JSONObject(spec);
+            List<Product> products = dao.searchProducts(options, 0, 99);
 
-            // ルートオブジェクトからキーがKEYであるデータを持ってくる
-            object.getString("KEY");
-
-            JSONArray array = object.getJSONArray("ARRAY_KEY");
-
-            for (Object obj : array) {
-                JSONObject jsonObj = (JSONObject) obj;
-                jsonObj.getString("asdasdads");
+            for(Product product: products) {
+                System.out.println(product.getName() + ": " + product.getPrice() + " " + product.getSpec());
             }
 
-
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
