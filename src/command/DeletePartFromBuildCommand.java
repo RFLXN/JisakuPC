@@ -4,15 +4,12 @@ import bean.Build;
 import bean.Product;
 import context.ResponseContext;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class DeletePartFromBuildCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
-        HttpSession session = ((HttpServletRequest)(getRequestContext().getRequest())).getSession();
-        Build build = (Build)session.getAttribute("build");
+        Build build = (Build) getRequestContext().getSessionAttribute("build");
         int partNo = Integer.parseInt(getRequestContext().getParameter("partNo")[0]);
 
         List<Product> products = build.getProducts();
@@ -25,7 +22,7 @@ public class DeletePartFromBuildCommand extends AbstractCommand {
         }
 
         build.setProducts(products);
-        session.setAttribute("build", build);
+        getRequestContext().setSessionAttribute("build", build);
 
         responseContext.setTarget("addbuild");
         return responseContext;

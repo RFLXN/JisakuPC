@@ -11,12 +11,9 @@ import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.user.UserDao;
 
-import javax.servlet.http.HttpServletRequest;
-
 public class LoginProcessCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
-
         String id = getRequestContext().getParameter("id")[0];
         String password = getRequestContext().getParameter("password")[0];
 
@@ -27,10 +24,9 @@ public class LoginProcessCommand extends AbstractCommand {
             UserFlag user = dao.getUser(id, password);
 
             if (user.isCorrectUser()) {
-                HttpServletRequest servletRequest = (HttpServletRequest) getRequestContext().getRequest();
-                servletRequest.getSession().setAttribute("loginFlag", user);
+                getRequestContext().setSessionAttribute("loginFlag", user);
 
-                String source = (String) servletRequest.getSession().getAttribute("source");
+                String source = (String) getRequestContext().getSessionAttribute("source");
 
                 if (source == null) {
                     responseContext.setTarget("index");

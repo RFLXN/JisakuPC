@@ -7,15 +7,12 @@ import db.dao.DAOException;
 import db.dao.build.BuildDao;
 import db.dao.factory.AbstractDaoFactory;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SaveBuildCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
-        HttpSession session = ((HttpServletRequest)(getRequestContext().getRequest())).getSession();
         String buildName = getRequestContext().getParameter("buildName")[0];
 
         if(buildName.equals("")) {
@@ -23,7 +20,7 @@ public class SaveBuildCommand extends AbstractCommand {
         }
 
         try {
-            UserFlag flag = (UserFlag) session.getAttribute("loginFlag");
+            UserFlag flag = (UserFlag) getRequestContext().getSessionAttribute("loginFlag");
             if(flag == null || !flag.isCorrectUser()) {
                 responseContext.setTarget("login");
                 return responseContext;
@@ -42,7 +39,7 @@ public class SaveBuildCommand extends AbstractCommand {
             }
 
             if(isAlreadyExist) {
-                Build sessionBuild = (Build) session.getAttribute("build");
+                Build sessionBuild = (Build) getRequestContext().getSessionAttribute("build");
                 Build build = dao.getBuildByName(buildName);
 
                 if(sessionBuild != null && sessionBuild.getProducts() != null) {
@@ -56,7 +53,7 @@ public class SaveBuildCommand extends AbstractCommand {
             } else {
                 dao.addBuild(flag.getUserNo(), buildName);
                 Build build = dao.getBuildByName(buildName);
-                Build sessionBuild = (Build) session.getAttribute("build");
+                Build sessionBuild = (Build) getRequestContext().getSessionAttribute("build");
 
                 if(sessionBuild != null && sessionBuild.getProducts() != null) {
                     build.setProducts(sessionBuild.getProducts());
