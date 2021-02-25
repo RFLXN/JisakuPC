@@ -9,6 +9,11 @@ function productspec(pid, dbPrice) {
         success: (data) => {
             console.log("getRakutenProduct: Successfully Load Product!");
             $("#product-spec-rakuten-url").html(data.productUrl);
+            let imgUrl = data.mediumImageUrl;
+            if(Array.isArray(imgUrl)) {
+                imgUrl = imgUrl[0];
+            }
+            $("#product-image").get(0).src = imgUrl;
             if (dbPrice != data.minPrice) {
                 console.log("Price Changed... -> Execute updatePrice");
                 $("#product-spec-price").html(`PRICE : ${data.minPrice}`);

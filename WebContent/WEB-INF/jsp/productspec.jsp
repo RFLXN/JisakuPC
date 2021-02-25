@@ -12,18 +12,15 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/productspec.js"></script>
 <script>
-    $(function () {
+    $(() => {
         productspec("${data.no}", ${data.price});
     });
 </script>
 
 <div id="product-spec">
   <h1>${data.name}</h1>
-  <!-- <div id="product-spec-pid">PID : ${data.no}</div>
   <br>
-  <div id="product-spec-name">NAME : ${data.name}</div>
-  <br>-->
-  <p>PRICE :</p>
+  <img id="product-image" src="${pageContext.request.contextPath}/image/transparent.png" alt="${data.name}" />
   <div id="product-spec-price"> ${data.price}</div>
   <br>
   <div id="product-spec-brand">BRAND : ${data.brand}</div>
