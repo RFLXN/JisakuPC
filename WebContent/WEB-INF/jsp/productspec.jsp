@@ -33,6 +33,5 @@
   <div id="product-spec-rakuten-url"></div>
 </div>
 
-<jsp:include page="/footer.jsp"/>
 </body>
 </html>

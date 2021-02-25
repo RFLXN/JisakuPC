@@ -7,8 +7,10 @@
   <meta charset="UTF-8">
 
   <title>掲示板</title>
+  <link href="css/showpost.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <form action="deletepost" method="post">
   <c:forEach var="post" items="${data}">
     <h1>${post.title}</h1>

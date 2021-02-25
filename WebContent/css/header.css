@@ -3,7 +3,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: #333333;
+    background-color: #333333!important;
     align-items: center;
     z-index: 99;
 }
@@ -15,8 +15,9 @@ div#logo {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none!important;
     color: #FFFFFF;
+    font-family:Centry!important;
 }
 
 .header-body tr {
@@ -31,6 +32,11 @@ a {
 }
 
 .header-body a:hover {
-    color: #DDDDDD;
+    color: #DDDDDD!important;
     text-decoration: underline;
+}
+* {
+	margin: 0;
+	padding : 0;
+	box-sizing: border-box;
 }
