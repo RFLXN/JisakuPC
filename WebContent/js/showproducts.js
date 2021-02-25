@@ -1,5 +1,9 @@
 $(async () => {
-    loadSpecSearch();
+    try {
+        loadSpecSearch();
+    } catch (e) {
+        console.log(e);
+    }
     loadProductImages();
 });
 
@@ -28,6 +32,8 @@ function loadProductImages() {
                 loadProduct();
             }).catch(err => {
                 console.log(err);
+                index = index + 1;
+                loadProduct();
             });
             index++;
         }
@@ -36,8 +42,12 @@ function loadProductImages() {
     function getProduct(pid) {
         return new Promise((resolve, reject) => {
             setTimeout(async () => {
-                const result = await axios.get(`rakuten-product.json?productId=${String(pid)}`);
-                resolve(result);
+                try {
+                    const result = await axios.get(`rakuten-product.json?productId=${String(pid)}`);
+                    resolve(result);
+                } catch (e) {
+                    reject(e);
+                }
             }, 180);
         });
     }

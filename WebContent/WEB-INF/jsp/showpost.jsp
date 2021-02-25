@@ -9,6 +9,10 @@
   <title>掲示板</title>
 </head>
 <body>
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/axios.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/showpost.js"></script>
+
 <form action="deletepost" method="post">
   <c:forEach var="post" items="${data}">
     <h1>${post.title}</h1>
@@ -24,14 +28,17 @@
       </tr>
       <c:forEach var="posts" items="${post.list}">
         <tr>
+          <td><img id="image-${posts.productno}"
+                   src="${pageContext.request.contextPath}/image/transparent.png" alt="${posts.pname}">
+          </td>
           <td>${posts.type}</td>
           <td>${posts.pname}</td>
           <td>${posts.price}</td>
-          <td>${posts.productno}</td>
+          <td class="product-no">${posts.productno}</td>
         </tr>
       </c:forEach>
       <input type="hidden" name="postno" value="${post.no}">
-      <c:if test="${post.userid == sessionScope.loginFlag.userId || sessionScope.loginFlag.isAdmin()}">
+      <c:if test="${(post.userid eq sessionScope.loginFlag.userId) or sessionScope.loginFlag.admin}">
         <input type="submit" name="delete" value="削除">
       </c:if>
     </table>
