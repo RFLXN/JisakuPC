@@ -20,7 +20,7 @@
 <div id="product-spec">
   <h1>${data.name}</h1>
   <br>
-  <img id="product-image" src="${pageContext.request.contextPath}/image/transparent.png" alt="${data.name}" />
+  <img id="product-image" src="${pageContext.request.contextPath}/image/transparent.png" alt="${data.name}"/>
   <div id="product-spec-price"> ${data.price}</div>
   <br>
   <div id="product-spec-brand">BRAND : ${data.brand}</div>

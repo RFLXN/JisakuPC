@@ -87,7 +87,7 @@
         <td align="center" width="60%">
           <img id="product-img-${product.no}" width="128" height="128"
                src="${pageContext.request.contextPath}/image/transparent.png" alt="${product.name}">
-          ${product.name}
+            ${product.name}
         </td>
         <td align="center" width="10%">${product.price}</td>
         <td align="center" width="10%">${product.spec}</td>

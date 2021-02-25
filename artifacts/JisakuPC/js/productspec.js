@@ -10,7 +10,7 @@ function productspec(pid, dbPrice) {
             console.log("getRakutenProduct: Successfully Load Product!");
             $("#product-spec-rakuten-url").html(data.productUrl);
             let imgUrl = data.mediumImageUrl;
-            if(Array.isArray(imgUrl)) {
+            if (Array.isArray(imgUrl)) {
                 imgUrl = imgUrl[0];
             }
             $("#product-image").get(0).src = imgUrl;
