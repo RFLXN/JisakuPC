@@ -52,7 +52,11 @@
         <br>
       </c:forEach>
     </div>
-
+	<c:if test="${sessionScope.loginFlag.isAdmin()}">
+		<form action="productmanagement">
+			<input type="submit" name="" value="管理者専用ぺぇじ">
+		</form>
+	</c:if>
   </div>
 
 

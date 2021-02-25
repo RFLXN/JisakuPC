@@ -1,13 +1,13 @@
 package command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bean.Post;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.post.PostDao;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShowPostCommand extends AbstractCommand {
     @Override
@@ -19,7 +19,6 @@ public class ShowPostCommand extends AbstractCommand {
             PostDao dao = daoFactory.getPostsDao();
             String postno = getRequestContext().getParameter("postno")[0];
             System.out.println("showpostno=" + postno);
-            //posts = dao.getSearchPost(postno);
             posts = dao.getPostData(postno);
         } catch (DAOException e) {
             throw new CommandException(e);
