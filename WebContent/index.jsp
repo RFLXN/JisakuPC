@@ -22,9 +22,7 @@
       <input type="text" name="search" value size="36" maxvalue="30" placeholder="キーワードで検索" maxlength="20">
       <input type="submit" value="検索">
     </form>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  </div>
+    </div>
 </div>
-<jsp:include page="footer.jsp"/>
 </body>
 </html>

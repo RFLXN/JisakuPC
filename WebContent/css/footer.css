@@ -32,11 +32,10 @@ a:hover {
     width: 20%;
     margin: 50px auto;
 }
-
 .foot-wrap ul {
     list-style: none;
     padding: 0;
-    line-height: 40px;
+    line-height:40px;
 }
 
 .foot-wrap {
@@ -46,7 +45,7 @@ a:hover {
 }
 
 .foot-wrap h3 {
-    border-bottom: 3px solid /*#2ac5b3*/ #FFFFFF;
+    border-bottom: 3px solid /*#2ac5b3*/#FFFFFF;
     padding: 10px;
 }
 
@@ -54,7 +53,6 @@ a:hover {
     text-decoration: none;
     color: #fff;
 }
-
 .foot-wrap a:hover {
     color: deeppink;
 }
