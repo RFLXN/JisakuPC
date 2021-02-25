@@ -31,7 +31,9 @@
         </tr>
       </c:forEach>
       <input type="hidden" name="postno" value="${post.no}">
-      <input type="submit" name="delete" value="削除">
+      <c:if test="${post.userid == sessionScope.loginFlag.userId || sessionScope.loginFlag.isAdmin()}">
+        <input type="submit" name="delete" value="削除">
+      </c:if>
     </table>
   </c:forEach>
 </form>

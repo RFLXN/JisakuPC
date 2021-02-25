@@ -18,7 +18,7 @@
 </script>
 
 <div id="product-spec">
-<h1>${data.name}</h1>
+  <h1>${data.name}</h1>
   <!-- <div id="product-spec-pid">PID : ${data.no}</div>
   <br>
   <div id="product-spec-name">NAME : ${data.name}</div>

@@ -15,13 +15,13 @@ public class SaveBuildCommand extends AbstractCommand {
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         String buildName = getRequestContext().getParameter("buildName")[0];
 
-        if(buildName.equals("")) {
+        if (buildName.equals("")) {
             buildName = "新しい見積り";
         }
 
         try {
             UserFlag flag = (UserFlag) getRequestContext().getSessionAttribute("loginFlag");
-            if(flag == null || !flag.isCorrectUser()) {
+            if (flag == null || !flag.isCorrectUser()) {
                 responseContext.setTarget("login");
                 return responseContext;
             }
@@ -31,18 +31,18 @@ public class SaveBuildCommand extends AbstractCommand {
             List<Build> builds = dao.getUserBuilds(flag.getUserNo());
             boolean isAlreadyExist = false;
 
-            for(Build build : builds) {
-                if(build.getBuildName().equals(buildName)) {
+            for (Build build : builds) {
+                if (build.getBuildName().equals(buildName)) {
                     isAlreadyExist = true;
                     break;
                 }
             }
 
-            if(isAlreadyExist) {
+            if (isAlreadyExist) {
                 Build sessionBuild = (Build) getRequestContext().getSessionAttribute("build");
                 Build build = dao.getBuildByName(buildName);
 
-                if(sessionBuild != null && sessionBuild.getProducts() != null) {
+                if (sessionBuild != null && sessionBuild.getProducts() != null) {
                     build.setProducts(sessionBuild.getProducts());
                 } else {
                     build.setProducts(new ArrayList<>());
@@ -55,7 +55,7 @@ public class SaveBuildCommand extends AbstractCommand {
                 Build build = dao.getBuildByName(buildName);
                 Build sessionBuild = (Build) getRequestContext().getSessionAttribute("build");
 
-                if(sessionBuild != null && sessionBuild.getProducts() != null) {
+                if (sessionBuild != null && sessionBuild.getProducts() != null) {
                     build.setProducts(sessionBuild.getProducts());
                 } else {
                     build.setProducts(new ArrayList<>());

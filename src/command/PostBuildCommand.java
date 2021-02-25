@@ -1,14 +1,14 @@
 package command;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import bean.Post;
 import bean.UserFlag;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.post.PostDao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostBuildCommand extends AbstractCommand {
     @Override
@@ -21,7 +21,7 @@ public class PostBuildCommand extends AbstractCommand {
             String title = getRequestContext().getParameter("title")[0];
             String description = getRequestContext().getParameter("description")[0];
             String buildno = getRequestContext().getParameter("buildno")[0];
-            UserFlag user =(UserFlag) getRequestContext().getSessionAttribute("loginFlag");
+            UserFlag user = (UserFlag) getRequestContext().getSessionAttribute("loginFlag");
             String userno = user.getUserNo();
 
             dao.insertPostBuildProducts(title, description, buildno, userno);

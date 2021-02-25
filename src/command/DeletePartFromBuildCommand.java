@@ -14,8 +14,8 @@ public class DeletePartFromBuildCommand extends AbstractCommand {
 
         List<Product> products = build.getProducts();
 
-        for(int i=0 ; i<products.size() ; i++) {
-            if(Integer.parseInt(products.get(i).getNo()) == partNo) {
+        for (int i = 0; i < products.size(); i++) {
+            if (Integer.parseInt(products.get(i).getNo()) == partNo) {
                 products.remove(i);
                 break;
             }

@@ -1,12 +1,5 @@
 package db.dao.post;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import bean.DBConnectionInfo;
 import bean.Post;
 import db.connector.DBCloseException;
@@ -19,6 +12,13 @@ import db.selector.DBSelectException;
 import db.selector.MySQLSelector;
 import db.updater.DBUpdateException;
 import db.updater.MySQLUpdater;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MySQLPostDao implements PostDao {
     private Connection connection;
@@ -102,7 +102,7 @@ public class MySQLPostDao implements PostDao {
 
                 post.setTitle(resultSet.getString("title"));
                 post.setDescription(resultSet.getString("description"));
-                post.setNo(	resultSet.getString("post_no"));
+                post.setNo(resultSet.getString("post_no"));
 
                 posts.add(post);
             }

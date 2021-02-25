@@ -1,8 +1,8 @@
 package context;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+import java.util.Set;
 
 public class JSONRequestContext implements RequestContext {
     private HttpServletRequest request;
@@ -19,6 +19,20 @@ public class JSONRequestContext implements RequestContext {
     @Override
     public String[] getParameter(String key) {
         return parameters.get(key);
+    }
+
+    @Override
+    public String[] getParameterKeys() {
+        Set<String> keySet = parameters.keySet();
+
+        String[] keys = new String[keySet.size()];
+
+        int i = 0;
+        for (String s : keySet) {
+            keys[i++] = s;
+        }
+
+        return keys;
     }
 
     @Override
@@ -39,9 +53,10 @@ public class JSONRequestContext implements RequestContext {
 
     @Override
     public Object getSessionAttribute(String key) {
-    	return null;
+        return null;
     }
 
     @Override
-    public void setSessionAttribute(String key, Object value) {}
+    public void setSessionAttribute(String key, Object value) {
+    }
 }

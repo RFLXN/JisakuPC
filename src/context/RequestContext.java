@@ -5,6 +5,8 @@ public interface RequestContext {
 
     String[] getParameter(String key);
 
+    String[] getParameterKeys();
+
     Object getRequest();
 
     void setRequest(Object request);

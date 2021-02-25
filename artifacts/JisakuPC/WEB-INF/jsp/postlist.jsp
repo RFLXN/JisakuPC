@@ -23,6 +23,9 @@
       <c:forEach var="list" items="${data}">
         <p>タイトル:<c:out value="${list.title}"/><br>
           説明:<c:out value="${list.description}"/></p>
+        <form action="showpost">
+          <input type="submit" name="postno" value="${list.no}">
+        </form>
       </c:forEach>
     </table>
   </div>

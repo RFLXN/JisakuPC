@@ -1,66 +1,114 @@
 package command;
 
 import bean.Product;
+import bean.ProductSpecSearchOption;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.product.ProductDao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SearchProductsCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         List<Product> products = new ArrayList<Product>();
 
-        String[] pn = getRequestContext().getParameter("moji");
         String productName = null;
+        String sort = null;
+        String productType = null;
+        String[] specOptions = null;
+        int[] page = null;
 
-        if (!(pn == null || pn.length < 1)) {
-            productName = pn[0];
+        String[] parameterKeys = getRequestContext().getParameterKeys();
+
+        if (getRequestContext().getParameter("productName") != null
+                && (!getRequestContext().getParameter("productName")[0].equals(""))) {
+            productName = getRequestContext().getParameter("productName")[0];
         }
-        System.out.println(productName);
+
+        if (getRequestContext().getParameter("sortByCost") != null
+                && (!getRequestContext().getParameter("sortByCost")[0].equals(""))) {
+            sort = getRequestContext().getParameter("sortByCost")[0];
+        }
+
+        if (getRequestContext().getParameter("productType") != null
+                && (!getRequestContext().getParameter("productType")[0].equals(""))) {
+            productType = getRequestContext().getParameter("productType")[0];
+        }
+
+        if (getRequestContext().getParameter("page") != null
+                && (!getRequestContext().getParameter("page")[0].equals(""))) {
+            String[] pBuff = getRequestContext().getParameter("page");
+            page = new int[pBuff.length];
+            for (int i = 0; i < pBuff.length; i++) {
+                page[i] = Integer.parseInt(pBuff[i]);
+            }
+        }
+
         try {
-            AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
-            ProductDao dao = daoFactory.getProductsDao();
+            ProductDao dao = AbstractDaoFactory.getFactory().getProductsDao();
+            Map<String, Object> searchOption = new HashMap<>();
 
-            String[] sort = getRequestContext().getParameter("sort-by-cost");
-            String[] parts = getRequestContext().getParameter("parts");
-
-            if (sort == null || sort[0].equals("")) {
-                if (parts == null || parts[0].equals("")) {
-                    products = dao.getSearchProducts(productName);
-                } else if (parts[0].equals("cpu")) {
-                    products = dao.getPartsSearchProducts("cpu");
-                } else if (parts[0].equals("gpu")) {
-                    products = dao.getPartsSearchProducts("gpu");
-                } else if (parts[0].equals("ram")) {
-                    products = dao.getPartsSearchProducts("ram");
-                } else if (parts[0].equals("storage")) {
-                    products = dao.getPartsSearchProducts("storage");
-                } else if (parts[0].equals("cpu_cooler")) {
-                    products = dao.getPartsSearchProducts("cpu_cooler");
-                } else if (parts[0].equals("case")) {
-                    products = dao.getPartsSearchProducts("case");
-                } else if (parts[0].equals("mother_board")) {
-                    products = dao.getPartsSearchProducts("mother_board");
-                } else if (parts[0].equals("power_supply")) {
-                    products = dao.getPartsSearchProducts("power_supply");
-                } else if (parts[0].equals("case_fan")) {
-                    products = dao.getPartsSearchProducts("case_fan");
-                }
-            } else if (sort[0].equals("asc")) {
-                products = dao.getASCSearchProducts(productName);
-            } else if (sort[0].equals("desc")) {
-                products = dao.getDESCSearchProducts(productName);
+            if (productName != null) {
+                searchOption.put("productName", productName);
             }
 
+            if (sort != null) {
+                searchOption.put("orderBy", sort);
+            }
 
+            if (productType != null) {
+                searchOption.put("productType", productType);
+            }
+            ArrayList<ProductSpecSearchOption> specSearchOptions = new ArrayList<>();
+            for (String optionName : parameterKeys) {
+                if (!optionName.equals("productName") && !optionName.equals("sortByCost")
+                        && !optionName.equals("productType") && !optionName.equals("page")
+                        && !getRequestContext().getParameter(optionName)[0].equals("")) {
+                    ProductSpecSearchOption specSearchOption = new ProductSpecSearchOption();
+                    specSearchOption.setOptionName(optionName);
+                    String value = getRequestContext().getParameter(optionName)[0];
+
+                    String[] buff = value.split(",");
+                    if (value.contains(",")) {
+                        specSearchOption.setCanRange(true);
+                        specSearchOption.setValue(value.split(","));
+                    } else {
+                        specSearchOption.setValue(new String[]{value});
+                        specSearchOption.setCanRange(false);
+                    }
+
+                    try {
+                        Integer.parseInt(buff[0]);
+                        specSearchOption.setValueType(ProductSpecSearchOption.INT);
+                    } catch (NumberFormatException e) {
+                        try {
+                            Double.parseDouble(buff[0]);
+                            specSearchOption.setValueType(ProductSpecSearchOption.DOUBLE);
+                        } catch (NumberFormatException ee) {
+                            specSearchOption.setValueType(ProductSpecSearchOption.STRING);
+                        }
+                    }
+                    specSearchOptions.add(specSearchOption);
+                }
+            }
+
+            if (specSearchOptions.size() > 0) {
+                searchOption.put("specOptions", specSearchOptions);
+            }
+
+            if (page != null) {
+                products = dao.searchProducts(searchOption, page);
+            } else {
+                products = dao.searchProducts(searchOption);
+            }
         } catch (DAOException e) {
             throw new CommandException(e);
         }
-
         responseContext.setResult(products);
         responseContext.setTarget("showproducts");
 

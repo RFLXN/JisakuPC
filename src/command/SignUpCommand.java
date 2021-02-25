@@ -25,7 +25,7 @@ public class SignUpCommand extends AbstractCommand {
 
             UserFlag user = userDao.getUser(id, password);
 
-            HttpServletRequest servletRequest = (HttpServletRequest)(requestContext.getRequest());
+            HttpServletRequest servletRequest = (HttpServletRequest) (requestContext.getRequest());
             servletRequest.getSession().setAttribute("loginFlag", user);
 
             responseContext.setResult(user);

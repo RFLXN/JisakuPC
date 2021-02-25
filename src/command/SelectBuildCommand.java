@@ -13,10 +13,10 @@ public class SelectBuildCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         String buildNo = getRequestContext().getParameter("buildNo")[0];
-        HttpSession session = ((HttpServletRequest)(getRequestContext().getRequest())).getSession();
+        HttpSession session = ((HttpServletRequest) (getRequestContext().getRequest())).getSession();
         responseContext.setTarget("addbuild");
 
-        if(buildNo == null || buildNo.equals("")) {
+        if (buildNo == null || buildNo.equals("")) {
             return responseContext;
         }
 

@@ -34,19 +34,21 @@
   <form action="postbuild" class="post" method="post" name="form1" onSubmit="return check()">
     <p>タイトル:<input type="text" name="title" placeholder="自作PC"></p>
     <p>コメント:<br>
-    <textarea name="description" rows="5" cols="40" placeholder="Intel Core i9 9900KF Box..."></textarea>
+      <textarea name="description" rows="5" cols="40" placeholder="Intel Core i9 9900KF Box..."></textarea>
     </p>
 
     <c:forEach var="list" items="${ data }">
-    <p>見積もりを選択：<input type="radio" name="buildno" value="${list.buildNo }" required>
-    	${list.buildName}
-    </p>
+      <p>見積もりを選択：<input type="radio" name="buildno" value="${list.buildNo }" required>
+          ${list.buildName}
+      </p>
     </c:forEach>
 
-    <p><div class="button"><input type="submit" value="送信"><input type="reset" value="リセット"></div></p>
+    <p>
+    <div class="button"><input type="submit" value="送信"><input type="reset" value="リセット"></div>
+    </p>
   </form>
 
-<!-- 0218 坂入 見積もりをforEachするので削除 -->
+  <!-- 0218 坂入 見積もりをforEachするので削除 -->
 </div>
 <jsp:include page="/footer.jsp"/>
 </body>

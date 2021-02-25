@@ -1,8 +1,8 @@
 package context;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
+import java.util.Set;
 
 public class WebRequestContext implements RequestContext {
     private HttpServletRequest request;
@@ -20,6 +20,20 @@ public class WebRequestContext implements RequestContext {
     @Override
     public String[] getParameter(String key) {
         return parameters.get(key);
+    }
+
+    @Override
+    public String[] getParameterKeys() {
+        Set<String> keySet = parameters.keySet();
+
+        String[] keys = new String[keySet.size()];
+
+        int i = 0;
+        for (String s : keySet) {
+            keys[i++] = s;
+        }
+
+        return keys;
     }
 
     @Override
@@ -49,7 +63,7 @@ public class WebRequestContext implements RequestContext {
 
     @Override
     public Object getSessionAttribute(String key) {
-    	return (Object) request.getSession().getAttribute(key);
+        return request.getSession().getAttribute(key);
     }
 
     @Override

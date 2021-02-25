@@ -10,7 +10,7 @@ body {
     margin-top: 100px;
 }
 
-.post{
+.post {
     float: right;
     text-align: center;
     background: #ffffff;
@@ -20,10 +20,11 @@ body {
     max-width: 400px;
     border-radius: 20px 20px 20px 20px;
 
+
     margin: 40px 3%;
 }
 
-.post input[type='text']{
+.post input[type='text'] {
     font: 15px/24px sans-serif;
     box-sizing: border-box;
     width: 50%;
@@ -34,17 +35,17 @@ body {
 }
 
 
-.post input[type='text']:focus{
+.post input[type='text']:focus {
     outline: none;
-    border:solid 1px /*#EEA34A*/ #CC0000;
+    border: solid 1px /*#EEA34A*/ #CC0000;
 }
 
-.post textarea:focus{
+.post textarea:focus {
     outline: none;
-    border:solid 1px #CC0000;
+    border: solid 1px #CC0000;
 }
 
-.button input{
+.button input {
     display: inline-block;
     padding: 0.3em 1em;
     text-decoration: none;
@@ -54,6 +55,7 @@ body {
     transition: .4s;
     font-size: 13px;
 }
+
 h1 {
     padding: .25em 0 .25em .75em;
     border-left: 6px solid #ccc;
@@ -66,6 +68,7 @@ div.page {
     z-index: auto;
 
 }
+
 div.page2 {
     font-size: 15px;
     margin: 0 0 0 140px;

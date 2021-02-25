@@ -18,8 +18,8 @@
       <%-- 登録に成功した時 --%>
       <c:when test="${data.correctUser}">
         <div class="result-text">
-          <label>${data.userId} 様</label>    <br>
-          登録に成功しました。    <br>
+          <label>${data.userId} 様</label> <br>
+          登録に成功しました。 <br>
         </div>
 
 
@@ -31,7 +31,7 @@
       <%-- 登録に失敗した時 --%>
       <c:otherwise>
         <div class="result-text">
-          登録に失敗しました。    <br>
+          登録に失敗しました。 <br>
         </div>
 
         <div class="result-button-container">

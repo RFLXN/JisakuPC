@@ -1,13 +1,13 @@
 package command;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import bean.Post;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.post.PostDao;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShowPostCommand extends AbstractCommand {
     @Override

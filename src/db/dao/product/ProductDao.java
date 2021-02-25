@@ -1,10 +1,10 @@
 package db.dao.product;
 
-import java.util.List;
-import java.util.Map;
-
 import bean.Product;
 import db.dao.DAOException;
+
+import java.util.List;
+import java.util.Map;
 
 public interface ProductDao {
     void addProduct(Product product) throws DAOException;
@@ -33,21 +33,23 @@ public interface ProductDao {
 
     List<Product> getSpecSearchProducts(String word, int... page) throws DAOException;
 
-    List<Product> getSpecialSearchProducts(String ddr,String clock, int... page) throws DAOException;
+    List<Product> getSpecialSearchProducts(String ddr, String clock, int... page) throws DAOException;
 
-    List<Product> getVolumeSearchProducts(String under,String over, int... page) throws DAOException;
+    List<Product> getVolumeSearchProducts(String under, String over, int... page) throws DAOException;
 
-    List<Product> getWSizeSearchProducts(String under,String over, int... page) throws DAOException;
+    List<Product> getWSizeSearchProducts(String under, String over, int... page) throws DAOException;
 
     List<Product> getSizeSearchProducts(String size, int... page) throws DAOException;
 
     /**
      * パーツ検索メソッド
+     *
      * @param options (key, value) ->
      *                ("productName", String), ("productType", String),
      *                ("productBrand", String), ("priceRange", int[] = [最小値, 最大値]),
+     *                ("orderBy", String),
      *                ("specOptions", Map<String, String> = ["jsonKey", "jsonValue"])
-     * @param page (始まる結果の番号, 結果個数) or (結果個数)
+     * @param page    (始まる結果の番号, 結果個数) or (結果個数)
      * @return 検索結果のリスト
      * @throws DAOException
      */

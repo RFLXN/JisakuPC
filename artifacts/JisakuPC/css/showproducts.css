@@ -1,24 +1,32 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-body{
-    margin-top:7em;
+body {
+    margin-top: 7em;
     background: #e9e9e9;
 
 }
-.search input[type="text"]{
+
+.search input[type="text"] {
     border: none;
     height: 2.4em;
-    border:none;
-    border-radius:10px;
+    border: none;
+    border-radius: 10px;
     box-shadow: none;
     padding: 2px 8px;
 
 }
+
 .search input[type="text"]:focus {
     outline: 0;
 }
-.search{
+
+.search {
     position: relative;
     box-sizing: border-box;
     border: 2px solid #3879D9;
@@ -29,7 +37,8 @@ body{
     margin: auto;
     max-width: 900px;
 }
-.search input[type="submit"]{
+
+.search input[type="submit"] {
     cursor: pointer;
     font-family: FontAwesome;
     border: none;
@@ -38,10 +47,11 @@ body{
     position: absolute;
     width: 3.5em;
     height: 3.0em;
-    right:0px;
+    right: 0px;
     top: -5px;
-    outline : none;
+    outline: none;
 }
+
 .search ::-webkit-input-placeholder {
     color: #3879D9;
 }
@@ -53,13 +63,44 @@ table.show tr td {
     border-bottom: 2px solid #DDDDDD;
     height: 50px;
 }
-.search-sort{
+
+.search-sort {
+    margin: auto;
+}
+
+.sort-select {
     margin: auto;
     max-width: 200px;
 }
+
+.product-type-select-hidden {
+    margin: auto;
+    max-width: 60%;
+    display: none;
+}
+
+.product-type-select-display {
+    margin: auto;
+    max-width: 60%;
+    display: block;
+}
+
+.spec-search-hidden {
+    margin: auto;
+    max-width: 60%;
+    display: none;
+}
+
+.spec-search-display {
+    margin: auto;
+    max-width: 60%;
+    display: block;
+}
+
 .search-sort input[type=radio] {
     display: none;
 }
+
 .sort {
     box-sizing: border-box;
     cursor: pointer;
@@ -68,6 +109,7 @@ table.show tr td {
     position: relative;
     width: auto;
 }
+
 .sort::before {
     background: #fff;
     border: 1px solid #ccc;
@@ -81,6 +123,7 @@ table.show tr td {
     top: 50%;
     width: 16px;
 }
+
 .sort::after {
     background: #00cccc;
     border-radius: 50%;
@@ -94,12 +137,15 @@ table.show tr td {
     top: 50%;
     width: 8px;
 }
+
 .search-sort input[type=radio]:checked + .sort::before {
     border-color: #666;
 }
+
 .search-sort input[type=radio]:checked + .sort::after {
     opacity: 1;
 }
+
 .add-button input {
     display: inline-block;
     padding: 0.3em 1em;
@@ -115,6 +161,7 @@ table.show tr td {
     background: #CC0000;
     color: white;
 }
+
 .details-button input {
     display: inline-block;
     padding: 0.3em 1em;
@@ -130,7 +177,8 @@ table.show tr td {
     background: #CC0000;
     color: white;
 }
-.products{
+
+.products {
     margin: auto;
     max-width: 900px;
 }

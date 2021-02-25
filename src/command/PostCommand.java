@@ -1,13 +1,13 @@
 package command;
 
-import java.util.List;
-
 import bean.Build;
 import bean.UserFlag;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.build.BuildDao;
 import db.dao.factory.AbstractDaoFactory;
+
+import java.util.List;
 
 public class PostCommand extends AbstractCommand {
     @Override
@@ -20,7 +20,7 @@ public class PostCommand extends AbstractCommand {
 //            PostDao dao = daoFactory.getPostsDao();
 //            posts = dao.getAllPosts();
             BuildDao bld_dao = daoFactory.getBuildDao();
-            UserFlag user =(UserFlag) getRequestContext().getSessionAttribute("loginFlag");
+            UserFlag user = (UserFlag) getRequestContext().getSessionAttribute("loginFlag");
             String userno = user.getUserNo();
             posts = bld_dao.getUserBuilds(userno);
 

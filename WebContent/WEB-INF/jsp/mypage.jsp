@@ -28,35 +28,37 @@
         <p>見積り名: ${build.buildName}</p>
         <form>
           <button class="btn btn-default" formmethod="get" formaction=""
-                      name="buildNo" value="${build.buildNo}">投稿</button>
+                  name="buildNo" value="${build.buildNo}">投稿
+          </button>
 
           <button class="btn btn-danger" formmethod="get" formaction="deletebuild"
-                      name="buildNo" value="${build.buildNo}">削除</button>
+                  name="buildNo" value="${build.buildNo}">削除
+          </button>
         </form>
         <table class="table table-hover">
           <tbody>
-            <tr>
-              <th>No</th>
-              <th>パーツ名</th>
-              <th>値段</th>
+          <tr>
+            <th>No</th>
+            <th>パーツ名</th>
+            <th>値段</th>
+          </tr>
+          <c:forEach var="part" items="${build.products}">
+            <tr onclick="location.href='productspec?pid=${part.no}'">
+              <td>${part.no}</td>
+              <td>${part.name}</td>
+              <td>${part.price}</td>
             </tr>
-            <c:forEach var="part" items="${build.products}">
-              <tr onclick="location.href='productspec?pid=${part.no}'">
-                <td>${part.no}</td>
-                <td>${part.name}</td>
-                <td>${part.price}</td>
-              </tr>
-            </c:forEach>
+          </c:forEach>
           </tbody>
         </table>
         <br>
       </c:forEach>
     </div>
-	<c:if test="${sessionScope.loginFlag.isAdmin()}">
-		<form action="productmanagement">
-			<input type="submit" name="" value="管理者専用ぺぇじ">
-		</form>
-	</c:if>
+    <c:if test="${sessionScope.loginFlag.isAdmin()}">
+      <form action="productmanagement">
+        <input type="submit" name="" value="管理者専用ぺぇじ">
+      </form>
+    </c:if>
   </div>
 
 

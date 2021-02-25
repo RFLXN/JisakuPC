@@ -1,16 +1,8 @@
 package db.dao.product;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import bean.DBConnectionInfo;
 import bean.Product;
+import bean.ProductSpecSearchOption;
 import db.connector.DBCloseException;
 import db.connector.DBCloser;
 import db.connector.DBConnectException;
@@ -21,6 +13,14 @@ import db.selector.DBSelectException;
 import db.selector.MySQLSelector;
 import db.updater.DBUpdateException;
 import db.updater.MySQLUpdater;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MySQLProductDao implements ProductDao {
     private Connection connection;
@@ -126,7 +126,7 @@ public class MySQLProductDao implements ProductDao {
     public List<Product> getProductsByType(String type, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -178,7 +178,7 @@ public class MySQLProductDao implements ProductDao {
     public List<Product> getSearchProducts(String moji, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -222,7 +222,7 @@ public class MySQLProductDao implements ProductDao {
     public List<Product> getASCSearchProducts(String moji, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -267,7 +267,7 @@ public class MySQLProductDao implements ProductDao {
     public List<Product> getDESCSearchProducts(String moji, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -350,7 +350,7 @@ public class MySQLProductDao implements ProductDao {
     public List<Product> getPartsSearchProducts(String moji, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -396,7 +396,7 @@ public class MySQLProductDao implements ProductDao {
     public List<Product> getWordSearchProducts(String word, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -441,7 +441,7 @@ public class MySQLProductDao implements ProductDao {
     public List<Product> getSpecSearchProducts(String word, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -483,10 +483,10 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getSpecialSearchProducts(String ddr,String clock, int... page) throws DAOException {
+    public List<Product> getSpecialSearchProducts(String ddr, String clock, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -528,10 +528,10 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getVolumeSearchProducts(String under,String over, int... page) throws DAOException {
+    public List<Product> getVolumeSearchProducts(String under, String over, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -546,8 +546,8 @@ public class MySQLProductDao implements ProductDao {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.setInt(1,Integer.parseInt(under));
-            statement.setInt(2,Integer.parseInt(over));
+            statement.setInt(1, Integer.parseInt(under));
+            statement.setInt(2, Integer.parseInt(over));
             statement.setInt(3, frontPageNum);
             statement.setInt(4, backPageNum);
 
@@ -574,10 +574,10 @@ public class MySQLProductDao implements ProductDao {
     }
 
     @Override
-    public List<Product> getWSizeSearchProducts(String under,String over, int... page) throws DAOException {
+    public List<Product> getWSizeSearchProducts(String under, String over, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -592,8 +592,8 @@ public class MySQLProductDao implements ProductDao {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.setInt(1,Integer.parseInt(under));
-            statement.setInt(2,Integer.parseInt(over));
+            statement.setInt(1, Integer.parseInt(under));
+            statement.setInt(2, Integer.parseInt(over));
             statement.setInt(3, frontPageNum);
             statement.setInt(4, backPageNum);
 
@@ -622,7 +622,7 @@ public class MySQLProductDao implements ProductDao {
     public List<Product> getSizeSearchProducts(String size, int... page) throws DAOException {
         int frontPageNum = 0;
         int backPageNum = 10;
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -637,7 +637,7 @@ public class MySQLProductDao implements ProductDao {
             connection = getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            statement.setDouble(1,Double.parseDouble(size));
+            statement.setDouble(1, Double.parseDouble(size));
             statement.setInt(2, frontPageNum);
             statement.setInt(3, backPageNum);
 
@@ -664,11 +664,13 @@ public class MySQLProductDao implements ProductDao {
 
     /**
      * パーツ検索メソッド
+     *
      * @param options (key, value) ->
      *                ("productName", String), ("productType", String),
      *                ("productBrand", String), ("priceRange", int[] = [最小値, 最大値]),
+     *                ("orderBy", String),
      *                ("specOptions", Map<String, String> = ["jsonKey", "jsonValue"])
-     * @param page (始まる結果の番号, 結果個数) or (結果個数)
+     * @param page    (始まる結果の番号, 結果個数) or (結果個数)
      * @return 検索結果のリスト
      * @throws DAOException
      */
@@ -677,7 +679,7 @@ public class MySQLProductDao implements ProductDao {
         int frontPageNum = 0;
         int backPageNum = 10;
 
-        if(page.length == 1) {
+        if (page.length == 1) {
             backPageNum = page[0];
         } else if (page.length == 2) {
             frontPageNum = page[0];
@@ -709,97 +711,146 @@ public class MySQLProductDao implements ProductDao {
             }
 
             DBCloser.close(connection);
-        } catch (SQLException | DBCloseException e) {
+        } catch (SQLException | DBCloseException | NumberFormatException e) {
             throw new DAOException(e);
         }
 
         return products;
     }
 
-    private String createOptionSearchSql(Map<String, Object> options) {
+    private String createOptionSearchSql(Map<String, Object> options) throws NumberFormatException {
         StringBuilder builder = new StringBuilder();
         builder.append("SELECT product_table.* FROM (")
                 .append("SELECT * FROM product_table WHERE ");
 
-        if(options.containsKey("productName")) {
-            if(builder.toString().endsWith("WHERE ")) {
-                builder.append("product_name LIKE '%").append((String)options.get("productName"))
+        if (options.containsKey("productName")) {
+            if (builder.toString().endsWith("WHERE ")) {
+                builder.append("product_name LIKE '%").append((String) options.get("productName"))
                         .append("%'");
             } else {
-                builder.append(" AND product_name LIKE '%").append((String)options.get("productName"))
+                builder.append(" AND product_name LIKE '%").append((String) options.get("productName"))
                         .append("%'");
             }
         }
 
-        if(options.containsKey("productType")) {
-            if(builder.toString().endsWith("WHERE ")) {
+        if (options.containsKey("productType")) {
+            if (builder.toString().endsWith("WHERE ")) {
                 builder.append("product_type = '").append(options.get("productType"))
-                .append("'");
+                        .append("'");
             } else {
                 builder.append(" AND product_type = '").append(options.get("productType"))
                         .append("'");
             }
         }
 
-        if(options.containsKey("priceRange")) {
-            int[] range = (int[])options.get("priceRange");
-            if(builder.toString().endsWith("WHERE ")) {
+        if (options.containsKey("priceRange")) {
+            int[] range = (int[]) options.get("priceRange");
+            if (builder.toString().endsWith("WHERE ")) {
                 builder.append("(product_price BETWEEN ").append(range[0])
-                .append(" AND ").append(range[1]).append(")");
+                        .append(" AND ").append(range[1]).append(")");
             } else {
                 builder.append(" AND (product_price BETWEEN ").append(range[0])
                         .append(" AND ").append(range[1]).append(")");
             }
         }
 
-        if(options.containsKey("productBrand")) {
-            if(builder.toString().endsWith("WHERE ")) {
-                builder.append("product_brand = '").append((String)options.get("productBrand"))
-                .append("'");
+        if (options.containsKey("productBrand")) {
+            if (builder.toString().endsWith("WHERE ")) {
+                builder.append("product_brand = '").append((String) options.get("productBrand"))
+                        .append("'");
             } else {
-                builder.append(" AND product_brand = '").append((String)options.get("productBrand"))
+                builder.append(" AND product_brand = '").append((String) options.get("productBrand"))
                         .append("'");
             }
         }
 
-        if(options.containsKey("specOptions")) {
-            Map<String, String> specOptions = (Map<String, String>)options.get("specOptions");
-            specOptions.forEach((String key, String value) -> {
-                boolean isNum = false;
+        if (options.containsKey("specOptions")) {
+            ArrayList<ProductSpecSearchOption> specSearchOptions = (ArrayList) options.get("specOptions");
 
-                try {
-                    Integer.parseInt(value);
-                    isNum = true;
-                } catch (NumberFormatException e) {
-                    isNum = false;
-                }
+            specSearchOptions.forEach((o) -> {
+                String optionName = o.getOptionName();
+                int valueType = o.getValueType();
+                boolean isCanRange = o.isCanRange();
+                String[] value = o.getValue();
 
-                if(builder.toString().endsWith("WHERE ")) {
-                    builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
-                            .append(key).append("')) = ");
-                } else {
-                    builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
-                            .append(key).append("')) = ");
-                }
-                if(isNum) {
-                    builder.append(value);
-                } else {
-                    builder.append("'").append(value).append("'");
+                if (valueType == ProductSpecSearchOption.STRING) {
+                    String trueValue = value[0];
+
+                    if (builder.toString().endsWith("WHERE ")) {
+                        builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                .append(optionName).append("')) = ");
+                    } else {
+                        builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                .append(optionName).append("')) = ");
+                    }
+                    builder.append("'").append(trueValue).append("'");
+
+                } else if (valueType == ProductSpecSearchOption.INT) {
+                    int trueValue = Integer.parseInt(value[0]);
+                    if (isCanRange) {
+                        if (builder.toString().endsWith("WHERE ")) {
+                            builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) >= ");
+                        } else {
+                            builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) >= ");
+                        }
+                        builder.append(trueValue);
+
+                        builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                .append(optionName).append("')) <= ");
+                        builder.append(Integer.parseInt(value[1]));
+                    } else {
+                        if (builder.toString().endsWith("WHERE ")) {
+                            builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) = ");
+                        } else {
+                            builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) = ");
+                        }
+                        builder.append(trueValue);
+                    }
+                } else if (valueType == ProductSpecSearchOption.DOUBLE) {
+                    double trueValue = Double.parseDouble(value[0]);
+                    if (isCanRange) {
+                        if (builder.toString().endsWith("WHERE ")) {
+                            builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) >= ");
+                        } else {
+                            builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) >= ");
+                        }
+                        builder.append(trueValue);
+
+                        builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                .append(optionName).append("')) <= ");
+                        builder.append(Double.parseDouble(value[1]));
+                    } else {
+                        if (builder.toString().endsWith("WHERE ")) {
+                            builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) = ");
+                        } else {
+                            builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) = ");
+                        }
+                        builder.append(trueValue);
+                    }
                 }
             });
         }
 
-        if(options.containsKey("orderBy")) {
-            if(builder.toString().endsWith("WHERE ")) {
-                builder.delete(builder.length()-6, builder.length());
-                builder.append("ORDER BY product_price ").append((String)options.get("orderBy"));
+
+        if (options.containsKey("orderBy")) {
+            if (builder.toString().endsWith("WHERE ")) {
+                builder.delete(builder.length() - 6, builder.length());
+                builder.append("ORDER BY product_price ").append((String) options.get("orderBy"));
             } else {
-                builder.append(" ORDER BY product_price ").append((String)options.get("orderBy"));
+                builder.append(" ORDER BY product_price ").append((String) options.get("orderBy"));
             }
         }
 
-        if(builder.toString().endsWith("WHERE ")) {
-            builder.delete(builder.length()-7, builder.length());
+        if (builder.toString().endsWith("WHERE ")) {
+            builder.delete(builder.length() - 7, builder.length());
         }
         builder.append(") product_table LIMIT ?, ?");
 
