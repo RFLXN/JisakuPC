@@ -21,7 +21,11 @@
     <div id="heading" class="col-xs-12">
       <h2>マイページ: ${sessionScope.loginFlag.userId}様</h2>
     </div>
-
+    <div id="user-control-section" class="col-xs-12">
+      <form>
+        <button class="btn btn-danger" formaction="logout" formmethod="get">ログアウト</button>
+      </form>
+    </div>
     <div id="build-list-section" class="col-xs-12">
       <h3>見積りリスト</h3><br>
       <c:forEach var="build" items="${data}">
@@ -54,10 +58,12 @@
         <br>
       </c:forEach>
     </div>
-    <c:if test="${sessionScope.loginFlag.isAdmin()}">
-      <form action="productmanagement">
-        <input type="submit" name="" value="管理者専用ぺぇじ">
-      </form>
+    <c:if test="${sessionScope.loginFlag.admin}">
+      <div id="admin-pannel" class="col-xs-12">
+        <form action="productmanagement">
+          <button type="submit" class="btn btn-default">管理者専用ぺぇじ</button>
+        </form>
+      </div>
     </c:if>
   </div>
 

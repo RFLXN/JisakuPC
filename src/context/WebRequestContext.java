@@ -70,4 +70,9 @@ public class WebRequestContext implements RequestContext {
     public void setSessionAttribute(String key, Object value) {
         request.getSession().setAttribute(key, value);
     }
+
+    @Override
+    public void clearSession() {
+        request.getSession().invalidate();
+    }
 }

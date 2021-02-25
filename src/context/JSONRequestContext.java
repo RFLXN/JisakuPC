@@ -59,4 +59,9 @@ public class JSONRequestContext implements RequestContext {
     @Override
     public void setSessionAttribute(String key, Object value) {
     }
+
+    @Override
+    public void clearSession() {
+
+    }
 }
