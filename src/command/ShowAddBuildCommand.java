@@ -13,8 +13,7 @@ public class ShowAddBuildCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         List<Product> products = new ArrayList<Product>();
-
-
+        
         try {
 
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();

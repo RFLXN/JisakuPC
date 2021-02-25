@@ -11,6 +11,7 @@
 </head>
 <body>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/axios.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/showproducts.js"></script>
 <jsp:include page="/header.jsp"/>
@@ -81,15 +82,19 @@
       <th>見積りへ</th>
     </tr>
     <c:forEach var="product" items="${data}">
-    <div class="button">
+    <div id="product-${product.no}" class="button product-section">
       <tr>
-        <td align="center" width="60%">${product.name}</td>
+        <td align="center" width="60%">
+          <img id="product-img-${product.no}" width="128" height="128"
+               src="${pageContext.request.contextPath}/image/transparent.png" alt="${product.name}">
+          ${product.name}
+        </td>
         <td align="center" width="10%">${product.price}</td>
         <td align="center" width="10%">${product.spec}</td>
         <td align="center" width="10%">
           <form method="get" action="productspec">
             <div class="details-button">
-              <input type="hidden" name="pid" value="${product.no}">
+              <input class="pid-value" type="hidden" name="pid" value="${product.no}">
               <input type="submit" value="詳細">
             </div>
           </form>
