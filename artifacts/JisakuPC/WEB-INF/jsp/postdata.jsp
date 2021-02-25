@@ -7,8 +7,10 @@
   <meta charset="UTF-8">
 
   <title>掲示板</title>
+  <link href="css/postdata.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <table border="1">
   <tr>
     <th>pname</th>

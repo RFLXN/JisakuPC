@@ -27,6 +27,7 @@
   </script>
 
   <title>掲示板</title>
+  <link href="css/post.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <jsp:include page="/header.jsp"/>
@@ -50,6 +51,5 @@
 
   <!-- 0218 坂入 見積もりをforEachするので削除 -->
 </div>
-<jsp:include page="/footer.jsp"/>
 </body>
 </html>

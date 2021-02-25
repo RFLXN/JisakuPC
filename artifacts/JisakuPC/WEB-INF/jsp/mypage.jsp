@@ -10,6 +10,7 @@
   <link href="css/mypage.css" rel="stylesheet" type="text/css"/>
   <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/mypage.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -30,7 +31,7 @@
       <c:forEach var="build" items="${data}">
         <p>見積り名: ${build.buildName}</p>
         <form>
-          <button class="btn btn-default" formmethod="get" formaction=""
+          <button class="btn btn-default" formmethod="get" formaction="post"
                   name="buildNo" value="${build.buildNo}">投稿
           </button>
 
@@ -68,8 +69,6 @@
 
 
 </main>
-
-<jsp:include page="/footer.jsp"/>
 
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 

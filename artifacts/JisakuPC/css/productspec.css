@@ -1,13 +1,12 @@
 * {
-    margin: 0;
+    margin: 5em;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    margin-top: 7em;
+    margin-top: 20em;
     background: #fff;
-
 }
 
 #product-spec {

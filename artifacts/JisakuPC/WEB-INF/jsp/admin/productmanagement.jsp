@@ -2,8 +2,10 @@
 <html>
 <head>
   <title>Title</title>
+  <link href="css/productmanagement.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <form method="post" action="addnewproduct">
   Product Name: <input type="text" name="productName"><br>
   Product Brand: <input type="text" name="productBrand"><br>

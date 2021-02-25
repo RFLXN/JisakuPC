@@ -7,8 +7,10 @@
   <meta charset="UTF-8">
 
   <title>掲示板</title>
+  <link href="css/postbuild.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <form action="postbuild" method="post">
   <p>タイトル:<input type="text" name="title" required></p>
   <p>コメント:<textarea name="description" rows="5" cols="40" required></textarea></p>

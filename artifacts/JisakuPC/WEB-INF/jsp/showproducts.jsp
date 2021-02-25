@@ -10,6 +10,7 @@
   <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/axios.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
@@ -111,8 +112,6 @@
       </c:forEach>
   </table>
 </div>
-
-<jsp:include page="/footer.jsp"/>
 </body>
 
 </html>

@@ -5,8 +5,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
+  <link href="css/buildpostcomplete.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 作成が完了しました
 <div id="buildpost">
   <form method="get" action="post">

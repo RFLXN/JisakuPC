@@ -5,8 +5,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Insert title here</title>
+  <link href="css/deletepostcomplete.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<jsp:include page="/header.jsp"/>
 削除が完了しました
 <div id="deletepost">
   <form method="get" action="post">

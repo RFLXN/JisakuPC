@@ -8,7 +8,7 @@
 
 body {
     margin-top: 7em;
-    background: #e9e9e9;
+
 
 }
 
@@ -51,7 +51,6 @@ body {
     top: -5px;
     outline: none;
 }
-
 .search ::-webkit-input-placeholder {
     color: #3879D9;
 }
@@ -66,41 +65,12 @@ table.show tr td {
 
 .search-sort {
     margin: auto;
-}
-
-.sort-select {
-    margin: auto;
     max-width: 200px;
-}
-
-.product-type-select-hidden {
-    margin: auto;
-    max-width: 60%;
-    display: none;
-}
-
-.product-type-select-display {
-    margin: auto;
-    max-width: 60%;
-    display: block;
-}
-
-.spec-search-hidden {
-    margin: auto;
-    max-width: 60%;
-    display: none;
-}
-
-.spec-search-display {
-    margin: auto;
-    max-width: 60%;
-    display: block;
 }
 
 .search-sort input[type=radio] {
     display: none;
 }
-
 .sort {
     box-sizing: border-box;
     cursor: pointer;
@@ -109,7 +79,6 @@ table.show tr td {
     position: relative;
     width: auto;
 }
-
 .sort::before {
     background: #fff;
     border: 1px solid #ccc;
@@ -123,7 +92,6 @@ table.show tr td {
     top: 50%;
     width: 16px;
 }
-
 .sort::after {
     background: #00cccc;
     border-radius: 50%;
@@ -137,15 +105,12 @@ table.show tr td {
     top: 50%;
     width: 8px;
 }
-
 .search-sort input[type=radio]:checked + .sort::before {
     border-color: #666;
 }
-
 .search-sort input[type=radio]:checked + .sort::after {
     opacity: 1;
 }
-
 .add-button input {
     display: inline-block;
     padding: 0.3em 1em;
@@ -161,7 +126,6 @@ table.show tr td {
     background: #CC0000;
     color: white;
 }
-
 .details-button input {
     display: inline-block;
     padding: 0.3em 1em;
