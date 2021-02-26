@@ -20,14 +20,20 @@
 <div id="product-spec">
   <h1>${data.name}</h1>
   <br>
+  <div id="product-spec">SPEC : ${data.spec	}</div>
+  <br>
+  <div class="image">
   <img id="product-image" src="${pageContext.request.contextPath}/image/transparent.png" alt="${data.name}"/>
-  <div id="product-spec-price"> ${data.price}</div>
+  </div>
+  <div class="spec">
+  <div id="product-spec-price">PRICE : ${data.price}</div>
   <br>
   <div id="product-spec-brand">BRAND : ${data.brand}</div>
   <br>
   <div id="product-spec-type">TYPE : ${data.type}</div>
   <br>
   <div id="product-spec-rakuten-url"></div>
+  </div>
 </div>
 
 </body>

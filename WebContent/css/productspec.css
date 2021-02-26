@@ -3,7 +3,7 @@
 }
 
 body{
-	margin-top:20em;
+	margin-top:5em;
 	background: #fff;
 }
 #product-spec{
@@ -15,4 +15,19 @@ body{
 	text-decoration:underline;
 	text-decoration-color: #FF0000;
 	color: #FF0000;
+}
+.image {
+	width:45%;
+	text-align: left;
+	float:left;
+}
+.spec {
+	background-color:#dcdcdc;
+	width:55%;
+	text-align: center;
+	float:right;
+}
+#product-spec-price {
+	color:#000;
+	text-decoration: none;
 }

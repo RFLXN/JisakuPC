@@ -18,11 +18,11 @@
 <form action="deletepost" method="post">
   <c:forEach var="post" items="${data}">
     <h1>${post.title}</h1>
-    <h3>${post.userid}</h3>
-    <h3>${post.date}</h3>
+    <h4>${post.userid} ${post.date}</h4>
     <h3>${post.description}</h3>
-    <table border="1">
+    <table border="1" class="showpost">
       <tr>
+        <th>画像</th>
         <th>分類</th>
         <th>商品名</th>
         <th>値段</th>
