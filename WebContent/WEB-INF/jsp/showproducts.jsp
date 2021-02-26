@@ -91,7 +91,6 @@
             ${product.name}
         </td>
         <td align="center" width="10%">${product.price}</td>
-        <td align="center" width="10%">${product.spec}</td>
         <td align="center" width="10%">
           <form method="get" action="productspec">
             <div class="details-button">

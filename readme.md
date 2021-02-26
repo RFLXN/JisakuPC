@@ -58,7 +58,7 @@
 > in Constraints : AUTO_INCREMENT
 
     MySQLではシーケンスがありません。
-    その代わりに AUTO_INCREMENTを使えます。
+    その代わりにAUTO_INCREMENTを使えます。
     
 > [JSON型 (JSON FUNCTION REFERENCE DOCUMENT)](https://dev.mysql.com/doc/refman/5.7/en/json-function-reference.html)
 
@@ -92,8 +92,8 @@ build_table
 | Column Name            | Data Type    | Constraints                    |
 | ---------------------- | ------------ | ------------------------------ |
 | build_no               | INT          | PRIMARY KEY AUTO_INCREMENT     |
-| user_no                | INT          | REFERENCES user_table(user_no) |
-| build_name             | VARCHAR(120) | NOT NULL                       |
+| user_no    | INT          | REFERENCES user_table(user_no) |
+| build_name | VARCHAR(120) | NOT NULL                       |
 
 
 build_parts_table
