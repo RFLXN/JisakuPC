@@ -220,11 +220,14 @@ source $project_root/sql/insert_dummy_data.sql
 ### 外部ライブラリ
 
 * WebContent/WEB-INF/lib/
-    * [json-20201115.jar: JSON-java ライブラリ](https://github.com/stleary/JSON-java)
-    
+  * [json-20201115.jar: JSON-java ライブラリ](https://github.com/stleary/JSON-java)
+
 * WebContent/css/
-    * [bootstrap.css: bootstrap css ライブラリ](http://bootstrapk.com/)
+  * [bootstrap.css: bootstrap css ライブラリ](https://getbootstrap.com/)
+  * [jquery-ui.min.css: jQuery UI css ライブラリ](https://jqueryui.com/)
 
 * WebContent/js/
-    * [bootstrap.js: bootstrap js ライブラリ](http://bootstrapk.com/)
-    * [jquery-3.5.1.min.js: jQuery ライブラリ](https://jquery.com/)
+  * [bootstrap.js: bootstrap js ライブラリ](http://bootstrapk.com/)
+  * [jquery-3.5.1.min.js: jQuery ライブラリ](https://jquery.com/)
+  * [jquery-ui.min.js: jQuery UI ライブラリ](https://jqueryui.com/)
+  * [axios.min.js: axios ライブラリ](https://github.com/axios/axios)
