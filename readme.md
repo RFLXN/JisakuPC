@@ -89,11 +89,11 @@ user_table
 
 build_table
 
-| Column Name            | Data Type    | Constraints                    |
-| ---------------------- | ------------ | ------------------------------ |
-| build_no               | INT          | PRIMARY KEY AUTO_INCREMENT     |
-| user_no    | INT          | REFERENCES user_table(user_no) |
-| build_name | VARCHAR(120) | NOT NULL                       |
+| Column Name | Data Type    | Constraints                    |
+| ----------- | ------------ | ------------------------------ |
+| build_no    | INT          | PRIMARY KEY AUTO_INCREMENT     |
+| user_no     | INT          | REFERENCES user_table(user_no) |
+| build_name  | VARCHAR(120) | NOT NULL                       |
 
 
 build_parts_table
