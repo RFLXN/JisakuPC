@@ -1,5 +1,8 @@
 package context;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 public interface RequestContext {
     String getCommandPath();
 
@@ -18,4 +21,8 @@ public interface RequestContext {
     void setSessionAttribute(String key, Object value);
 
     void clearSession();
+
+    String getHeader(String key);
+
+    InputStream getRequestInputSteam() throws IOException;
 }

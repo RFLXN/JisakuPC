@@ -20,7 +20,6 @@ public class SearchProductsCommand extends AbstractCommand {
         String productName = null;
         String sort = null;
         String productType = null;
-        String[] specOptions = null;
         int[] page = null;
 
         String[] parameterKeys = getRequestContext().getParameterKeys();

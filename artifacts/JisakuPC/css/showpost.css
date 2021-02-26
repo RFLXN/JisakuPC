@@ -9,6 +9,21 @@ body {
     margin-top: 5em;
 }
 
+table.showpost tr td {
+    padding-right: 0;
+    background: #fafafa;
+    border: none;
+    border-bottom: 2px solid #DDDDDD;
+    height: 50px;
+}
+
+table.showpost th {
+    padding-right: 0;
+    background: #fafafa;
+    border: none;
+    border-bottom: 2px solid #DDDDDD;
+    height: 20px;
+}
 
 button {
     display: inline-block;
@@ -30,4 +45,21 @@ button:hover {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+h4 {
+    margin-top: 10px;
+    width: 40%;
+    color: #696969;
+    text-align: right;
+}
+
+h3 {
+    margin-top: 20px;
+    margin-left: 15px;
+}
+
+h1 {
+    margin-top: 100px;
+    margin-left: 15px;
 }

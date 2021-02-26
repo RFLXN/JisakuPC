@@ -1,6 +1,8 @@
 package context;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 import java.util.Set;
 
@@ -74,5 +76,15 @@ public class WebRequestContext implements RequestContext {
     @Override
     public void clearSession() {
         request.getSession().invalidate();
+    }
+
+    @Override
+    public String getHeader(String key) {
+        return request.getHeader(key);
+    }
+
+    @Override
+    public InputStream getRequestInputSteam() throws IOException {
+        return request.getInputStream();
     }
 }
