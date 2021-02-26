@@ -3,8 +3,6 @@
 
 body{
     margin-top:7em;
-
-
 }
 .search input[type="text"]{
     border: none;
@@ -130,7 +128,24 @@ table.show tr td {
     background: #CC0000;
     color: white;
 }
-.products{
+
+.products {
     margin: auto;
     max-width: 900px;
+}
+
+.product-type-select-hidden {
+    display: none;
+}
+
+.product-type-select-display {
+    display: block;
+}
+
+.spec-search-hidden {
+    display: none;
+}
+
+.spec-search-display {
+    display: block;
 }

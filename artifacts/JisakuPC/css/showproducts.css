@@ -7,8 +7,6 @@
 
 body {
     margin-top: 7em;
-
-
 }
 
 .search input[type="text"] {
@@ -144,4 +142,20 @@ table.show tr td {
 .products {
     margin: auto;
     max-width: 900px;
+}
+
+.product-type-select-hidden {
+    display: none;
+}
+
+.product-type-select-display {
+    display: block;
+}
+
+.spec-search-hidden {
+    display: none;
+}
+
+.spec-search-display {
+    display: block;
 }

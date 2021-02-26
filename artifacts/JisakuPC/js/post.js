@@ -23,7 +23,6 @@ function getFormData() {
     const form = $("#image-form").get(0);
     return new FormData(form);
 }
-
 function loadFiles() {
     imgFiles = [];
     const inputs = $(".image-input");

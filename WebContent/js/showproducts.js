@@ -48,7 +48,7 @@ function loadProductImages() {
                 } catch (e) {
                     reject(e);
                 }
-            }, 180);
+            }, 300);
         });
     }
 
