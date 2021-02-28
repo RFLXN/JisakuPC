@@ -8,14 +8,22 @@
 <body>
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/signup.js"></script>
-
+<script>
+    function checkForm(target) {
+        let str = target.value;
+        while (str.match(/[^A-Z^a-z\d\-]/)) {
+            str = str.replace(/[^A-Z^a-z\d\-]/, "");
+        }
+        target.value = str;
+    }
+</script>
 <jsp:include page="/header.jsp"/>
 <div class="signup-body">
   <h1>Sign Up</h1>
   <div id="signup-area">
     <form id="signup-form" method="post" action="signup-result">
-      ID <input id="signup-id" type="text" name="id"><br>
-      PASSWORD <input id="signup-password" type="text" name="password">
+      ID <input id="signup-id" type="text" name="id" onInput="checkForm(this)"><br>
+      PASSWORD <input id="signup-password" type="text" name="password" onInput="checkForm(this)">
       <div class="warning-container">
         <p class="warning-text"></p>
       </div>

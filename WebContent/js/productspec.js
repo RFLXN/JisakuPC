@@ -14,7 +14,7 @@ function productspec(pid, dbPrice) {
                 imgUrl = imgUrl[0];
             }
             $("#product-image").get(0).src = imgUrl;
-            if (dbPrice != data.minPrice) {
+            if (dbPrice != null && dbPrice != undefined && dbPrice != 0 && dbPrice != data.minPrice) {
                 console.log("Price Changed... -> Execute updatePrice");
                 $("#product-spec-price").html(`PRICE : ${data.minPrice}`);
                 updatePrice(pid, data.minPrice);

@@ -31,8 +31,10 @@
       </td>
       <td width="34%">
         <div id="photo2">
+
           <img src="image/JisakuPC02.jpg" height="300">
         </div>
+
       </td>
       <td width="33%">
         <div id="photo3">

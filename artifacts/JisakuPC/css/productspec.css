@@ -37,3 +37,16 @@ body {
     color: #000;
     text-decoration: none;
 }
+
+.name {
+    width: 45%;
+    float: left;
+}
+
+.back {
+    margin-top: 1em;
+    color: #000;
+    float: right;
+    text-align: center;
+    background-color: #d3d3d3;
+}

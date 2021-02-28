@@ -16,11 +16,12 @@
         productspec("${data.no}", ${data.price});
     });
 </script>
-
 <div id="product-spec">
-  <h1>${data.name}</h1>
+  <h1 class="name">${data.name}</h1>
+  <a href="javascript:history.back()" class="back">1ページ戻る</a>
   <br>
-  <div id="product-spec">SPEC : ${data.spec  }</div>
+  <br>
+  <div id="product-spec">SPEC : ${data.spec}</div>
   <br>
   <div class="image">
     <img id="product-image" src="${pageContext.request.contextPath}/image/transparent.png" alt="${data.name}"/>

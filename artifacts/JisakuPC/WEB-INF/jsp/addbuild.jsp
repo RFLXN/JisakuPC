@@ -29,6 +29,17 @@
   <title>見積り</title>
   <link href="css/addbuild.css" rel="stylesheet" type="text/css"/>
 </head>
+<script>
+    var ctlKey = false;
+    document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey) ctlKey = true;
+        if ((e.which || e.keyCode) == 82 && ctlKey) e.preventDefault();
+        if ((e.which || e.keyCode) == 116) e.preventDefault();
+    });
+    document.addEventListener('keyup', function (e) {
+        if (e.ctrlKey) ctlKey = false;
+    });
+</script>
 <body>
 <jsp:include page="/header.jsp"/>
 

@@ -6,6 +6,7 @@ public class CsvProduct implements Serializable {
     private String productName;
     private String spec;
     private String brand;
+    private int price;
 
     public CsvProduct() {
     }
@@ -14,6 +15,21 @@ public class CsvProduct implements Serializable {
         this.productName = productName;
         this.spec = spec;
         this.brand = brand;
+    }
+
+    public CsvProduct(String productName, String spec, String brand, int price) {
+        this.productName = productName;
+        this.spec = spec;
+        this.brand = brand;
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getProductName() {
