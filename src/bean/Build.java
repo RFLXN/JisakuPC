@@ -43,4 +43,16 @@ public class Build implements Serializable {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
+
+    public String getTotalPrice() {
+    	int total = 0;
+
+    	for(Product p: products) {
+    		int price = Integer.parseInt(p.getPrice());
+    		total += price;
+    	}
+    	return Integer.toString(total);
+    }
+
+
 }
