@@ -25,7 +25,8 @@
         <div class="page3"><p>タイトル:<c:out value="${list.title}"/><br>
           説明:<c:out value="${list.description}"/></p>
         <form action="showpost">
-          <input type="submit" name="postno" value="${list.no}">
+          <input type="hidden" name="postno" value="${list.no}">
+          <input type="submit" name="show" value="詳細">
         </form></div>
       </c:forEach>
     </table>

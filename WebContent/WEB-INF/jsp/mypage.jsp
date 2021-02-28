@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
          pageEncoding="UTF-8" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
 <html>
@@ -56,8 +57,11 @@
           </tbody>
         </table>
         <br>
+<div>${build.getTotalPrice()}
+</div>
       </c:forEach>
     </div>
+
     <c:if test="${sessionScope.loginFlag.admin}">
       <div id="admin-pannel" class="col-xs-12">
         <form action="productmanagement">
@@ -66,8 +70,6 @@
       </div>
     </c:if>
   </div>
-
-
 </main>
 
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
