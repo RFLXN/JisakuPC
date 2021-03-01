@@ -6,8 +6,8 @@
 <%@ page import="org.json.JSONException" %>
 <%@ page import="bean.ProductSpecInfo" %>
 <%@ page import="java.util.Map" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-         pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+
 <html>
 <head>
   <title>Product Spec : ${data.name}</title>
@@ -39,7 +39,7 @@
 	  <br>
 	  <div id="product-spec-type">種類: ${ProductTypeInfo.getTranslatedTypeName(data.type)}</div>
 	  <br>
-	  <div id="product-spec-rakuten-url"></div>
+	  <div id="product-spec-rakuten-url" class="url"></div>
 	  </div>
   <div id="product-spec-section">
     <%

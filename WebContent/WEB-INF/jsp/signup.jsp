@@ -24,10 +24,12 @@ function CheckPassword(confirm){
 	var input1 = document.form1.password.value;
 	var input2 = confirm.value;
 	// パスワード比較
-	if(input1 != input2){
-		confirm.setCustomValidity("入力値が一致しません。");
+	if(input1 === input2){
+		$(".warning-text").text("OK!");
+		form1.action = "signup-result";
 	}else{
-		confirm.setCustomValidity('');
+		$(".warning-text").text("パスワードが違います。");
+		form1.action = "";
 	}
 }
 </script>
@@ -35,10 +37,10 @@ function CheckPassword(confirm){
 <div class="signup-body">
   <h1>Sign Up</h1>
   <div id="signup-area">
-    <form id="signup-form" method="post" action="signup-result" name="form1">
-      ID(半角) <input id="signup-id" type="text" name="id" onInput="checkForm(this)"><br>
-      PASSWORD(半角) <input id="signup-password" type="text" name="password" onInput="checkForm(this)">
-      <%-- Re:PASSWORD(半角) <input id="signup-password"type="text" name="confirm" onInput="CheckPassword(this)"> --%>
+    <form id="signup-form" method="post" action="" name="form1">
+      ID <input id="signup-id" type="text" name="id" placeholder="半角" onInput="checkForm(this)" required><br>
+      PASSWORD <input id="signup-password" type="text" name="password" placeholder="半角" onInput="checkForm(this)">
+      PASSWORD(再確認) <input id="signup-password"type="text" name="confirm" placeholder="再確認" onInput="CheckPassword(this)">
       <div class="warning-container">
         <p class="warning-text"></p>
       </div>

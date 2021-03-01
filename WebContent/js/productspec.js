@@ -9,7 +9,7 @@ function productspec(pid, dbPrice) {
         success: (data) => {
             console.log("getRakutenProduct: Successfully Load Product!");
             if (data.productUrl !== undefined) {
-                $("#product-spec-rakuten-url").html(`<a href="${data.productUrl}">${data.productUrl}</a>`);
+                $("#product-spec-rakuten-url").html(`<a href="${data.productUrl}" target="_blank">楽天の商品ページに飛びます(外部サイト)</a>`);
             } else {
                 $("#product-spec-rakuten-url").html("商品情報の収集に失敗しました。");
             }
