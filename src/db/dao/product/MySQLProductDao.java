@@ -769,6 +769,9 @@ public class MySQLProductDao implements ProductDao {
 
             specSearchOptions.forEach((o) -> {
                 String optionName = o.getOptionName();
+                if (optionName.equals("80PLUS")) {
+                    optionName = "\"80PLUS\"";
+                }
                 int valueType = o.getValueType();
                 boolean isCanRange = o.isCanRange();
                 String[] value = o.getValue();

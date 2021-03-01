@@ -61,13 +61,19 @@ table.show tr td {
 }
 
 .search-sort {
+    align-items: center;
     margin: auto;
-    max-width: 200px;
+    max-width: 50%;
+}
+
+.sort-select {
+    align-self: center;
 }
 
 .search-sort input[type=radio] {
     display: none;
 }
+
 .sort {
     box-sizing: border-box;
     cursor: pointer;
@@ -154,8 +160,10 @@ table.show tr td {
 
 .spec-search-hidden {
     display: none;
+    font-size: smaller;
 }
 
 .spec-search-display {
     display: block;
+    font-size: smaller;
 }

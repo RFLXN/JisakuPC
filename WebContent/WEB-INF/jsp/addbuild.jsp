@@ -54,6 +54,7 @@ document.addEventListener('keyup', function(e){
         <form method="get" action="selectbuild">
           <label for="builds">見積りを選択</label>
           <select id="builds" name="buildNo">
+            <option value="new">新しい見積もり</option>
             <c:forEach var="build" items="${buildList}">
               <c:choose>
                 <c:when test="${param.buildNo eq build.buildNo}">
@@ -413,8 +414,8 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </c:if>
       </c:if>
-      見積り名 <input type="text" name="buildName" class="build-action-input" value="${buildName}">
-      <input type="submit" value="この見積を保存"class="mitsu">
+      見積り名 <input type="text" name="buildName" class="build-action-input" value="${buildName}" required>
+      <input type="submit" value="この見積を保存" class="mitsu">
     </form>
   </div>
 

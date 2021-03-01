@@ -8,19 +8,28 @@ function productspec(pid, dbPrice) {
         },
         success: (data) => {
             console.log("getRakutenProduct: Successfully Load Product!");
-            $("#product-spec-rakuten-url").html(`<a href="${data.productUrl}">${data.productUrl}</a>`);
+            if (data.productUrl !== undefined) {
+                $("#product-spec-rakuten-url").html(`<a href="${data.productUrl}">${data.productUrl}</a>`);
+            } else {
+                $("#product-spec-rakuten-url").html("商品情報の収集に失敗しました。");
+            }
+
             let imgUrl = data.mediumImageUrl;
             if (Array.isArray(imgUrl)) {
                 imgUrl = imgUrl[0];
             }
-            $("#product-image").get(0).src = imgUrl;
-            if (dbPrice != null && dbPrice != undefined && dbPrice != 0 && dbPrice != data.minPrice) {
+            if (imgUrl !== undefined && !imgUrl.endsWith("undefined")) {
+                $("#product-image").get(0).src = imgUrl;
+            }
+
+            if (data.minPrice != null && data.minPrice != undefined && data.minPrice != 0 && dbPrice != data.minPrice) {
                 console.log("Price Changed... -> Execute updatePrice");
                 $("#product-spec-price").html(`PRICE : ${data.minPrice}`);
                 updatePrice(pid, data.minPrice);
             }
         },
         error: (data) => {
+            $("#product-spec-rakuten-url").html("商品情報の収集に失敗しました。");
             console.log("getRakutenProduct: Some Error Occurred");
         }
     });
