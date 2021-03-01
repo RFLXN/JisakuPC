@@ -9,7 +9,7 @@ body {
     margin-top: 100px;
 }
 
-.post {
+.post{
     float: right;
     text-align: center;
     background: #ffffff;
@@ -21,7 +21,7 @@ body {
     margin: 40px 3%;
 }
 
-.post input[type='text'] {
+.post input[type='text']{
     font: 15px/24px sans-serif;
     box-sizing: border-box;
     width: 50%;
@@ -32,17 +32,17 @@ body {
 }
 
 
-.post input[type='text']:focus {
+.post input[type='text']:focus{
     outline: none;
-    border: solid 1px /*#EEA34A*/ #CC0000;
+    border:solid 1px /*#EEA34A*/ #CC0000;
 }
 
-.post textarea:focus {
+.post textarea:focus{
     outline: none;
-    border: solid 1px #CC0000;
+    border:solid 1px #CC0000;
 }
 
-.button input {
+.button input{
     display: inline-block;
     padding: 0.3em 1em;
     text-decoration: none;
@@ -52,7 +52,6 @@ body {
     transition: .4s;
     font-size: 13px;
 }
-
 h1 {
     padding: .25em 0 .25em .75em;
     border-left: 6px solid #ccc;
@@ -69,24 +68,24 @@ div.page {
     font-size: 15px;
     margin: 0 0 0 140px;
     margin-top: 8em;
-    border-collapse: separate;
+	border-collapse: separate;
 
 
 }
 
-.page2 p {
-    border-bottom: dotted; /*下線を点線にする*/
-    border-color: #C0C0C0;
-    border-width: 1px;
+.page3{
+    border-bottom:dotted;/*下線を点線にする*/
+	border-color:#C0C0C0;
+	border-width:1px;
+	/*white-space: pre-wrap;*/
 
 }
+input.sinki{
+	position: relative;
+			top: 50px;
+			left:200px;
 
-input.sinki {
-    position: relative;
-    top: 50px;
-    left: 200px;
-
-    display: inline-block;
+			display: inline-block;
     padding: 0.3em 1em;
     text-decoration: none;
     color: #CC0000;
@@ -101,8 +100,8 @@ input.sinki {
 
 }
 
-.page2 input {
-    display: inline-block;
+.page2 input{
+	display: inline-block;
     padding: 0.3em 1em;
     text-decoration: none;
     color: #CC0000;
@@ -115,4 +114,10 @@ input.sinki {
 .page2 input:hover {
     background: #FFC0CB;
 
+}
+
+.page4{
+	position: relative;
+	left: 50px;
+	margin-top: -1.5em;
 }

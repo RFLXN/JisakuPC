@@ -16,19 +16,18 @@
   </div>
   <div id="new-post-section">
     <form action="post" method="get">
-      <input type="submit" value="新規作成" class="sinki">
+      <input type="submit" value="投稿する(ログインユーザーのみ)" class="sinki">
     </form>
   </div>
   <div class="page2">
-    <table border="2" width="100%" cellpadding="30">
+    <table width="100%" cellpadding="30">
       <c:forEach var="list" items="${data}">
-        <div class="page3"><p>タイトル:<c:out value="${list.title}"/><br>
-          説明:<c:out value="${list.description}"/></p>
-          <form action="showpost">
-            <input type="hidden" name="postno" value="${list.no}">
-            <input type="submit" name="show" value="詳細">
-          </form>
-        </div>
+        <div class="page3"><p>タイトル:<c:out value="${list.title}"/></p>
+          <p>説明:<div class="page4">${list.description}</div></p>
+        <form action="showpost">
+          <input type="hidden" name="postno" value="${list.no}">
+          <input type="submit" name="show" value="詳細">
+        </form></div>
       </c:forEach>
     </table>
   </div>

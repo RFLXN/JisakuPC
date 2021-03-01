@@ -6,23 +6,19 @@ body {
 div.page {
     margin-top: 5em;
 }
-
-#text {
-    text-align: center;
-    font-family: serif;
+#text{
+	text-align: center;
+	font-family: serif;
 }
-
-#photo1 {
-    height: 100px;
-    object-fit: cover;
+#photo1{
+	height: 100px;
+	object-fit: cover;
 }
-
-#photo2 {
-    height: 100px;
-    object-fit: cover;
+#photo2{
+	height: 100px;
+	object-fit: cover;
 }
-
-#photo3 {
-    height: 100px;
-    object-fit: cover;
+#photo3{
+	height: 100px;
+	object-fit: cover;
 }

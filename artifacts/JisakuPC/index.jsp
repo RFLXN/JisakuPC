@@ -14,35 +14,35 @@
 
 <div class="page">
   <div id="text">
-    <h1>JisakuPC</h1>
-    <p>このサイトではPCの見積りや作成した見積りを投稿できます。また、他の人が作った見積りも閲覧できるので<br>
-      PCパーツの知識があり、自作PCの見積りを一括で簡単に作りたい人。また、作成を自慢したり他の人の作成を<br>
-      見たい人におすすめのサイトになっています。
-    </p>
+  	<h1>JisakuPC</h1>
+  	<p>このサイトではPCの見積りや作成した見積りを投稿できます。また、他の人が作った見積りも閲覧できるので<br>
+  	   PCパーツの知識があり、自作PCの見積りを一括で簡単に作りたい人。また、作成を自慢したり他の人の作成を<br>
+  	   見たい人におすすめのサイトになっています。
+  	</p>
   </div>
 
-  <br><br>
-  <table width="100%">
-    <tr>
-      <td width="33%">
-        <div id="photo1">
-          <img src="image/JisakuPC01.jpg" height="300">
-        </div>
-      </td>
-      <td width="34%">
-        <div id="photo2">
-
-          <img src="image/JisakuPC02.jpg" height="300">
-        </div>
-
-      </td>
-      <td width="33%">
-        <div id="photo3">
-          <img src="image/JisakuPC03.jpg" height="300">
-        </div>
-      </td>
-    </tr>
-  </table>
+<br><br>
+<table width="100%">
+  <tr>
+	<td width="33%">
+	<div id="photo1">
+		<img src="image/JisakuPC01.jpg" height="300">
+	</div>
+	</td>
+	<td width="34%">
+	<div id="photo2">
+	
+		<img src="image/JisakuPC02.jpg" height="300">
+	</div>
+	
+	</td>
+	<td width="33%">
+	<div id="photo3">
+		<img src="image/JisakuPC03.jpg" height="300">
+	</div>
+	</td>
+  </tr>
+</table>
 </div>
 
 

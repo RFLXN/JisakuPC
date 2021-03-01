@@ -1,29 +1,22 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-body {
-    margin-top: 7em;
+body{
+    margin-top:7em;
 }
-
-.search input[type="text"] {
+.search input[type="text"]{
     border: none;
     height: 2.4em;
-    border: none;
-    border-radius: 10px;
+    border:none;
+    border-radius:10px;
     box-shadow: none;
     padding: 2px 8px;
 
 }
-
 .search input[type="text"]:focus {
     outline: 0;
 }
-
-.search {
+.search{
     position: relative;
     box-sizing: border-box;
     border: 2px solid #3879D9;
@@ -34,8 +27,7 @@ body {
     margin: auto;
     max-width: 900px;
 }
-
-.search input[type="submit"] {
+.search input[type="submit"]{
     cursor: pointer;
     font-family: FontAwesome;
     border: none;
@@ -44,9 +36,9 @@ body {
     position: absolute;
     width: 3.5em;
     height: 3.0em;
-    right: 0px;
+    right:0px;
     top: -5px;
-    outline: none;
+    outline : none;
 }
 .search ::-webkit-input-placeholder {
     color: #3879D9;

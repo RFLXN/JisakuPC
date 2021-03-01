@@ -28,6 +28,7 @@
         <th>値段</th>
         <th>商品番号</th>
       </tr>
+      <a href="javascript:history.back()" class="back">1ページ戻る</a>
       <c:forEach var="posts" items="${post.list}">
         <tr>
           <td><img id="image-${posts.productno}"

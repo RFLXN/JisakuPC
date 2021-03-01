@@ -30,15 +30,15 @@
   <link href="css/addbuild.css" rel="stylesheet" type="text/css"/>
 </head>
 <script>
-    var ctlKey = false;
-    document.addEventListener('keydown', function (e) {
-        if (e.ctrlKey) ctlKey = true;
-        if ((e.which || e.keyCode) == 82 && ctlKey) e.preventDefault();
-        if ((e.which || e.keyCode) == 116) e.preventDefault();
-    });
-    document.addEventListener('keyup', function (e) {
-        if (e.ctrlKey) ctlKey = false;
-    });
+var ctlKey = false;
+document.addEventListener('keydown', function(e){
+  if(e.ctrlKey) ctlKey = true;
+  if((e.which || e.keyCode) == 82 && ctlKey) e.preventDefault();
+  if((e.which || e.keyCode) == 116) e.preventDefault();
+});
+document.addEventListener('keyup', function(e){
+  if(e.ctrlKey) ctlKey = false;
+});
 </script>
 <body>
 <jsp:include page="/header.jsp"/>
@@ -52,8 +52,9 @@
     <c:if test="${not empty pageScope.buildList}">
       <c:if test="${pageScope.buildList.size() gt 0}">
         <form method="get" action="selectbuild">
-          <label for="builds">見積りを選択</label>
+          <label for="builds">過去の見積りを選択</label>
           <select id="builds" name="buildNo">
+            <option value="new">新しい見積もり</option>
             <c:forEach var="build" items="${buildList}">
               <c:choose>
                 <c:when test="${param.buildNo eq build.buildNo}">
@@ -413,7 +414,7 @@
           </c:forEach>
         </c:if>
       </c:if>
-      見積り名 <input type="text" name="buildName" class="build-action-input" value="${buildName}">
+      見積り名 <input type="text" name="buildName" class="build-action-input" value="${buildName}" required>
       <input type="submit" value="この見積を保存" class="mitsu">
     </form>
   </div>
