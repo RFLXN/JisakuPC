@@ -17,7 +17,7 @@ public class SelectBuildCommand extends AbstractCommand {
         }
 
         if (buildNo.equals("new")) {
-            getRequestContext().setSessionAttribute("build", new Build());
+            getRequestContext().setSessionAttribute("build", null);
         } else {
             try {
                 BuildDao dao = AbstractDaoFactory.getFactory().getBuildDao();

@@ -15,7 +15,6 @@ public class ShowAddBuildCommand extends AbstractCommand {
         List<Product> products = new ArrayList<Product>();
 
         try {
-
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             ProductDao dao = daoFactory.getProductsDao();
         } catch (DAOException e) {

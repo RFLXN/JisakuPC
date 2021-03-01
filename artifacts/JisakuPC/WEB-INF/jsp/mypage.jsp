@@ -47,18 +47,18 @@
             <th>パーツ名</th>
             <th>値段</th>
           </tr>
-          <c:forEach var="part" items="${build.products}">
-            <tr onclick="location.href='productspec?pid=${part.no}'">
-              <td>${part.no}</td>
-              <td>${part.name}</td>
-              <td>${part.price}</td>
+          <c:forEach var="part" items="${build.getStackedProducts()}">
+            <tr onclick="location.href='productspec?pid=${part.product.no}'">
+              <td>${part.product.no}</td>
+              <td>${part.product.name} * ${part.stack}</td>
+              <td>${part.getStackedPrice()}</td>
             </tr>
           </c:forEach>
           </tbody>
         </table>
         <br>
-<div class="sokei">総計: ${build.getTotalPrice()}
-</div>
+        <div class="sokei">総計: ${build.getTotalPrice()}
+        </div>
       </c:forEach>
     </div>
 

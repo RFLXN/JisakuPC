@@ -1,6 +1,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Build implements Serializable {
@@ -45,14 +46,44 @@ public class Build implements Serializable {
     }
 
     public String getTotalPrice() {
-    	int total = 0;
+        int total = 0;
 
-    	for(Product p: products) {
-    		int price = Integer.parseInt(p.getPrice());
-    		total += price;
-    	}
-    	return Integer.toString(total);
+        for (Product p : products) {
+            int price = Integer.parseInt(p.getPrice());
+            total += price;
+        }
+        return Integer.toString(total);
     }
 
+    public List<StackedProduct> getStackedProducts() {
+        List<StackedProduct> stackedProducts = new ArrayList<>();
 
+        products.forEach((Product product) -> {
+            if (stackedProducts.size() == 0) {
+                StackedProduct p = new StackedProduct();
+                p.setProduct(product);
+                p.setStack(1);
+                stackedProducts.add(p);
+            } else {
+                boolean isNew = true;
+                for (int i = 0; i < stackedProducts.size(); i++) {
+                    StackedProduct stackedProduct = stackedProducts.get(i);
+                    if (stackedProduct.getProduct().getNo().equals(product.getNo())) {
+                        isNew = false;
+                        stackedProduct.setStack(stackedProduct.getStack() + 1);
+                        break;
+                    }
+                }
+
+                if (isNew) {
+                    StackedProduct p = new StackedProduct();
+                    p.setStack(1);
+                    p.setProduct(product);
+                    stackedProducts.add(p);
+                }
+            }
+        });
+
+        return stackedProducts;
+    }
 }

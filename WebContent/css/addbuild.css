@@ -8,10 +8,20 @@ div.page {
     padding-left: 1em;
     position: relative;
     z-index: auto;
-
 }
 
- input.add {
+input.add {
+    display: inline-block;
+    padding: 0.1em 0.5em;
+    text-decoration: none;
+    color: #CC0000;
+    border: solid 2px #CC0000;
+    border-radius: 3px;
+    transition: .4s;
+    font-size: 20px;
+}
+
+button.add {
     display: inline-block;
     padding: 0.1em 0.5em;
     text-decoration: none;
@@ -27,10 +37,10 @@ div.page {
 
 }
 
-input.osusume{
-	background-color:#fff;
-	color: #000;
-  	font-weight: bold;
+input.osusume {
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
   	padding: 0px 0px;
  	border: solid 1px #fff;
 	border-radius: 6px;
@@ -46,17 +56,17 @@ h3 {
     margin: 0 0 0 20px;
 }
 
-input.mitsu{
-	display: inline-block;
+.mitsu {
+    display: inline-block;
     padding: 0.3em 1em;
     text-decoration: none;
     color: white;
     border: solid 2px #CC0000;
-
     transition: .4s;
     font-size: 20px;
     background-color: #FF0000;
 }
+
 .mitsu:hover {
     background: #FF0000;
     color: white;

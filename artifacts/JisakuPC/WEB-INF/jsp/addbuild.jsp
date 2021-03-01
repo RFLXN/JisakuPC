@@ -29,16 +29,18 @@
   <title>見積り</title>
   <link href="css/addbuild.css" rel="stylesheet" type="text/css"/>
 </head>
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/addbuild.js"></script>
 <script>
-var ctlKey = false;
-document.addEventListener('keydown', function(e){
-  if(e.ctrlKey) ctlKey = true;
-  if((e.which || e.keyCode) == 82 && ctlKey) e.preventDefault();
-  if((e.which || e.keyCode) == 116) e.preventDefault();
-});
-document.addEventListener('keyup', function(e){
-  if(e.ctrlKey) ctlKey = false;
-});
+    var ctlKey = false;
+    document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey) ctlKey = true;
+        if ((e.which || e.keyCode) == 82 && ctlKey) e.preventDefault();
+        if ((e.which || e.keyCode) == 116) e.preventDefault();
+    });
+    document.addEventListener('keyup', function (e) {
+        if (e.ctrlKey) ctlKey = false;
+    });
 </script>
 <body>
 <jsp:include page="/header.jsp"/>
@@ -82,12 +84,13 @@ document.addEventListener('keyup', function(e){
       <tr>
         <td width="10%">CPU</td>
         <td width="45%">
-          <c:forEach var="part" items="${sessionScope.build.products}">
-            <c:if test="${part.type eq 'cpu'}">
+          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+            <c:if test="${part.product.type eq 'cpu'}">
               <form>
-                <a style="color: black;" href="productspec?pid=${part.no}"><c:out value="${part.name}"/>: <c:out
-                        value="${part.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.no}">
+                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                  * <c:out value="${part.stack}"/>:
+                  <c:out value="${part.product.price}"/></a>
+                <input type="hidden" name="partNo" value="${part.product.no}">
                 <button formmethod="get" formaction="deletebuildpart">X</button>
               </form>
               <br>
@@ -95,19 +98,19 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </td>
         <td width="15%">
-          <form>
+          <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="cpu">
-            <input type="submit" formaction="searchproduct" formmethod="get" value="追加" class="add">
+            <button type="button" class="add">追加</button>
           </form>
         </td>
-        <form method="get" action="searchproduct">
-          <input type="hidden" name="productType" value="cpu">
-          <td width="30%">おすすめ:
+        <td width="30%">
+          <form method="get" action="searchproduct">
+            <input type="hidden" name="productType" value="cpu">おすすめ:
             <input type="submit" name="productName" value="Ryzen 5" class="osusume">
             <input type="submit" name="productName" value="Core i9" class="osusume">
             <input type="submit" name="productName" value="Core i7" class="osusume">
-          </td>
-        </form>
+          </form>
+        </td>
       </tr>
     </div>
 
@@ -115,12 +118,13 @@ document.addEventListener('keyup', function(e){
       <tr>
         <td width="15%">GPU</td>
         <td width="45%">
-          <c:forEach var="part" items="${sessionScope.build.products}">
-            <c:if test="${part.type eq 'gpu'}">
+          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+            <c:if test="${part.product.type eq 'gpu'}">
               <form>
-                <a style="color: black;" href="productspec?pid=${part.no}"><c:out value="${part.name}"/>: <c:out
-                        value="${part.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.no}">
+                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                  * <c:out value="${part.stack}"/>:
+                  <c:out value="${part.product.price}"/></a>
+                <input type="hidden" name="partNo" value="${part.product.no}">
                 <button formmethod="get" formaction="deletebuildpart">X</button>
               </form>
               <br>
@@ -128,9 +132,9 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </td>
         <td width="15%">
-          <form>
+          <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="gpu">
-            <input type="submit" formaction="searchproduct" formmethod="get" value="追加" class="add">
+            <button type="button" class="add">追加</button>
           </form>
         </td>
         <form method="get" action="searchproduct">
@@ -148,12 +152,13 @@ document.addEventListener('keyup', function(e){
       <tr>
         <td width="10%">メモリ</td>
         <td width="45%">
-          <c:forEach var="part" items="${sessionScope.build.products}">
-            <c:if test="${part.type eq 'ram'}">
+          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+            <c:if test="${part.product.type eq 'ram'}">
               <form>
-                <a style="color: black;" href="productspec?pid=${part.no}"><c:out value="${part.name}"/>: <c:out
-                        value="${part.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.no}">
+                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                  * <c:out value="${part.stack}"/>:
+                  <c:out value="${part.product.price}"/></a>
+                <input type="hidden" name="partNo" value="${part.product.no}">
                 <button formmethod="get" formaction="deletebuildpart">X</button>
               </form>
               <br>
@@ -161,9 +166,9 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </td>
         <td width="15%">
-          <form>
+          <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="ram">
-            <input type="submit" formaction="searchproduct" formmethod="get" value="追加" class="add">
+            <button type="button" class="add">追加</button>
           </form>
         </td>
         <form method="get" action="searchproduct">
@@ -179,12 +184,13 @@ document.addEventListener('keyup', function(e){
       <tr>
         <td width="10%">クーラー</td>
         <td width="45%">
-          <c:forEach var="part" items="${sessionScope.build.products}">
-            <c:if test="${part.type eq 'cpu_cooler'}">
+          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+            <c:if test="${part.product.type eq 'cpu_cooler'}">
               <form>
-                <a style="color: black;" href="productspec?pid=${part.no}"><c:out value="${part.name}"/>: <c:out
-                        value="${part.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.no}">
+                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                  * <c:out value="${part.stack}"/>:
+                  <c:out value="${part.product.price}"/></a>
+                <input type="hidden" name="partNo" value="${part.product.no}">
                 <button formmethod="get" formaction="deletebuildpart">X</button>
               </form>
               <br>
@@ -192,9 +198,9 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </td>
         <td width="15%">
-          <form>
+          <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="cpu_cooler">
-            <input type="submit" formaction="searchproduct" formmethod="get" value="追加" class="add">
+            <button type="button" class="add">追加</button>
           </form>
         </td>
         <form method="get" action="searchproduct">
@@ -210,12 +216,13 @@ document.addEventListener('keyup', function(e){
       <tr>
         <td width="10%">ケース</td>
         <td width="45%">
-          <c:forEach var="part" items="${sessionScope.build.products}">
-            <c:if test="${part.type eq 'case'}">
+          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+            <c:if test="${part.product.type eq 'case'}">
               <form>
-                <a style="color: black;" href="productspec?pid=${part.no}"><c:out value="${part.name}"/>: <c:out
-                        value="${part.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.no}">
+                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                  * <c:out value="${part.stack}"/>:
+                  <c:out value="${part.product.price}"/></a>
+                <input type="hidden" name="partNo" value="${part.product.no}">
                 <button formmethod="get" formaction="deletebuildpart">X</button>
               </form>
               <br>
@@ -223,9 +230,9 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </td>
         <td width="15%">
-          <form>
+          <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="case">
-            <input type="submit" formaction="searchproduct" formmethod="get" value="追加" class="add">
+            <button type="button" class="add">追加</button>
           </form>
         </td>
         <form method="get" action="searchproduct">
@@ -243,12 +250,13 @@ document.addEventListener('keyup', function(e){
       <tr>
         <td width="10%">マザーボード</td>
         <td width="45%">
-          <c:forEach var="part" items="${sessionScope.build.products}">
-            <c:if test="${part.type eq 'mother_board'}">
+          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+            <c:if test="${part.product.type eq 'mother_board'}">
               <form>
-                <a style="color: black;" href="productspec?pid=${part.no}"><c:out value="${part.name}"/>: <c:out
-                        value="${part.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.no}">
+                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                  * <c:out value="${part.stack}"/>:
+                  <c:out value="${part.product.price}"/></a>
+                <input type="hidden" name="partNo" value="${part.product.no}">
                 <button formmethod="get" formaction="deletebuildpart">X</button>
               </form>
               <br>
@@ -256,9 +264,9 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </td>
         <td width="15%">
-          <form>
+          <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="mother_board">
-            <input type="submit" formaction="searchproduct" formmethod="get" value="追加" class="add">
+            <button type="button" class="add">追加</button>
           </form>
         </td>
         <form method="get" action="searchproduct">
@@ -276,12 +284,13 @@ document.addEventListener('keyup', function(e){
       <tr>
         <td width="10%">ストレージ</td>
         <td width="45%">
-          <c:forEach var="part" items="${sessionScope.build.products}">
-            <c:if test="${part.type eq 'storage'}">
+          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+            <c:if test="${part.product.type eq 'storage'}">
               <form>
-                <a style="color: black;" href="productspec?pid=${part.no}"><c:out value="${part.name}"/>: <c:out
-                        value="${part.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.no}">
+                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                  * <c:out value="${part.stack}"/>:
+                  <c:out value="${part.product.price}"/></a>
+                <input type="hidden" name="partNo" value="${part.product.no}">
                 <button formmethod="get" formaction="deletebuildpart">X</button>
               </form>
               <br>
@@ -289,9 +298,9 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </td>
         <td width="15%">
-          <form>
+          <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="storage">
-            <input type="submit" formaction="searchproduct" formmethod="get" value="追加" class="add">
+            <button type="button" class="add">追加</button>
           </form>
         </td>
         <form method="get" action="searchproduct">
@@ -315,12 +324,13 @@ document.addEventListener('keyup', function(e){
       <tr>
         <td width="10%">電源</td>
         <td width="45%">
-          <c:forEach var="part" items="${sessionScope.build.products}">
-            <c:if test="${part.type eq 'power_supply'}">
+          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+            <c:if test="${part.product.type eq 'power_supply'}">
               <form>
-                <a style="color: black;" href="productspec?pid=${part.no}"><c:out value="${part.name}"/>: <c:out
-                        value="${part.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.no}">
+                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                  * <c:out value="${part.stack}"/>:
+                  <c:out value="${part.product.price}"/></a>
+                <input type="hidden" name="partNo" value="${part.product.no}">
                 <button formmethod="get" formaction="deletebuildpart">X</button>
               </form>
               <br>
@@ -328,9 +338,9 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </td>
         <td width="15%">
-          <form>
+          <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="power_supply">
-            <input type="submit" formaction="searchproduct" formmethod="get" value="追加" class="add">
+            <button type="button" class="add">追加</button>
           </form>
         </td>
         <form method="get" action="searchproduct">
@@ -357,12 +367,13 @@ document.addEventListener('keyup', function(e){
       <tr>
         <td width="10%">ケースファン</td>
         <td width="45%">
-          <c:forEach var="part" items="${sessionScope.build.products}">
-            <c:if test="${part.type eq 'case_fan'}">
+          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+            <c:if test="${part.product.type eq 'case_fan'}">
               <form>
-                <a style="color: black;" href="productspec?pid=${part.no}"><c:out value="${part.name}"/>: <c:out
-                        value="${part.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.no}">
+                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                  * <c:out value="${part.stack}"/>:
+                  <c:out value="${part.product.price}"/></a>
+                <input type="hidden" name="partNo" value="${part.product.no}">
                 <button formmethod="get" formaction="deletebuildpart">X</button>
               </form>
               <br>
@@ -370,9 +381,9 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </td>
         <td width="15%">
-          <form>
+          <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="case_fan">
-            <input type="submit" formaction="searchproduct" formmethod="get" value="追加" class="add">
+            <button type="button" class="add">追加</button>
           </form>
         </td>
         <form method="get" action="searchproduct">
@@ -397,13 +408,7 @@ document.addEventListener('keyup', function(e){
 
   </table>
   <div id="total-prize-section">
-    <c:set var="totalPrice" value="0"/>
-    <c:forEach var="part" items="${sessionScope.build.products}">
-      <fmt:parseNumber var="i" type="number" value="${part.price}"/>
-      <fmt:parseNumber var="j" type="number" value="${totalPrice}"/>
-      <c:set var="totalPrice" value="${i+j}"/>
-    </c:forEach>
-    <h4>総計金額: <c:out value="${totalPrice}"/></h4>
+    <h4>総計金額: <c:out value="${sessionScope.build.getTotalPrice()}"/></h4>
   </div>
   <br>
   <div id="build-action-pannel">
@@ -425,7 +430,7 @@ document.addEventListener('keyup', function(e){
           見積り名 <input type="text" name="buildName" class="build-action-input" value="${buildName}" required>
         </c:otherwise>
       </c:choose>
-      <input type="submit" value="この見積を保存" class="mitsu">
+      <button type="button" class="mitsu">この見積を保存</button>
     </form>
   </div>
 
