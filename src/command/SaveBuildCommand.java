@@ -16,7 +16,8 @@ public class SaveBuildCommand extends AbstractCommand {
         String buildName = getRequestContext().getParameter("buildName")[0];
 
         if (buildName.equals("")) {
-            buildName = "新しい見積り";
+            responseContext.setTarget("addbuild");
+            return responseContext;
         }
 
         try {

@@ -60,6 +60,9 @@ document.addEventListener('keyup', function(e){
                 <c:when test="${param.buildNo eq build.buildNo}">
                   <option selected="selected" value="${build.buildNo}"><c:out value="${build.buildName}"/></option>
                 </c:when>
+                <c:when test="${param.buildName eq build.buildName}">
+                  <option selected="selected" value="${build.buildNo}"><c:out value="${build.buildName}"/></option>
+                </c:when>
                 <c:otherwise>
                   <option value="${build.buildNo}"><c:out value="${build.buildName}"/></option>
                 </c:otherwise>
@@ -414,7 +417,14 @@ document.addEventListener('keyup', function(e){
           </c:forEach>
         </c:if>
       </c:if>
-      見積り名 <input type="text" name="buildName" class="build-action-input" value="${buildName}" required>
+      <c:choose>
+        <c:when test="${not empty param.buildName}">
+          見積り名 <input type="text" name="buildName" class="build-action-input" value="${param.buildName}" required>
+        </c:when>
+        <c:otherwise>
+          見積り名 <input type="text" name="buildName" class="build-action-input" value="${buildName}" required>
+        </c:otherwise>
+      </c:choose>
       <input type="submit" value="この見積を保存" class="mitsu">
     </form>
   </div>
