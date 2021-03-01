@@ -8,6 +8,9 @@
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
          pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
   <title>Product Spec : ${data.name}</title>
@@ -27,6 +30,16 @@
 <div id="product-spec">
   <h1 class="name">${data.name}</h1>
   <a href="javascript:history.back()" class="back">1ページ戻る</a>
+  <div class="replacespec">
+  <c:set var="oldspec" value="${data.spec}"/>
+  <c:set var="newspec" value="${fn:replace(oldspec,'{', '')
+	.replace('}', '').replace('\"', '').replace(',', ' /').replace('tdp', 'TDP').replace('date', '日付')
+	.replace('core', 'コア').replace('socket', 'Socket').replace('thread', 'スレッド').replace('frequency', 'GHz')
+  }" />
+	<p>変換後 : ${newspec}</p>
+	</div>
+
+  <div id="product-spec">SPEC : ${data.spec}</div>
   <br>
   <br>
   <div class="image">

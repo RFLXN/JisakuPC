@@ -73,10 +73,11 @@ div.page {
 
 }
 
-.page2 p{
+.page3{
     border-bottom:dotted;/*下線を点線にする*/
 	border-color:#C0C0C0;
 	border-width:1px;
+	/*white-space: pre-wrap;*/
 
 }
 input.sinki{
@@ -113,4 +114,10 @@ input.sinki{
 .page2 input:hover {
     background: #FFC0CB;
 
+}
+
+.page4{
+	position: relative;
+	left: 50px;
+	margin-top: -1.5em;
 }

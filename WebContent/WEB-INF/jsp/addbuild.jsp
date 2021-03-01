@@ -52,7 +52,7 @@ document.addEventListener('keyup', function(e){
     <c:if test="${not empty pageScope.buildList}">
       <c:if test="${pageScope.buildList.size() gt 0}">
         <form method="get" action="selectbuild">
-          <label for="builds">見積りを選択</label>
+          <label for="builds">過去の見積りを選択</label>
           <select id="builds" name="buildNo">
             <option value="new">新しい見積もり</option>
             <c:forEach var="build" items="${buildList}">

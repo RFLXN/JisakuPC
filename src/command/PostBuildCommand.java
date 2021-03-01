@@ -1,25 +1,27 @@
 package command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bean.Post;
 import bean.UserFlag;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.post.PostDao;
-
-import java.util.ArrayList;
-import java.util.List;
+import utility.Conversion;
 
 public class PostBuildCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
         List<Post> posts = new ArrayList<>();
+        Conversion cn = new Conversion();
 
         try {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             PostDao dao = daoFactory.getPostsDao();
             String title = getRequestContext().getParameter("title")[0];
-            String description = getRequestContext().getParameter("description")[0];
+            String description = cn.conversionText(getRequestContext().getParameter("description")[0]);
             String buildno = getRequestContext().getParameter("buildno")[0];
             UserFlag user = (UserFlag) getRequestContext().getSessionAttribute("loginFlag");
             String userno = user.getUserNo();

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
   <link href="css/signup.css" rel="stylesheet" type="text/css"/>
@@ -18,14 +19,26 @@ function checkForm(target)
     }
     target.value=str;
 }
+function CheckPassword(confirm){
+	// 入力値取得
+	var input1 = document.form1.password.value;
+	var input2 = confirm.value;
+	// パスワード比較
+	if(input1 != input2){
+		confirm.setCustomValidity("入力値が一致しません。");
+	}else{
+		confirm.setCustomValidity('');
+	}
+}
 </script>
 <jsp:include page="/header.jsp"/>
 <div class="signup-body">
   <h1>Sign Up</h1>
   <div id="signup-area">
-    <form id="signup-form" method="post" action="signup-result">
-      ID <input id="signup-id" type="text" name="id" onInput="checkForm(this)"><br>
-      PASSWORD <input id="signup-password" type="text" name="password" onInput="checkForm(this)">
+    <form id="signup-form" method="post" action="signup-result" name="form1">
+      ID(半角) <input id="signup-id" type="text" name="id" onInput="checkForm(this)"><br>
+      PASSWORD(半角) <input id="signup-password" type="text" name="password" onInput="checkForm(this)">
+      <%-- Re:PASSWORD(半角) <input id="signup-password"type="text" name="confirm" onInput="CheckPassword(this)"> --%>
       <div class="warning-container">
         <p class="warning-text"></p>
       </div>
