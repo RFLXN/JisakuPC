@@ -57,7 +57,7 @@
           </tbody>
         </table>
         <br>
-<div>${build.getTotalPrice()}
+<div class="sokei">総計: ${build.getTotalPrice()}
 </div>
       </c:forEach>
     </div>
