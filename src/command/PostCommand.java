@@ -21,6 +21,10 @@ public class PostCommand extends AbstractCommand {
 //            posts = dao.getAllPosts();
             BuildDao bld_dao = daoFactory.getBuildDao();
             UserFlag user = (UserFlag) getRequestContext().getSessionAttribute("loginFlag");
+            if (user == null || !user.isCorrectUser() || user.getUserNo().equals("")) {
+                responseContext.setTarget("login");
+                return responseContext;
+            }
             String userno = user.getUserNo();
             posts = bld_dao.getUserBuilds(userno);
 

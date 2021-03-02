@@ -12,6 +12,7 @@ function productspec(pid, dbPrice) {
                 $("#product-spec-rakuten-url").html(`<a href="${data.productUrl}" target="_blank">楽天の商品ページに飛びます(外部サイト)</a>`);
             } else {
                 $("#product-spec-rakuten-url").html("商品情報の収集に失敗しました。");
+                $("#product-spec-rakuten-url").removeClass("url");
             }
 
             let imgUrl = data.mediumImageUrl;
@@ -30,6 +31,7 @@ function productspec(pid, dbPrice) {
         },
         error: (data) => {
             $("#product-spec-rakuten-url").html("商品情報の収集に失敗しました。");
+            $("#product-spec-rakuten-url").removeClass("url");
             console.log("getRakutenProduct: Some Error Occurred");
         }
     });

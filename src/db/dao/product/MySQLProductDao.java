@@ -718,6 +718,31 @@ public class MySQLProductDao implements ProductDao {
         return products;
     }
 
+    @Override
+    public int getSearchProductsLength(Map<String, Object> options) throws DAOException {
+        String sql = createOptionSearchSqlForLength(options);
+
+        int result = 0;
+
+        try {
+            connection = getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+
+            ResultSet resultSet = query(statement);
+
+            resultSet.last();
+            result = resultSet.getRow();
+
+
+            DBCloser.close(connection);
+        } catch (SQLException | DBCloseException | NumberFormatException e) {
+            throw new DAOException(e);
+        }
+
+        return result;
+    }
+
     private String createOptionSearchSql(Map<String, Object> options) throws NumberFormatException {
         StringBuilder builder = new StringBuilder();
         builder.append("SELECT product_table.* FROM (")
@@ -856,6 +881,150 @@ public class MySQLProductDao implements ProductDao {
             builder.delete(builder.length() - 7, builder.length());
         }
         builder.append(") product_table LIMIT ?, ?");
+
+        System.out.println(builder.toString());
+
+        return builder.toString();
+    }
+
+    private String createOptionSearchSqlForLength(Map<String, Object> options) throws NumberFormatException {
+        StringBuilder builder = new StringBuilder();
+        builder.append("SELECT product_table.* FROM (")
+                .append("SELECT * FROM product_table WHERE ");
+
+        if (options.containsKey("productName")) {
+            if (builder.toString().endsWith("WHERE ")) {
+                builder.append("product_name LIKE '%").append((String) options.get("productName"))
+                        .append("%'");
+            } else {
+                builder.append(" AND product_name LIKE '%").append((String) options.get("productName"))
+                        .append("%'");
+            }
+        }
+
+        if (options.containsKey("productType")) {
+            if (builder.toString().endsWith("WHERE ")) {
+                builder.append("product_type = '").append(options.get("productType"))
+                        .append("'");
+            } else {
+                builder.append(" AND product_type = '").append(options.get("productType"))
+                        .append("'");
+            }
+        }
+
+        if (options.containsKey("priceRange")) {
+            int[] range = (int[]) options.get("priceRange");
+            if (builder.toString().endsWith("WHERE ")) {
+                builder.append("(product_price BETWEEN ").append(range[0])
+                        .append(" AND ").append(range[1]).append(")");
+            } else {
+                builder.append(" AND (product_price BETWEEN ").append(range[0])
+                        .append(" AND ").append(range[1]).append(")");
+            }
+        }
+
+        if (options.containsKey("productBrand")) {
+            if (builder.toString().endsWith("WHERE ")) {
+                builder.append("product_brand = '").append((String) options.get("productBrand"))
+                        .append("'");
+            } else {
+                builder.append(" AND product_brand = '").append((String) options.get("productBrand"))
+                        .append("'");
+            }
+        }
+
+        if (options.containsKey("specOptions")) {
+            ArrayList<ProductSpecSearchOption> specSearchOptions = (ArrayList) options.get("specOptions");
+
+            specSearchOptions.forEach((o) -> {
+                String optionName = o.getOptionName();
+                if (optionName.equals("80PLUS")) {
+                    optionName = "\"80PLUS\"";
+                }
+                int valueType = o.getValueType();
+                boolean isCanRange = o.isCanRange();
+                String[] value = o.getValue();
+
+                if (valueType == ProductSpecSearchOption.STRING) {
+                    String trueValue = value[0];
+
+                    if (builder.toString().endsWith("WHERE ")) {
+                        builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                .append(optionName).append("')) = ");
+                    } else {
+                        builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                .append(optionName).append("')) = ");
+                    }
+                    builder.append("'").append(trueValue).append("'");
+
+                } else if (valueType == ProductSpecSearchOption.INT) {
+                    int trueValue = Integer.parseInt(value[0]);
+                    if (isCanRange) {
+                        if (builder.toString().endsWith("WHERE ")) {
+                            builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) >= ");
+                        } else {
+                            builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) >= ");
+                        }
+                        builder.append(trueValue);
+
+                        builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                .append(optionName).append("')) <= ");
+                        builder.append(Integer.parseInt(value[1]));
+                    } else {
+                        if (builder.toString().endsWith("WHERE ")) {
+                            builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) = ");
+                        } else {
+                            builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) = ");
+                        }
+                        builder.append(trueValue);
+                    }
+                } else if (valueType == ProductSpecSearchOption.DOUBLE) {
+                    double trueValue = Double.parseDouble(value[0]);
+                    if (isCanRange) {
+                        if (builder.toString().endsWith("WHERE ")) {
+                            builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) >= ");
+                        } else {
+                            builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) >= ");
+                        }
+                        builder.append(trueValue);
+
+                        builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                .append(optionName).append("')) <= ");
+                        builder.append(Double.parseDouble(value[1]));
+                    } else {
+                        if (builder.toString().endsWith("WHERE ")) {
+                            builder.append("JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) = ");
+                        } else {
+                            builder.append(" AND JSON_UNQUOTE(JSON_EXTRACT(product_spec, '$.")
+                                    .append(optionName).append("')) = ");
+                        }
+                        builder.append(trueValue);
+                    }
+                }
+            });
+        }
+
+
+        if (options.containsKey("orderBy")) {
+            if (builder.toString().endsWith("WHERE ")) {
+                builder.delete(builder.length() - 6, builder.length());
+                builder.append("ORDER BY product_price ").append((String) options.get("orderBy"));
+            } else {
+                builder.append(" ORDER BY product_price ").append((String) options.get("orderBy"));
+            }
+        }
+
+        if (builder.toString().endsWith("WHERE ")) {
+            builder.delete(builder.length() - 7, builder.length());
+        }
+        builder.append(") product_table");
 
         System.out.println(builder.toString());
 

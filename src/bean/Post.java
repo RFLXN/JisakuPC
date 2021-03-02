@@ -2,6 +2,7 @@ package bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Post implements Serializable {
 
@@ -14,7 +15,7 @@ public class Post implements Serializable {
     private String pname;
     private String productno;
     private String userid;
-    private ArrayList<?> list;
+    private List<Post> list;
     private String type;
     private String price;
 
@@ -94,11 +95,11 @@ public class Post implements Serializable {
         this.productno = productno;
     }
 
-    public ArrayList<?> getList() {
+    public List<Post> getList() {
         return list;
     }
 
-    public void setList(ArrayList<?> list) {
+    public void setList(List<Post> list) {
         this.list = list;
     }
 
@@ -116,5 +117,48 @@ public class Post implements Serializable {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public List<StackedProduct> getStackedProducts() {
+        List<StackedProduct> stackedProducts = new ArrayList<>();
+
+        list.forEach((Post post) -> {
+            if (stackedProducts.size() == 0) {
+                StackedProduct p = new StackedProduct();
+                Product product = new Product();
+
+                product.setPrice(post.getPrice());
+                product.setName(post.getPname());
+                product.setNo(post.getProductno());
+
+                p.setProduct(product);
+                p.setStack(1);
+                stackedProducts.add(p);
+            } else {
+                boolean isNew = true;
+                for (int i = 0; i < stackedProducts.size(); i++) {
+                    StackedProduct stackedProduct = stackedProducts.get(i);
+                    if (stackedProduct.getProduct().getNo().equals(post.getProductno())) {
+                        isNew = false;
+                        stackedProduct.setStack(stackedProduct.getStack() + 1);
+                        break;
+                    }
+                }
+
+                if (isNew) {
+                    StackedProduct p = new StackedProduct();
+                    p.setStack(1);
+
+                    Product product = new Product();
+                    product.setPrice(post.getPrice());
+                    product.setName(post.getPname());
+                    product.setNo(post.getProductno());
+                    p.setProduct(product);
+                    stackedProducts.add(p);
+                }
+            }
+        });
+
+        return stackedProducts;
     }
 }

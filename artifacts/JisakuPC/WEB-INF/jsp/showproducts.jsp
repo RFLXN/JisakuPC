@@ -18,7 +18,7 @@
 <jsp:include page="/header.jsp"/>
 
 <form method="get" action="searchproduct" id="type-change-form"></form>
-<form method="get" action="searchproduct">
+<form id="search-options-form" method="get" action="searchproduct">
   <div class="search">
     <input type="text" name="productName" value="${param.productName}" size="36" placeholder="キーワードで検索" maxlength="20">
     <input type="submit" value="検索">
@@ -132,7 +132,13 @@
       </table>
     </c:otherwise>
   </c:choose>
+</div>
 
+<div id="paginator-container" class="container">
+  <div id="pagination-section" class="row col-xs-offset-4 col-xs-8">
+    <ul id="paginator" class="pagination row col-xs-12">
+    </ul>
+  </div>
 </div>
 </body>
 

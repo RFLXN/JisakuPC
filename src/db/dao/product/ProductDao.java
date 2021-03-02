@@ -55,4 +55,5 @@ public interface ProductDao {
      */
     List<Product> searchProducts(Map<String, Object> options, int... page) throws DAOException;
 
+    int getSearchProductsLength(Map<String, Object> options) throws DAOException;
 }

@@ -6,8 +6,8 @@
 <%@ page import="org.json.JSONException" %>
 <%@ page import="bean.ProductSpecInfo" %>
 <%@ page import="java.util.Map" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-         pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+
 <html>
 <head>
   <title>Product Spec : ${data.name}</title>
@@ -38,9 +38,9 @@
 	  <div id="product-spec-brand">ブランド名: ${data.brand}</div>
 	  <br>
 	  <div id="product-spec-type">種類: ${ProductTypeInfo.getTranslatedTypeName(data.type)}</div>
-	  <br>
-	  <div id="product-spec-rakuten-url"></div>
-	  </div>
+    <br>
+    <div id="product-spec-rakuten-url" class="url"></div>
+  </div>
   <div id="product-spec-section">
     <%
       Product product = (Product) request.getAttribute("data");

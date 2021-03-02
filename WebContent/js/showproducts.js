@@ -5,7 +5,80 @@ $(async () => {
         console.log(e);
     }
     loadProductImages();
+
+    paginate();
 });
+
+function paginate() {
+    const paramString = location.search;
+    const paginator = $("#paginator");
+
+    $.ajax({
+        methon: "GET",
+        url: "searchproductlength.json" + paramString,
+        success: (data) => {
+            const length = parseInt(data.length);
+            const lastPage = Math.floor(length / 10);
+            let currentPage = 1;
+
+            const pageParam = getUrlParameter("page");
+            if (pageParam != "") {
+                const pages = pageParam.split(",");
+
+                currentPage = Math.floor(parseInt(pages[0]) / 10);
+            }
+
+            if (currentPage == 1) {
+                paginator.append(`<li class="disabled"><a href="#">&laquo;</a></li>`);
+            } else {
+                let hrefUrl = `searchproduct${paramString}`;
+                if (hrefUrl.match(/&page=[0-9]+,10/)) {
+                    hrefUrl = hrefUrl.replace(/&page=[0-9]+,10/, "");
+                }
+                paginator.append(`<li><a href="${hrefUrl}">&laquo;</a></li>`);
+            }
+
+            for (let i = currentPage - 4; i <= currentPage + 4; i++) {
+                if (i < 1) {
+                    i = 0;
+                    continue;
+                }
+                if (i > lastPage) {
+                    break;
+                }
+                if (i < lastPage) {
+                    let hrefUrl = `searchproduct${paramString}`;
+                    if (hrefUrl.match(/page=[0-9]+,10/)) {
+                        hrefUrl = hrefUrl.replace(/page=[0-9]+,10/, `page=${i * 10},10`);
+                    } else {
+                        hrefUrl = hrefUrl + `&page=${i * 10},10`;
+                    }
+                    console.log(hrefUrl);
+                    if (i == currentPage) {
+                        paginator.append(`<li class="active"><a href="${hrefUrl}">${i}</a></li>`);
+                    } else {
+                        paginator.append(`<li><a href="${hrefUrl}">${i}</a></li>`);
+                    }
+                }
+            }
+
+            if (currentPage >= lastPage) {
+                paginator.append(`<li class="disabled"><a href="#">&raquo;</a></li>`);
+            } else {
+                let hrefUrl = `searchproduct${paramString}`;
+                if (hrefUrl.match(/page=[0-9]+,10/)) {
+                    hrefUrl = hrefUrl.replace(/page=[0-9]+,10/, `page=${lastPage * 10},10`);
+                } else {
+                    hrefUrl = hrefUrl + `&page=${lastPage * 10},10`;
+                }
+                paginator.append(`<li><a href="${hrefUrl}">&raquo;</a></li>`);
+            }
+        },
+        error: (error) => {
+            console.log("Failed to Load Pagination Information");
+        }
+    });
+}
 
 function loadProductImages() {
     const valueElements = $(".pid-value");
@@ -13,7 +86,7 @@ function loadProductImages() {
     let index = 0;
     for (let i = 0; i < valueElements.length; i++) {
         const pid = valueElements.get(i).value;
-        if (pid != undefined && pid != "") {
+        if (pid != undefined && pid != "" && pid != "undefined") {
             pidList.push(pid);
         }
     }
@@ -25,20 +98,25 @@ function loadProductImages() {
         if (pidList.length === index) {
             return console.log("Load Complete");
         } else {
-            getProduct(pid).then(result => {
-                let imageUrl = result.data.mediumImageUrl;
-                if (Array.isArray(imageUrl)) {
-                    imageUrl = imageUrl[0];
-                }
-
-                applyImage(imageUrl, pid);
-                loadProduct();
-            }).catch(err => {
-                console.log(err);
+            if (pid == undefined || pid == "" || pid == "undefined") {
                 index = index + 1;
                 loadProduct();
-            });
-            index++;
+            } else {
+                getProduct(pid).then(result => {
+                    let imageUrl = result.data.mediumImageUrl;
+                    if (Array.isArray(imageUrl)) {
+                        imageUrl = imageUrl[0];
+                    }
+
+                    applyImage(imageUrl, pid);
+                    loadProduct();
+                }).catch(err => {
+                    console.log(err);
+                    index = index + 1;
+                    loadProduct();
+                });
+                index++;
+            }
         }
     }
 
@@ -131,7 +209,7 @@ function loadSpecSearch() {
                 values: [parseInt(numSelectedMinValue), parseInt(numSelectedMaxValue)],
                 slide: (event, ui) => {
                     $(`#option-${specOptionName}-value`).attr("value", `${ui.values[0]},${ui.values[1]}`);
-                    $(`#option-${specOptionName}-value-view`).html(`${specOptionName}: ${ui.values[0]} - ${ui.values[1]}`);
+                    $(`#option-${specOptionName}-value-view`).html(`${getTranslatedSpecOptionName(specOptionName)}: ${ui.values[0]} - ${ui.values[1]}`);
                 }
             };
 

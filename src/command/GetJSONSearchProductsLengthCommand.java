@@ -1,26 +1,22 @@
 package command;
 
-import bean.Product;
 import bean.ProductSpecSearchOption;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.product.ProductDao;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class SearchProductsCommand extends AbstractCommand {
+public class GetJSONSearchProductsLengthCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
-        List<Product> products = new ArrayList<Product>();
-
         String productName = null;
         String sort = null;
         String productType = null;
-        int[] page = null;
 
         String[] parameterKeys = getRequestContext().getParameterKeys();
 
@@ -37,15 +33,6 @@ public class SearchProductsCommand extends AbstractCommand {
         if (getRequestContext().getParameter("productType") != null
                 && (!getRequestContext().getParameter("productType")[0].equals(""))) {
             productType = getRequestContext().getParameter("productType")[0];
-        }
-
-        if (getRequestContext().getParameter("page") != null
-                && (!getRequestContext().getParameter("page")[0].equals(""))) {
-            String[] pBuff = getRequestContext().getParameter("page")[0].split(",");
-            page = new int[pBuff.length];
-            for (int i = 0; i < pBuff.length; i++) {
-                page[i] = Integer.parseInt(pBuff[i]);
-            }
         }
 
         try {
@@ -100,15 +87,16 @@ public class SearchProductsCommand extends AbstractCommand {
                 searchOption.put("specOptions", specSearchOptions);
             }
 
-            if (page != null) {
-                products = dao.searchProducts(searchOption, page);
-            } else {
-                products = dao.searchProducts(searchOption);
-            }
+            int length = dao.getSearchProductsLength(searchOption);
+
+            JSONObject o = new JSONObject();
+            o.put("length", length);
+
+            responseContext.setResult(o);
         } catch (DAOException e) {
             throw new CommandException(e);
         }
-        responseContext.setResult(products);
+
         responseContext.setTarget("showproducts");
 
         return responseContext;

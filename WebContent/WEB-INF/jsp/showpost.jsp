@@ -29,15 +29,15 @@
         <th>商品番号</th>
       </tr>
       <a href="javascript:history.back()" class="back">1ページ戻る</a>
-      <c:forEach var="posts" items="${post.list}">
+      <c:forEach var="stackedProduct" items="${post.getStackedProducts()}">
         <tr>
-          <td><img id="image-${posts.productno}"
-                   src="${pageContext.request.contextPath}/image/transparent.png" alt="${posts.pname}">
+          <td><img id="image-${stackedProduct.product.no}"
+                   src="${pageContext.request.contextPath}/image/noimg.png" alt="${stackedProduct.product.name}">
           </td>
-          <td>${posts.type}</td>
-          <td>${posts.pname}</td>
-          <td>${posts.price}</td>
-          <td class="product-no">${posts.productno}</td>
+          <td>${stackedProduct.product.type}</td>
+          <td>${stackedProduct.product.name} * ${stackedProduct.stack}</td>
+          <td>${stackedProduct.product.price}</td>
+          <td class="product-no">${stackedProduct.product.no}</td>
         </tr>
       </c:forEach>
       <input type="hidden" name="postno" value="${post.no}">
