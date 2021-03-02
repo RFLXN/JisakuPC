@@ -18,7 +18,7 @@ window.addEventListener('popstate', (e) => {
 <jsp:include page="/header.jsp"/>
 削除が完了しました
 <div id="deletepost">
-  <form method="get" action="post">
+  <form method="get" action="postlist">
     <button id="deletepost">TOP</button>
   </form>
 </div>
