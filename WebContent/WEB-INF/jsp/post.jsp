@@ -33,9 +33,9 @@
 <jsp:include page="/header.jsp"/>
 <div class="post-body">
   <form action="postbuild" class="post" method="post" name="form1" onSubmit="return check()">
-    <p>タイトル:<input type="text" name="title" placeholder="文字まで" maxlength='60'></p>
+    <p>タイトル:<input type="text" name="title" placeholder="60文字まで" maxlength='60'></p>
     <p>コメント:<br>
-      <textarea name="description" rows="5" cols="40" placeholder="文字まで" maxlength='800' cols="3"></textarea>
+      <textarea name="description" rows="5" cols="40" placeholder="800文字まで" maxlength='800' cols="3"></textarea>
     </p>
 
     <c:forEach var="list" items="${ data }">
