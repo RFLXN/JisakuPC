@@ -117,7 +117,18 @@ input.sinki{
 }
 
 .page4{
-	position: relative;
-	left: 50px;
-	margin-top: -1.5em;
+    position: relative;
+    left: 67.5px;
+    margin-top: -1.45em;
+
+
+    width: 250px;
+    height: 1.3em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+
+
 }

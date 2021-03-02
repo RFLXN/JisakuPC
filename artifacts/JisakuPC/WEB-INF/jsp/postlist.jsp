@@ -23,11 +23,14 @@
     <table width="100%" cellpadding="30">
       <c:forEach var="list" items="${data}">
         <div class="page3"><p>タイトル:<c:out value="${list.title}"/></p>
-          <p>説明:<div class="page4">${list.description}</div></p>
-        <form action="showpost">
-          <input type="hidden" name="postno" value="${list.no}">
-          <input type="submit" name="show" value="詳細">
-        </form></div>
+          <p>コメント:
+          <div class="page4">${list.description}</div>
+          </p>
+          <form action="showpost">
+            <input type="hidden" name="postno" value="${list.no}">
+            <input type="submit" name="show" value="詳細">
+          </form>
+        </div>
       </c:forEach>
     </table>
   </div>

@@ -47,7 +47,7 @@ h1 {
     outline: none;
 }
 .signup-submit{
-	padding: 3.1em 0;
+    /*padding: 3.1em 0;*/
 }
 .signup-submit #signup-btn {
     background: #f16272;

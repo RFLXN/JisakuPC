@@ -10,28 +10,27 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/signup.js"></script>
 <script>
-function checkForm(target)
-{
-    let str=target.value;
-    while(str.match(/[^A-Z^a-z\d\-]/)) {
-        str = str.replace(/[^A-Z^a-z\d\-]/, "");
+    function checkForm(target) {
+        let str = target.value;
+        while (str.match(/[^A-Z^a-z\d\-]/)) {
+            str = str.replace(/[^A-Z^a-z\d\-]/, "");
+        }
+        target.value = str;
     }
-    target.value = str;
-}
 
-function CheckPassword(confirm) {
-    // 入力値取得
-    var input1 = document.form1.password.value;
-    var input2 = confirm.value;
-    // パスワード比較
-    if (input1 === input2) {
-        $(".warning-text").text("OK!");
-        form1.action = "signup-result";
-    } else {
-        $(".warning-text").text("パスワードが違います。");
-        form1.action = "";
+    function CheckPassword(confirm) {
+        // 入力値取得
+        var input1 = document.form1.password.value;
+        var input2 = confirm.value;
+        // パスワード比較
+        if (input1 === input2) {
+            $(".warning-text").text("OK!");
+            form1.action = "signup-result";
+        } else {
+            $(".warning-text").text("パスワードが違います。");
+            form1.action = "";
+        }
     }
-}
 </script>
 <jsp:include page="/header.jsp"/>
 <div class="signup-body">
