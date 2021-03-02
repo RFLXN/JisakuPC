@@ -4,9 +4,13 @@
   align-items: center;
   justify-content: center;
  }
- body{
- margin-top: 5em;
- }
+body {
+    margin-top: 5em;
+}
+
+table.showpost {
+    margin-left: 3%;
+}
 
 table.showpost tr td {
     padding-right: 0;
@@ -38,6 +42,7 @@ button:hover {
     background: #CC0000;
     color: white;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -61,7 +66,7 @@ h3 {
 
 h1 {
     margin-top: 100px;
-    margin-left: 15px;
+    margin-left: 3%;
 }
 .back {
     /*margin-top:1em;*/
@@ -75,10 +80,16 @@ h1 {
     border-radius: 20px 20px 20px 20px;
     padding: 3px 5px 3px 5px;
 }
+
 .delete {
     background-color: #fff;
     padding: 3px 5px 3px 5px;
     border: 1px solid #000;
     border-radius: 5px 5px 5px 5px;
 
+}
+
+.products {
+    margin-left: 3%;
+    background-color: #FFA;
 }

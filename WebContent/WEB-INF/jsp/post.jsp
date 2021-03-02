@@ -38,15 +38,24 @@
       <textarea name="description" rows="5" cols="40" placeholder="文字まで" maxlength='800' cols="3" required></textarea>
     </p>
 
-    <c:forEach var="list" items="${ data }">
-      <p>見積もりを選択：<input type="radio" name="buildno" value="${list.buildNo}" required>
-          ${list.buildName}
-      </p>
-    </c:forEach>
-
-    <p>
+    <div id="build-select-section">
+      <label for="build-select">見積もりを選択</label>
+      <select id="build-select" name="buildno" required>
+        <c:forEach var="list" items="${ data }">
+          <c:choose>
+            <c:when test="${param.buildNo eq list.buildNo}">
+              <option value="${list.buildNo}" selected>${list.buildName}</option>
+            </c:when>
+            <c:otherwise>
+              <option value="${list.buildNo}">${list.buildName}</option>
+            </c:otherwise>
+          </c:choose>
+        </c:forEach>
+      </select>
+    </div>
+    <br>
     <div class="button"><input type="submit" value="送信"><input type="reset" value="リセット"></div>
-    </p>
+
   </form>
 
   <!-- 0218 坂入 見積もりをforEachするので削除 -->

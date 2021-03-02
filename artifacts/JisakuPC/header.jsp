@@ -9,6 +9,16 @@
   <link href="css/header.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+
+<script>
+    function logout() {
+        const c = confirm("ログアウトしますか?");
+
+        if (c) {
+            location.href = "logout";
+        }
+    }
+</script>
 <header>
 
   <table width="100%">
@@ -31,9 +41,14 @@
         </td>
         <c:choose>
           <c:when test="${sessionScope.loginFlag.correctUser}">
-            <td width="40%">
+            <td width="20%">
               <div id="user-info">
                 <a href="mypage">${sessionScope.loginFlag.userId} 様</a>
+              </div>
+            </td>
+            <td width="20%">
+              <div id="logout">
+                <a href="#" onclick="logout()">ログアウト</a>
               </div>
             </td>
           </c:when>

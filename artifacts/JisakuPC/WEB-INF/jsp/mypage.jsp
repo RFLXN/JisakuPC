@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"
          pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 
@@ -23,8 +22,8 @@
       <h2>マイページ: ${sessionScope.loginFlag.userId}様</h2>
     </div>
     <div id="user-control-section" class="col-xs-12">
-      <form>
-        <button class="btn btn-danger" formaction="logout" formmethod="get">ログアウト</button>
+      <form action="logout" method="get">
+        <button class="btn btn-danger" type="button" onclick="checkLogout(this)">ログアウト</button>
       </form>
     </div>
     <div id="build-list-section" class="col-xs-12">
@@ -32,12 +31,13 @@
       <c:forEach var="build" items="${data}">
         <p>見積り名: ${build.buildName}</p>
         <form>
-          <button class="btn btn-default" formmethod="get" formaction="post"
-                  name="buildNo" value="${build.buildNo}">投稿
+          <input type="hidden" name="buildNo" value="${build.buildNo}">
+          <button class="btn btn-default" formmethod="get" formaction="post">
+            投稿
           </button>
 
-          <button class="btn btn-danger" formmethod="get" formaction="deletebuild"
-                  name="buildNo" value="${build.buildNo}">削除
+          <button class="btn btn-danger delete-button" formmethod="get" formaction="deletebuild">
+            削除
           </button>
         </form>
         <table class="table table-hover">
@@ -72,7 +72,9 @@
   </div>
 </main>
 
+<script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/mypage.js"></script>
 
 </body>
 </html>
