@@ -106,6 +106,25 @@ table.show tr td {
 .search-sort input[type=radio]:checked + .sort::after {
     opacity: 1;
 }
+
+.specsearch-btn {
+    width: 10em;
+    height: 2.5em;
+    display: inline-block;
+    padding: 0.3em 1em;
+    text-decoration: none;
+    color: #CC0000;
+    border: solid 2px #CC0000;
+    border-radius: 3px;
+    transition: .4s;
+    font-size: 12px;
+}
+
+.specsearch-btn:hover {
+    background: #CC0000;
+    color: white;
+}
+
 .add-button input {
     display: inline-block;
     padding: 0.3em 1em;

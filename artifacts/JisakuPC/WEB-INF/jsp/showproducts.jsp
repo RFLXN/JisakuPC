@@ -15,7 +15,6 @@
 <script src="${pageContext.request.contextPath}/js/axios.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/jquery-ui.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/showproducts.js"></script>
-<jsp:include page="/header.jsp"/>
 
 <form method="get" action="searchproduct" id="type-change-form"></form>
 <form id="search-options-form" method="get" action="searchproduct">
@@ -31,8 +30,8 @@
       <input type="radio" id="sort-desc" name="sortByCost" value="desc"
              <c:if test="${param.sortByCost eq 'desc'}">checked</c:if>>
       <label for="sort-desc" class="sort">降順</label>
-      <button type="button" id="type-select-button" onclick="showTypeSelect()">パーツ種類</button>
-      <button type="button" id="spec-search-button" onclick="showSpecSearch()">スペック条件</button>
+      <button class="specsearch-btn" type="button" id="type-select-button" onclick="showTypeSelect()">パーツ種類</button>
+      <button class="specsearch-btn" type="button" id="spec-search-button" onclick="showSpecSearch()">スペック条件</button>
     </div>
     <div id="product-type-select" class="product-type-select-hidden">
       <button name="productType" value="cpu" form="type-change-form">CPU</button>

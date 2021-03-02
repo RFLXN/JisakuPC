@@ -32,18 +32,17 @@ a {
 }
 
 .header-body a:hover {
-    color: #DDDDDD !important;
+    color: #DDDDDD!important;
     text-decoration: underline;
 }
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding : 0;
+	box-sizing: border-box;
 }
 
 div#build a {
-    color: #FFF !important;
+	color:#FFF!important;
 }
 
 div#post a {
