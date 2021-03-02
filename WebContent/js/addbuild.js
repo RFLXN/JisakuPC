@@ -37,10 +37,13 @@ $(() => {
         });
     });
 
+    var buildName;
     $("button.mitsu").on("click", (event) => {
         const form = event.target.form;
-        const buildName = form.getElementsByTagName("input")[0].value;
-
+        buildName = form.getElementsByTagName("input")[0].value;
+        console.log(buildName);
+        buildName = buildName.replaceAll("　", " ").replaceAll(" ", "");
+        console.log(typeof buildName);
         if (buildName == undefined || buildName == "") {
             alert("見積り名を入力してください。");
         } else {

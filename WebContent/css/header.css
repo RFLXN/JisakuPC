@@ -40,3 +40,16 @@ a {
 	padding : 0;
 	box-sizing: border-box;
 }
+
+div#build a {
+	color:#FFF!important;
+}
+div#post a {
+	color:#FFF!important;
+}
+div#user-info a {
+	color:#FFF!important;
+}
+div#logo a {
+	color:#FFF!important;
+}
