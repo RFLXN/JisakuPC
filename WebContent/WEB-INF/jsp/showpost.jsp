@@ -18,7 +18,12 @@
 <form action="deletepost" method="post">
   <c:forEach var="post" items="${data}">
     <h1>${post.title}</h1>
-    <h4>${post.userid} ${post.date}</h4>
+    <h4>${post.userid}&nbsp;&nbsp;${post.date}&nbsp;&nbsp;
+    <input type="hidden" name="postno" value="${post.no}">
+      <c:if test="${(post.userid eq sessionScope.loginFlag.userId) or sessionScope.loginFlag.admin}">
+        <input type="submit" name="delete" class="delete" value="投稿を削除">
+      </c:if>
+      </h4><br>
     <h3>${post.description}</h3>
     <table border="1" class="showpost">
       <tr>
@@ -40,10 +45,7 @@
           <td class="product-no">${posts.productno}</td>
         </tr>
       </c:forEach>
-      <input type="hidden" name="postno" value="${post.no}">
-      <c:if test="${(post.userid eq sessionScope.loginFlag.userId) or sessionScope.loginFlag.admin}">
-        <input type="submit" name="delete" value="削除">
-      </c:if>
+
     </table>
   </c:forEach>
 </form>
