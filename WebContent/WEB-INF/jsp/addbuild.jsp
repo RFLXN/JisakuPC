@@ -93,7 +93,7 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
@@ -127,7 +127,7 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
@@ -161,7 +161,7 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
@@ -193,7 +193,7 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
@@ -225,7 +225,7 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
@@ -259,7 +259,7 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
@@ -293,7 +293,7 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
@@ -333,7 +333,7 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
@@ -376,7 +376,7 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
@@ -410,7 +410,7 @@
 
   </table>
   <div id="total-prize-section">
-    <h4>総計金額: <c:out value="${sessionScope.build.getTotalPrice()}"/></h4>
+    <h4>総計金額: <c:out value="${sessionScope.build.getTotalPrice()}"/> 円</h4>
   </div>
   <br>
   <div id="build-action-pannel">

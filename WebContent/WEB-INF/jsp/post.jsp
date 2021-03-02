@@ -33,13 +33,13 @@
 <jsp:include page="/header.jsp"/>
 <div class="post-body">
   <form action="postbuild" class="post" method="post" name="form1" onSubmit="return check()">
-    <p>タイトル:<input type="text" name="title" placeholder="60文字まで" maxlength='60'></p>
-    <p>コメント:<br>
-      <textarea name="description" rows="5" cols="40" placeholder="800文字まで" maxlength='800' cols="3"></textarea>
+    <p>タイトル<br><input type="text" name="title" placeholder="60文字まで" maxlength='60'></p>
+    <p>コメント<br>
+      <textarea name="description" rows="20" cols="100" placeholder="800文字まで" maxlength='800' cols="3"></textarea>
     </p>
-
+	<p>見積もりを選択</p>
     <c:forEach var="list" items="${ data }">
-      <p>見積もりを選択：<input type="radio" name="buildno" value="${list.buildNo }" required>
+      <p><input type="radio" name="buildno" value="${list.buildNo }" required>
           ${list.buildName}
       </p>
     </c:forEach>
