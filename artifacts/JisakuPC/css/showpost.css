@@ -43,22 +43,24 @@ button:hover {
 	padding: 0;
 	box-sizing: border-box;
 }
-h4{
+h4 {
     margin-top: 10px;
     /* width:40%;*/
     margin-left: 3%;
     color: #696969;
     /*text-align: right;*/
 }
+
 h3 {
     margin-top: 20px;
     margin-left: 3%;
     width: 80%;
     word-break: break-word;
 }
+
 h1 {
-	margin-top: 100px;
-    margin-left : 15px;
+    margin-top: 100px;
+    margin-left: 15px;
 }
 .back {
     /*margin-top:1em;*/
@@ -72,7 +74,6 @@ h1 {
     border-radius: 20px 20px 20px 20px;
     padding: 3px 5px 3px 5px;
 }
-
 .delete {
     background-color: #fff;
     padding: 3px 5px 3px 5px;
