@@ -1,10 +1,12 @@
 body {
+	color: #5e5e5e;
     margin: 0;
+	font: 400 87.5%/1.5em 'Open Sans', sans-serif;
     padding: 0;
 }
 
 div.page {
-    margin-top: 8em;
+    margin-top: 5em;
     padding-left: 1em;
     position: relative;
     z-index: auto;
@@ -49,6 +51,15 @@ input.osusume {
 h1 {
     padding: .25em 0 .25em .75em;
     border-left: 6px solid #ccc;
+    font-size:30px;
+
+
+}
+.ti{
+	margin-top: 100px;
+    padding-left: 100px;
+    position: relative;
+    z-index: auto;
 }
 
 h3 {

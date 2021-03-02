@@ -41,22 +41,19 @@ a {
 	box-sizing: border-box;
 }
 
-div#build a {
-	color:#FFF!important;
+#build a {
+ color: #FFFFFF!important;
+}
+#post a {
+ color: #FFFFFF!important;
+}
+#user-info a {
+ color: #FFFFFF!important;
+}
+#logo a {
+ color: #FFFFFF!important;
 }
 
-div#post a {
-    color: #FFF !important;
-}
-
-div#user-info a {
-    color: #FFF !important;
-}
-
-div#logo a {
-    color: #FFF !important;
-}
-
-div#logout a {
-    color: #FFF !important;
+#logout a {
+    color: #FFFFFF !important;
 }
