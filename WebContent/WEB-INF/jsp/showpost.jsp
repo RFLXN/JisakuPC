@@ -24,7 +24,7 @@
         <input type="submit" name="delete" class="delete" value="投稿を削除">
       </c:if>
       </h4><br>
-    <h3>${post.description}</h3>
+    <h3>${post.description}</h3><br>
     <table border="1" class="showpost">
       <tr>
         <th>画像</th>
@@ -35,7 +35,7 @@
       </tr>
       <a href="javascript:history.back()" class="back">1ページ戻る</a>
       <c:forEach var="stackedProduct" items="${post.getStackedProducts()}">
-        <tr>
+        <tr class="products">
           <td><img id="image-${stackedProduct.product.no}"
                    src="${pageContext.request.contextPath}/image/noimg.png" alt="${stackedProduct.product.name}">
           </td>
