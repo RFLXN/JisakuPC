@@ -10,8 +10,6 @@ public interface PostDao {
 
     List<Post> getShowPostProducts() throws DAOException;
 
-    List<Post> getAllPosts() throws DAOException;
-
     void deletePost(String postno) throws DAOException;
 
     List<Post> getPostData(String postno) throws DAOException;

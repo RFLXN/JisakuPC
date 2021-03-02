@@ -24,36 +24,6 @@ public class MySQLPostDao implements PostDao {
     private Connection connection;
 
     @Override
-    public List<Post> getAllPosts() throws DAOException {
-        ArrayList<Post> posts = new ArrayList<>();
-
-        String sql = "SELECT * FROM build_post_table";
-
-
-        ResultSet resultSet = query(sql);
-
-        try {
-            while (resultSet.next()) {
-                Post post = new Post();
-
-                post.setNo(resultSet.getString("post_no"));
-                post.setUserno(resultSet.getString("user_no"));
-                post.setBuildno(resultSet.getString("build_no"));
-                post.setTitle(resultSet.getString("title"));
-                post.setDescription(resultSet.getString("description"));
-                post.setDate(resultSet.getString("date"));
-
-                posts.add(post);
-            }
-            DBCloser.close(connection);
-        } catch (SQLException | DBCloseException e) {
-            throw new DAOException(e.getMessage(), e);
-        }
-
-        return posts;
-    }
-
-    @Override
     public void insertPostBuildProducts(String title, String description, String buildno, String userno) throws DAOException {
         //ArrayList<Post> posts = new ArrayList<>();
         String sql = "INSERT INTO build_post_table (title,description,build_no,user_no) VALUES (?,?,?,?)";
