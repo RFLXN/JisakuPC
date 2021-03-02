@@ -46,7 +46,9 @@
 <jsp:include page="/header.jsp"/>
 
 <div class="page">
+	<div class="ti">
   <h1>自作PCを作成</h1>
+
   <br>
   <h3>パーツリスト</h3>
   <br>
