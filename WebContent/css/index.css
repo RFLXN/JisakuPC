@@ -12,9 +12,13 @@ div.page {
 }
 div.setumei{
 	margin-left:10%;
+	font-family: serif;
 }
-
-
-table {
-    margin:0 25% 0 12%;
+div.setumei2{
+	margin-right:10%;
+	font-family: serif;
+}
+.page {
+	margin: auto;
+	max-width: 900px;
 }
