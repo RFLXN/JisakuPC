@@ -111,10 +111,12 @@
         </td>
         <td id="cpu-section-recommends">
           <form method="get" action="searchproduct">
-            <input type="hidden" name="productType" value="cpu">おすすめ:
-            <input type="submit" name="productName" value="Ryzen 5" class="osusume">
-            <input type="submit" name="productName" value="Core i9" class="osusume">
-            <input type="submit" name="productName" value="Core i7" class="osusume">
+            <input type="hidden" name="productType" value="cpu">おすすめ
+            <table>
+              <td><input type="submit" name="productName" value="Ryzen 5" class="osusume"></td>
+              <td><input type="submit" name="productName" value="Core i9" class="osusume"></td>
+              <td><input type="submit" name="productName" value="Core i7" class="osusume"></td>
+            </table>
           </form>
         </td>
       </tr>
@@ -143,10 +145,12 @@
         </td>
         <td id="gpu-section-recommends">
           <form method="get" action="searchproduct">
-            <input type="hidden" name="productType" value="gpu">おすすめ:
-            <input type="submit" name="productName" value="RTX 3070" class="osusume">
-            <input type="submit" name="productName" value="RTX 2070 SUPER" class="osusume">
-            <input type="submit" name="productName" value="RX 5700 XT" class="osusume">
+            <input type="hidden" name="productType" value="gpu">おすすめ
+            <table>
+              <td><input type="submit" name="productName" value="RTX 3070" class="osusume"></td>
+              <td><input type="submit" name="productName" value="RTX 2070 SUPER" class="osusume"></td>
+              <td><input type="submit" name="productName" value="RX 5700 XT" class="osusume"></td>
+            </table>
           </form>
         </td>
       </tr>
@@ -175,8 +179,10 @@
         </td>
         <td id="ram-section-recommends">
           <form method="get" action="searchproduct">
-            <input type="hidden" name="productType" value="ram">おすすめ:
-            <input type="submit" name="clock" value="2666" class="osusume">
+            <input type="hidden" name="productType" value="ram">おすすめ
+            <table>
+              <td><input type="submit" name="clock" value="2666" class="osusume"></td>
+            </table>
           </form>
         </td>
       </tr>
@@ -206,8 +212,10 @@
         </td>
         <td id="cooler-section-recommends">
           <form method="get" action="searchproduct">
-            <input type="hidden" name="productType" value="cpu_cooler">おすすめ:
-            <input type="submit" name="productName" value="Noctua" class="osusume">
+            <input type="hidden" name="productType" value="cpu_cooler">おすすめ
+            <table>
+              <td><input type="submit" name="productName" value="Noctua" class="osusume"></td>
+            </table>
           </form>
         </td>
       </tr>
@@ -236,10 +244,12 @@
         </td>
         <td id="case-section-recommends">
           <form method="get" action="searchproduct">
-            <input type="hidden" name="productType" value="case">おすすめ:
-            <input type="submit" name="factor" value="MicroATX" class="osusume">
-            <input type="submit" name="factor" value="ATX" class="osusume">
-            <input type="submit" name="factor" value="Mini-ITX" class="osusume">
+            <input type="hidden" name="productType" value="case">おすすめ
+            <table>
+              <td><input type="submit" name="factor" value="MicroATX" class="osusume"></td>
+              <td><input type="submit" name="factor" value="ATX" class="osusume"></td>
+              <td><input type="submit" name="factor" value="Mini-ITX" class="osusume"></td>
+            </table>
           </form>
         </td>
       </tr>
@@ -268,10 +278,12 @@
         </td>
         <td id="motherboard-section-recommends">
           <form method="get" action="searchproduct">
-            <input type="hidden" name="productType" value="mother_board">おすすめ:
-            <input type="submit" name="formfactor" value="Mini ITX" class="osusume">
-            <input type="submit" name="chipset" value="AMD B550" class="osusume">
-            <input type="submit" name="chipset" value="INTEL Z490" class="osusume">
+            <input type="hidden" name="productType" value="mother_board">おすすめ
+            <table>
+              <td><input type="submit" name="formfactor" value="Mini ITX" class="osusume"></td>
+              <td><input type="submit" name="chipset" value="AMD B550" class="osusume"></td>
+              <td><input type="submit" name="chipset" value="INTEL Z490" class="osusume"></td>
+            </table>
           </form>
         </td>
       </tr>
@@ -300,24 +312,26 @@
         </td>
         <td id="storage-section-recommends">
           <form method="get" action="searchproduct">
-            <input type="hidden" name="productType" value="storage">おすすめ:
-            <input type="submit" name="size" value="M.2 (Type2280)" class="osusume">
-            <form method="get" action="searchproduct">
-              <input type="hidden" name="size" value="2.5">
-              <input type="submit" value="2.5インチ" class="osusume">
-            </form>
-            <form method="get" action="searchproduct">
-              <input type="hidden" name="volume" value="480,512">
-              <input type="submit" value="480GB~512GB未満" class="osusume">
-            </form>
+            <input type="hidden" name="productType" value="storage">おすすめ
+            <table>
+              <td><input type="submit" name="size" value="M.2 (Type2280)" class="osusume">
+                <form method="get" action="searchproduct">
+              <td><input type="hidden" name="size" value="2.5"></td>
+              <td><input type="submit" value="2.5インチ" class="osusume"></td>
           </form>
-        </td>
-      </tr>
+          <form method="get" action="searchproduct">
+        <td><input type="hidden" name="volume" value="480,512"></td>
+        <td><input type="submit" value="480GB~512GB未満" class="osusume"></td>
+        </form>
+    </table>
+    </form>
+    </td>
+    </tr>
 
-      <tr id="power-section">
-        <td>電源</td>
-        <td width="50%" id="power-section-parts">
-          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+    <tr id="power-section">
+      <td>電源</td>
+      <td width="50%" id="power-section-parts">
+        <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'power_supply'}">
               <form>
                 <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
@@ -329,36 +343,38 @@
               <br>
             </c:if>
           </c:forEach>
-        </td>
-        <td id="power-section-actions">
-          <form action="searchproduct" method="get">
-            <input type="hidden" name="productType" value="power_supply">
-            <button type="button" class="add">追加</button>
-          </form>
-        </td>
-        <td id="power-section-recommends">
-          <form method="get" action="searchproduct">
-            <input type="hidden" name="productType" value="power_supply">おすすめ:
+      </td>
+      <td id="power-section-actions">
+        <form action="searchproduct" method="get">
+          <input type="hidden" name="productType" value="power_supply">
+          <button type="button" class="add">追加</button>
+        </form>
+      </td>
+      <td id="power-section-recommends">
+        <form method="get" action="searchproduct">
+          <input type="hidden" name="productType" value="power_supply">おすすめ
+          <table>
             <form method="get" action="searchproduct">
-              <input type="hidden" name="factor" value="[&quot;SFX&quot;]">
-              <input type="submit" value="SFX" class="osusume">
+              <td><input type="hidden" name="factor" value="[&quot;SFX&quot;]"></td>
+              <td><input type="submit" value="SFX" class="osusume"></td>
             </form>
             <form method="get" action="searchproduct">
-              <input type="hidden" name="W" value="300,600">
-              <input type="submit" value="300W~600W未満" class="osusume">
+              <td><input type="hidden" name="W" value="300,600"></td>
+              <td><input type="submit" value="300W~600W未満" class="osusume"></td>
             </form>
             <form method="get" action="searchproduct">
-              <input type="hidden" name="W" value="600,800">
-              <input type="submit" value="600W~800W未満" class="osusume">
+              <td><input type="hidden" name="W" value="600,800"></td>
+              <td><input type="submit" value="600W~800W未満" class="osusume"></td>
             </form>
-          </form>
-        </td>
-      </tr>
+          </table>
+        </form>
+      </td>
+    </tr>
 
-      <tr id="case_fan-section">
-        <td>ケースファン</td>
-        <td width="50%" id="case_fan-section-parts">
-          <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
+    <tr id="case_fan-section">
+      <td>ケースファン</td>
+      <td width="50%" id="case_fan-section-parts">
+        <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'case_fan'}">
               <form>
                 <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
@@ -370,31 +386,33 @@
               <br>
             </c:if>
           </c:forEach>
-        </td>
-        <td id="case_fan-setcion-actions">
-          <form action="searchproduct" method="get">
-            <input type="hidden" name="productType" value="case_fan">
-            <button type="button" class="add">追加</button>
-          </form>
-        </td>
-        <td id="case_fan-section-actions">
-          <form method="get" action="searchproduct">
-            <input type="hidden" name="productType" value="case_fan">おすすめ:
+      </td>
+      <td id="case_fan-setcion-actions">
+        <form action="searchproduct" method="get">
+          <input type="hidden" name="productType" value="case_fan">
+          <button type="button" class="add">追加</button>
+        </form>
+      </td>
+      <td id="case_fan-section-actions">
+        <form method="get" action="searchproduct">
+          <input type="hidden" name="productType" value="case_fan">おすすめ
+          <table>
             <form method="get" action="searchproduct">
-              <input type="hidden" name="size" value="140">
-              <input type="submit" value="140mm角" class="osusume">
+              <td><input type="hidden" name="size" value="140"></td>
+              <td><input type="submit" value="140mm角" class="osusume"></td>
             </form>
             <form method="get" action="searchproduct">
-              <input type="hidden" name="size" value="120">
-              <input type="submit" value="120mm角" class="osusume">
+              <td><input type="hidden" name="size" value="120"></td>
+              <td><input type="submit" value="120mm角" class="osusume"></td>
             </form>
             <form method="get" action="searchproduct">
-              <input type="submit" name="productName" value="クーラーマスター" class="osusume">
-              <input type="submit" name="productName" value="Corsair" class="osusume">
+              <td><input type="submit" name="productName" value="クーラーマスター" class="osusume"></td>
+              <td><input type="submit" name="productName" value="Corsair" class="osusume"></td>
             </form>
-          </form>
-        </td>
-      </tr>
+          </table>
+        </form>
+      </td>
+    </tr>
     </table>
     <div id="total-prize-section">
       <h4>総計金額: <c:out value="${sessionScope.build.getTotalPrice()}"/> 円</h4>
