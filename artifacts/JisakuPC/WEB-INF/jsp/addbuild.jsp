@@ -342,7 +342,7 @@
             </form>
             <br>
           </c:if>
-          </c:forEach>
+        </c:forEach>
       </td>
       <td id="power-section-actions">
         <form action="searchproduct" method="get">
@@ -385,7 +385,7 @@
             </form>
             <br>
           </c:if>
-          </c:forEach>
+        </c:forEach>
       </td>
       <td id="case_fan-setcion-actions">
         <form action="searchproduct" method="get">
