@@ -10,15 +10,11 @@ div.page {
 	text-align: center;
 	font-family: serif;
 }
-#photo1{
-	height: 100px;
-	object-fit: cover;
+div.setumei{
+	margin-left:10%;
 }
-#photo2{
-	height: 100px;
-	object-fit: cover;
-}
-#photo3{
-	height: 100px;
-	object-fit: cover;
+
+
+table {
+    margin:0 25% 0 12%;
 }
