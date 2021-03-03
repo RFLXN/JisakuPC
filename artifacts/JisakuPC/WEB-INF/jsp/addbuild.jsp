@@ -332,16 +332,16 @@
       <td>電源</td>
       <td width="50%" id="power-section-parts">
         <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
-            <c:if test="${part.product.type eq 'power_supply'}">
-              <form>
-                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
-                  * <c:out value="${part.stack}"/>:
-                  <c:out value="${part.product.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">削除</button>
-              </form>
-              <br>
-            </c:if>
+          <c:if test="${part.product.type eq 'power_supply'}">
+            <form>
+              <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                * <c:out value="${part.stack}"/>:
+                <c:out value="${part.product.price}"/></a>
+              <input type="hidden" name="partNo" value="${part.product.no}">
+              <button formmethod="get" formaction="deletebuildpart">削除</button>
+            </form>
+            <br>
+          </c:if>
           </c:forEach>
       </td>
       <td id="power-section-actions">
@@ -375,16 +375,16 @@
       <td>ケースファン</td>
       <td width="50%" id="case_fan-section-parts">
         <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
-            <c:if test="${part.product.type eq 'case_fan'}">
-              <form>
-                <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
-                  * <c:out value="${part.stack}"/>:
-                  <c:out value="${part.product.price}"/></a>
-                <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">削除</button>
-              </form>
-              <br>
-            </c:if>
+          <c:if test="${part.product.type eq 'case_fan'}">
+            <form>
+              <a style="color: black;" href="productspec?pid=${part.product.no}"><c:out value="${part.product.name}"/>
+                * <c:out value="${part.stack}"/>:
+                <c:out value="${part.product.price}"/></a>
+              <input type="hidden" name="partNo" value="${part.product.no}">
+              <button formmethod="get" formaction="deletebuildpart">削除</button>
+            </form>
+            <br>
+          </c:if>
           </c:forEach>
       </td>
       <td id="case_fan-setcion-actions">
