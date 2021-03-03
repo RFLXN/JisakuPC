@@ -1,19 +1,20 @@
 package command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import bean.Build;
 import bean.UserFlag;
 import context.ResponseContext;
 import db.dao.DAOException;
 import db.dao.build.BuildDao;
 import db.dao.factory.AbstractDaoFactory;
-
-import java.util.ArrayList;
-import java.util.List;
+import utility.Conversion;
 
 public class SaveBuildCommand extends AbstractCommand {
     @Override
     public ResponseContext execute(ResponseContext responseContext) throws CommandException {
-        String buildName = getRequestContext().getParameter("buildName")[0];
+        String buildName = Conversion.conversionText(getRequestContext().getParameter("buildName")[0]);
 
         if (buildName.equals("")) {
             responseContext.setTarget("addbuild");
