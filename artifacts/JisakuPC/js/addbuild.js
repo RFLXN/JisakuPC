@@ -71,3 +71,7 @@ $(() => {
         }
     });
 });
+
+function resetBuild() {
+    location.href = "selectbuild?buildNo=new";
+}

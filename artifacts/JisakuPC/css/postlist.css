@@ -67,26 +67,27 @@ div.page {
 .page2 {
     font-size: 15px;
     margin: 0 0 0 140px;
-    margin-top: 8em;
-	border-collapse: separate;
+    margin-top: 80px;
+    border-collapse: separate;
 
 
 }
 
-.page3{
-    border-bottom:dotted;/*下線を点線にする*/
-	border-color:#C0C0C0;
-	border-width:1px;
-	/*white-space: pre-wrap;*/
+.page3 {
+    border-bottom: dotted; /*下線を点線にする*/
+    border-color: #C0C0C0;
+    border-width: 1px;
+    /*white-space: pre-wrap;*/
+    width: 120%;
 
 }
-input.sinki{
-	position: relative;
-			top: 50px;
-			left:200px;
-
-			display: inline-block;
-    padding: 0.3em 1em;
+input.sinki {
+    position: fixed;
+    top: 125px;
+    right: 30px;
+    border-radius: 20px 20px 20px 20px;
+    padding: 3px 5px 3px 5px;
+    display: inline-block;
     text-decoration: none;
     color: #CC0000;
     border: solid 2px #CC0000;
@@ -116,12 +117,10 @@ input.sinki{
 
 }
 
-.page4{
+.page4 {
     position: relative;
-    left: 67.5px;
+    left: 76px;
     margin-top: -1.45em;
-
-
     width: 250px;
     height: 1.3em;
     white-space: nowrap;

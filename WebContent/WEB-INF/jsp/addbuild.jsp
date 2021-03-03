@@ -78,7 +78,7 @@
               </c:choose>
             </c:forEach>
           </select>
-          <input type="submit" value="選択">
+          <input type="submit" value="選択">&nbsp;&nbsp;&nbsp;<button type="button" onclick="resetBuild()">リセット</button>
         </form>
       </c:if>
     </c:if>
