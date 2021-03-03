@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
@@ -46,9 +46,11 @@ h1 {
     border-bottom: 2px solid #c0c0c0;
     outline: none;
 }
-.signup-submit{
-	/*padding: 3.1em 0;*/
+
+.signup-submit {
+    /*padding: 3.1em 0;*/
 }
+
 .signup-submit #signup-btn {
     background: #f16272;
     border: none;

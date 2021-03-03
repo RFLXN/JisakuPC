@@ -1,7 +1,7 @@
 body {
-	color: #5e5e5e;
+    color: #5e5e5e;
     margin: 0;
-	font: 400 87.5%/1.5em 'Open Sans', sans-serif;
+    font: 400 87.5%/1.5em 'Open Sans', sans-serif;
     padding: 0;
 }
 
@@ -20,7 +20,7 @@ input.add {
     border: solid 2px #CC0000;
     border-radius: 3px;
     transition: .4s;
-    font-size: 20px;
+    font-size: medium;
 }
 
 button.add {
@@ -31,7 +31,7 @@ button.add {
     border: solid 2px #CC0000;
     border-radius: 3px;
     transition: .4s;
-    font-size: 20px;
+    font-size: medium;
 }
 
 .add:hover {
@@ -43,20 +43,21 @@ input.osusume {
     background-color: #fff;
     color: #000;
     font-weight: bold;
-  	padding: 0px 0px;
- 	border: solid 1px #fff;
-	border-radius: 6px;
+    padding: 0px 0px;
+    border: solid 1px #fff;
+    border-radius: 6px;
 }
 
 h1 {
     padding: .25em 0 .25em .75em;
     border-left: 6px solid #ccc;
-    font-size:30px;
+    font-size: 30px;
 
 
 }
-.ti{
-	margin-top: 100px;
+
+.ti {
+    margin-top: 100px;
     padding-left: 100px;
     position: relative;
     z-index: auto;
@@ -82,9 +83,11 @@ h3 {
     background: #f0e68c;
     color: white;
 }
+
 div.productname {
-	/*商品の名前が少し上になるので中央にする*/
+    /*商品の名前が少し上になるので中央にする*/
 }
+
 table.show tr td {
     border: 1px solid #000;
     border-collapse: collapse;

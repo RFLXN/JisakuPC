@@ -42,48 +42,48 @@
     document.addEventListener('keyup', function (e) {
         if (e.ctrlKey) ctlKey = false;
     });
-    $(document).on('keydown', function(e){
-    	if ((e.which || e.keyCode) == 116) {
-    		return false;
-    	}
+    $(document).on('keydown', function (e) {
+        if ((e.which || e.keyCode) == 116) {
+            return false;
+        }
     });
 </script>
 <body>
 <jsp:include page="/header.jsp"/>
 
 <div class="page">
-	<div class="ti">
-  <h1>自作PCを作成</h1>
+  <div class="ti">
+    <h1>自作PCを作成</h1>
 
-  <br>
-  <h3>パーツリスト</h3>
-  <br>
-  <div id="build-select-section">
-    <c:if test="${not empty pageScope.buildList}">
-      <c:if test="${pageScope.buildList.size() gt 0}">
-        <form method="get" action="selectbuild">
-          <label for="builds">過去の見積りを選択</label>
-          <select id="builds" name="buildNo">
-            <option value="new">新しい見積もり</option>
-            <c:forEach var="build" items="${buildList}">
-              <c:choose>
-                <c:when test="${param.buildNo eq build.buildNo}">
-                  <option selected="selected" value="${build.buildNo}"><c:out value="${build.buildName}"/></option>
-                </c:when>
-                <c:when test="${param.buildName eq build.buildName}">
-                  <option selected="selected" value="${build.buildNo}"><c:out value="${build.buildName}"/></option>
-                </c:when>
-                <c:otherwise>
-                  <option value="${build.buildNo}"><c:out value="${build.buildName}"/></option>
-                </c:otherwise>
-              </c:choose>
-            </c:forEach>
-          </select>
-          <input type="submit" value="選択">&nbsp;&nbsp;&nbsp;<button type="button" onclick="resetBuild()">リセット</button>
-        </form>
+    <br>
+    <h3>パーツリスト</h3>
+    <br>
+    <div id="build-select-section">
+      <c:if test="${not empty pageScope.buildList}">
+        <c:if test="${pageScope.buildList.size() gt 0}">
+          <form method="get" action="selectbuild">
+            <label for="builds">過去の見積りを選択</label>
+            <select id="builds" name="buildNo">
+              <option value="new">新しい見積もり</option>
+              <c:forEach var="build" items="${buildList}">
+                <c:choose>
+                  <c:when test="${param.buildNo eq build.buildNo}">
+                    <option selected="selected" value="${build.buildNo}"><c:out value="${build.buildName}"/></option>
+                  </c:when>
+                  <c:when test="${param.buildName eq build.buildName}">
+                    <option selected="selected" value="${build.buildNo}"><c:out value="${build.buildName}"/></option>
+                  </c:when>
+                  <c:otherwise>
+                    <option value="${build.buildNo}"><c:out value="${build.buildName}"/></option>
+                  </c:otherwise>
+                </c:choose>
+              </c:forEach>
+            </select>
+            <input type="submit" value="選択">&nbsp;&nbsp;&nbsp;<button type="button" onclick="resetBuild()">リセット</button>
+          </form>
+        </c:if>
       </c:if>
-    </c:if>
-  </div>
+    </div>
 
     <%-- tableいborderを追加、tdにalignを追加 --%>
     <table class="table">
@@ -398,38 +398,38 @@
     </table>
     <div id="total-prize-section">
       <h4>総計金額: <c:out value="${sessionScope.build.getTotalPrice()}"/> 円</h4>
-  </div>
-  <br>
-  <div id="build-action-pannel">
-    <form method="get" action="savebuild">
-      <c:if test="${not empty pageScope.buildList}">
-        <c:if test="${pageScope.buildList.size() gt 0}">
-          <c:forEach var="build" items="${buildList}">
-            <c:if test="${build.buildNo eq param.buildNo}">
-              <c:set var="buildName" value="${build.buildName}"/>
-            </c:if>
-          </c:forEach>
+    </div>
+    <br>
+    <div id="build-action-pannel">
+      <form method="get" action="savebuild">
+        <c:if test="${not empty pageScope.buildList}">
+          <c:if test="${pageScope.buildList.size() gt 0}">
+            <c:forEach var="build" items="${buildList}">
+              <c:if test="${build.buildNo eq param.buildNo}">
+                <c:set var="buildName" value="${build.buildName}"/>
+              </c:if>
+            </c:forEach>
+          </c:if>
         </c:if>
-      </c:if>
-      <c:choose>
-        <c:when test="${not empty param.buildName}">
-          見積り名 <input type="text" name="buildName" class="build-action-input" value="${param.buildName}" required>
-        </c:when>
-        <c:otherwise>
-          見積り名 <input type="text" name="buildName" class="build-action-input" value="${buildName}" required>
-        </c:otherwise>
-      </c:choose>
-      <button type="button" class="mitsu">この見積を保存</button>
-    </form>
+        <c:choose>
+          <c:when test="${not empty param.buildName}">
+            見積り名 <input type="text" name="buildName" class="build-action-input" value="${param.buildName}" required>
+          </c:when>
+          <c:otherwise>
+            見積り名 <input type="text" name="buildName" class="build-action-input" value="${buildName}" required>
+          </c:otherwise>
+        </c:choose>
+        <button type="button" class="mitsu">この見積を保存</button>
+      </form>
+    </div>
+
   </div>
 
-</div>
-
-<%--  <br><tr><td>総計</td></tr><tr><td>円</td></tr>
- <form method="post" action="">
-  <br><input type="submit" value="保存">
- </form>
-</div>--%>
+  <%--  <br><tr><td>総計</td></tr><tr><td>円</td></tr>
+   <form method="post" action="">
+    <br><input type="submit" value="保存">
+   </form>
+  </div>--%>
 
 
 </body>

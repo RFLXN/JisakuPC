@@ -6,39 +6,40 @@ body {
 }
 
 .post-body {
-	margin:0 10% 0 10%;
+    margin: 0 10% 0 10%;
 }
 
-.post{
-	text-align: center;
-	background: #ffffff;
+.post {
+    text-align: center;
+    background: #ffffff;
     box-sizing: border-box;
     padding: 3em 1em;
     max-width: 700px;
     border-radius: 20px 20px 20px 20px;
     margin: 400px 3%;
-	margin: 8em auto 3em;
+    margin: 8em auto 3em;
 }
 
-.post input[type='text']{
-	font: 15px/24px sans-serif;
-	box-sizing: border-box;
-	width: 50%;
-	letter-spacing: 1px;
-	/*padding-left: 4em;*/
-}
-.post input[type='text']:focus{
-	outline: none;
-	border:solid 1px /*#EEA34A*/ #CC0000;
+.post input[type='text'] {
+    font: 15px/24px sans-serif;
+    box-sizing: border-box;
+    width: 50%;
+    letter-spacing: 1px;
+    /*padding-left: 4em;*/
 }
 
-.post textarea:focus{
-	outline: none;
-	border:solid 1px #CC0000;
+.post input[type='text']:focus {
+    outline: none;
+    border: solid 1px /*#EEA34A*/ #CC0000;
 }
 
-.button input{
-	display: inline-block;
+.post textarea:focus {
+    outline: none;
+    border: solid 1px #CC0000;
+}
+
+.button input {
+    display: inline-block;
     padding: 0.3em 1em;
     text-decoration: none;
     color: #CC0000;
@@ -47,6 +48,7 @@ body {
     transition: .4s;
     font-size: 13px;
 }
+
 h1 {
     padding: .25em 0 .25em .75em;
     border-left: 6px solid #ccc;
@@ -59,6 +61,7 @@ div.page {
     z-index: auto;
 
 }
+
 div.page2 {
     font-size: 15px;
     margin: 0 0 0 140px;

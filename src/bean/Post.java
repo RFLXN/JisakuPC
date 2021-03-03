@@ -130,6 +130,7 @@ public class Post implements Serializable {
                 product.setPrice(post.getPrice());
                 product.setName(post.getPname());
                 product.setNo(post.getProductno());
+                product.setType(post.getType());
 
                 p.setProduct(product);
                 p.setStack(1);
@@ -153,6 +154,7 @@ public class Post implements Serializable {
                     product.setPrice(post.getPrice());
                     product.setName(post.getPname());
                     product.setNo(post.getProductno());
+                    product.setType(post.getType());
                     p.setProduct(product);
                     stackedProducts.add(p);
                 }
@@ -161,4 +163,6 @@ public class Post implements Serializable {
 
         return stackedProducts;
     }
+
+
 }

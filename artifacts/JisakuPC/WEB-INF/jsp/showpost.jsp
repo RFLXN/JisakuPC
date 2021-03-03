@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ page import="bean.ProductTypeInfo" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -44,11 +45,11 @@
       </tr>
       <a href="javascript:history.back()" class="back">1ページ戻る</a>
       <c:forEach var="stackedProduct" items="${post.getStackedProducts()}">
-        <tr class="products">
+        <tr class="products" onclick="location.href='productspec?pid=${stackedProduct.product.no}'">
           <td><img id="image-${stackedProduct.product.no}"
                    src="${pageContext.request.contextPath}/image/noimg.png" alt="${stackedProduct.product.name}">
           </td>
-          <td>${stackedProduct.product.type}</td>
+          <td>${ProductTypeInfo.getTranslatedTypeName(stackedProduct.product.type)}</td>
           <td>${stackedProduct.product.name} * ${stackedProduct.stack}</td>
           <td>${stackedProduct.product.price}</td>
           <td class="product-no">${stackedProduct.product.no}</td>

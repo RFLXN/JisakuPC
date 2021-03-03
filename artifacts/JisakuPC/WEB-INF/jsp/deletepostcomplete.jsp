@@ -7,12 +7,12 @@
   <title>Insert title here</title>
   <link href="css/deletepostcomplete.css" rel="stylesheet" type="text/css"/>
   <script>
-  <%-- 戻るボタンを制限 --%>
-history.pushState(null, null, location.href);
-window.addEventListener('popstate', (e) => {
-  history.go(1);
-});
-</script>
+      <%-- 戻るボタンを制限 --%>
+      history.pushState(null, null, location.href);
+      window.addEventListener('popstate', (e) => {
+          history.go(1);
+      });
+  </script>
 </head>
 <body>
 <jsp:include page="/header.jsp"/>

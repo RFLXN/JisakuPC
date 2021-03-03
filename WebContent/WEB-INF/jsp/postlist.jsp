@@ -21,27 +21,27 @@
   </div>
   <div class="page2">
 
-      <c:forEach var="list" items="${data}">
-      <table width="100%" cellpadding="30">
-    <tr>
+    <c:forEach var="list" items="${data}">
+    <table width="100%" cellpadding="30">
+      <tr>
 
         <td width="70%">
-        <div class="page3"><p>タイトル: <c:out value="${list.title}"/></p>
-          <p>コメント:
-          <div class="page4">${list.description}</div>
-          </p>
-         </td>
-         <td width="30%">
-        <form action="showpost">
-          <input type="hidden" name="postno" value="${list.no}">
-          <input type="submit" name="show" value="詳細" class="show">
-        </form>
-        </div>
+          <div class="page3"><p>タイトル: <c:out value="${list.title}"/></p>
+            <p>コメント:
+            <div class="page4">${list.description}</div>
+            </p>
         </td>
-      </tr>
-    </table>
-      </c:forEach>
+        <td width="30%">
+          <form action="showpost">
+            <input type="hidden" name="postno" value="${list.no}">
+            <input type="submit" name="show" value="詳細" class="show">
+          </form>
   </div>
+  </td>
+  </tr>
+  </table>
+  </c:forEach>
+</div>
 </div>
 
 </body>

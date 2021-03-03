@@ -1,15 +1,18 @@
 .comp {
-  height: 10em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
- }
- body{
- margin-top: 5em;
- }
-table.showpost {
-    margin-left : 3%;
+    height: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+body {
+    margin-top: 5em;
+}
+
+table.showpost {
+    margin-left: 3%;
+}
+
 table.showpost tr td {
     padding-right: 0;
     background: #fafafa;
@@ -17,6 +20,7 @@ table.showpost tr td {
     border-bottom: 2px solid #DDDDDD;
     height: 50px;
 }
+
 table.showpost th {
     padding-right: 0;
     background: #fafafa;
@@ -25,7 +29,7 @@ table.showpost th {
     height: 20px;
 }
 
- button {
+button {
     display: inline-block;
     padding: 0.3em 1em;
     text-decoration: none;
@@ -40,48 +44,55 @@ button:hover {
     background: #CC0000;
     color: white;
 }
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-h4{
- margin-top: 10px;
-/* width:40%;*/
-margin-left:3%;
- color:#696969;
- /*text-align: right;*/
+
+h4 {
+    margin-top: 10px;
+    /* width:40%;*/
+    margin-left: 3%;
+    color: #696969;
+    /*text-align: right;*/
 }
-h3{
-	margin-top: 20px;
-    margin-left : 3%;
-	width:80%;
-	word-break: break-word;
+
+h3 {
+    margin-top: 20px;
+    margin-left: 3%;
+    width: 80%;
+    word-break: break-word;
 }
+
 h1 {
-	margin-top: 100px;
-    margin-left : 3%;
+    margin-top: 100px;
+    margin-left: 3%;
 }
+
 .back {
-	/*margin-top:1em;*/
-	color:#000;
-	float:right;
-	text-align: center;
-	background-color:#d3d3d3;
-	position: fixed;
-	bottom:50px;
-	right:100px;
+    /*margin-top:1em;*/
+    color: #000;
+    float: right;
+    text-align: center;
+    background-color: #d3d3d3;
+    position: fixed;
+    bottom: 50px;
+    right: 100px;
     border-radius: 20px 20px 20px 20px;
-    padding:3px 5px 3px 5px;
+    padding: 3px 5px 3px 5px;
 }
+
 .delete {
-	background-color:#fff;
-	padding:3px 5px 3px 5px;
+    background-color: #fff;
+    padding: 3px 5px 3px 5px;
     border: 1px solid #000;
     border-radius: 5px 5px 5px 5px;
 
 }
+
 .products {
-	margin-left: 3%;
-	background-color:#FFA;
+    margin-left: 3%;
+    background-color: #FFA;
 }

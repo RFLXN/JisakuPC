@@ -28,7 +28,7 @@ public class AddPartsToBuildCommand extends AbstractCommand {
                 getRequestContext().setSessionAttribute("build", build);
             } else {
                 Build build = (Build) getRequestContext().getSessionAttribute("build");
-                if(build.getProducts() == null || build.getProducts().size() == 0) {
+                if (build.getProducts() == null || build.getProducts().size() == 0) {
                     build.setProducts(new ArrayList<>());
                     build = (Build) getRequestContext().getSessionAttribute("build");
                 }

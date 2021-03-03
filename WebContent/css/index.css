@@ -6,15 +6,17 @@ body {
 div.page {
     margin-top: 5em;
 }
-#text{
-	text-align: center;
-	font-family: serif;
+
+#text {
+    text-align: center;
+    font-family: serif;
 }
-div.setumei{
-	margin-left:10%;
+
+div.setumei {
+    margin-left: 10%;
 }
 
 
 table {
-    margin:0 25% 0 12%;
+    margin: 0 25% 0 12%;
 }

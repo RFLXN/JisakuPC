@@ -11,15 +11,13 @@
 </head>
 <body>
 <script>
-function checkForm(target)
-{
-    let str=target.value;
-    while(str.match(/[^A-Z^a-z\d\-]/))
-    {
-        str=str.replace(/[^A-Z^a-z\d\-]/,"");
+    function checkForm(target) {
+        let str = target.value;
+        while (str.match(/[^A-Z^a-z\d\-]/)) {
+            str = str.replace(/[^A-Z^a-z\d\-]/, "");
+        }
+        target.value = str;
     }
-    target.value=str;
-}
 </script>
 <jsp:include page="/header.jsp"/>
 <div class="loginbody">

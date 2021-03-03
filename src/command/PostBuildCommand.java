@@ -1,8 +1,5 @@
 package command;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import bean.Post;
 import bean.UserFlag;
 import context.ResponseContext;
@@ -10,6 +7,9 @@ import db.dao.DAOException;
 import db.dao.factory.AbstractDaoFactory;
 import db.dao.post.PostDao;
 import utility.Conversion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostBuildCommand extends AbstractCommand {
     @Override
@@ -21,7 +21,7 @@ public class PostBuildCommand extends AbstractCommand {
             AbstractDaoFactory daoFactory = AbstractDaoFactory.getFactory();
             PostDao dao = daoFactory.getPostsDao();
             String title = getRequestContext().getParameter("title")[0];
-            String description = cn.conversionText(getRequestContext().getParameter("description")[0]);
+            String description = Conversion.conversionText(getRequestContext().getParameter("description")[0]);
             String buildno = getRequestContext().getParameter("buildno")[0];
             UserFlag user = (UserFlag) getRequestContext().getSessionAttribute("loginFlag");
             String userno = user.getUserNo();

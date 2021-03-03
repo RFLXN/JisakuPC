@@ -1,16 +1,17 @@
 .comp {
-  height: 10em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
- }
- body{
- margin-top: 8em;
- text-align:center;
- }
+    height: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    margin-top: 8em;
+    text-align: center;
+}
 
 
- button {
+button {
     display: inline-block;
     padding: 0.3em 1em;
     text-decoration: none;
@@ -25,8 +26,9 @@ button:hover {
     background: #CC0000;
     color: white;
 }
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
