@@ -41,6 +41,11 @@
     document.addEventListener('keyup', function (e) {
         if (e.ctrlKey) ctlKey = false;
     });
+    $(document).on('keydown', function(e){
+    	if ((e.which || e.keyCode) == 116) {
+    		return false;
+    	}
+    });
 </script>
 <body>
 <jsp:include page="/header.jsp"/>
@@ -79,13 +84,13 @@
     </c:if>
   </div>
 
-
-  <table width="100%" cellpadding="30">
+<%-- tableいborderを追加、tdにalignを追加 --%>
+  <table width="100%" cellpadding="30" border="1" class="show" cellspacing="0">
 
     <div id="cpu">
       <tr>
-        <td width="10%">CPU</td>
-        <td width="45%">
+        <td width="10%" align="center">CPU</td>
+        <td width="45%" align="center">
           <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'cpu'}">
               <form>
@@ -93,19 +98,19 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
           </c:forEach>
         </td>
-        <td width="15%">
+        <td width="15%" align="center">
           <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="cpu">
             <button type="button" class="add">追加</button>
           </form>
         </td>
-        <td width="30%">
+        <td width="30%" align="center">
           <form method="get" action="searchproduct">
             <input type="hidden" name="productType" value="cpu">おすすめ:
             <input type="submit" name="productName" value="Ryzen 5" class="osusume">
@@ -118,8 +123,8 @@
 
     <div id="gpu">
       <tr>
-        <td width="15%">GPU</td>
-        <td width="45%">
+        <td width="15%" align="center">GPU</td>
+        <td width="45%" align="center">
           <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'gpu'}">
               <form>
@@ -127,13 +132,13 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
           </c:forEach>
         </td>
-        <td width="15%">
+        <td width="15%" align="center">
           <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="gpu">
             <button type="button" class="add">追加</button>
@@ -141,7 +146,7 @@
         </td>
         <form method="get" action="searchproduct">
           <input type="hidden" name="productType" value="gpu">
-          <td width="30%">おすすめ:
+          <td width="30%" align="center">おすすめ:
             <input type="submit" name="productName" value="RTX 3070" class="osusume">
             <input type="submit" name="productName" value="RTX 2070 SUPER" class="osusume">
             <input type="submit" name="productName" value="RX 5700 XT" class="osusume">
@@ -152,8 +157,8 @@
 
     <div id="ram">
       <tr>
-        <td width="10%">メモリ</td>
-        <td width="45%">
+        <td width="10%" align="center">メモリ</td>
+        <td width="45%" align="center">
           <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'ram'}">
               <form>
@@ -161,13 +166,13 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
           </c:forEach>
         </td>
-        <td width="15%">
+        <td width="15%" align="center">
           <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="ram">
             <button type="button" class="add">追加</button>
@@ -175,7 +180,7 @@
         </td>
         <form method="get" action="searchproduct">
           <input type="hidden" name="productType" value="ram">
-          <td width="30%">おすすめ:
+          <td width="30%" align="center">おすすめ:
             <input type="submit" name="clock" value="2666" class="osusume">
           </td>
         </form>
@@ -184,8 +189,8 @@
 
     <div id="cpu_cooler">
       <tr>
-        <td width="10%">クーラー</td>
-        <td width="45%">
+        <td width="10%" align="center">クーラー</td>
+        <td width="45%" align="center">
           <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'cpu_cooler'}">
               <form>
@@ -193,13 +198,13 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
           </c:forEach>
         </td>
-        <td width="15%">
+        <td width="15%" align="center">
           <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="cpu_cooler">
             <button type="button" class="add">追加</button>
@@ -207,7 +212,7 @@
         </td>
         <form method="get" action="searchproduct">
           <input type="hidden" name="productType" value="cpu_cooler">
-          <td width="30%">おすすめ:
+          <td width="30%" align="center">おすすめ:
             <input type="submit" name="productName" value="Noctua" class="osusume">
           </td>
         </form>
@@ -216,8 +221,8 @@
 
     <div id="case">
       <tr>
-        <td width="10%">ケース</td>
-        <td width="45%">
+        <td width="10%" align="center">ケース</td>
+        <td width="45%" align="center">
           <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'case'}">
               <form>
@@ -225,13 +230,13 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
           </c:forEach>
         </td>
-        <td width="15%">
+        <td width="15%" align="center">
           <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="case">
             <button type="button" class="add">追加</button>
@@ -239,7 +244,7 @@
         </td>
         <form method="get" action="searchproduct">
           <input type="hidden" name="productType" value="case">
-          <td width="30%">おすすめ:
+          <td width="30%" align="center">おすすめ:
             <input type="submit" name="factor" value="MicroATX" class="osusume">
             <input type="submit" name="factor" value="ATX" class="osusume">
             <input type="submit" name="factor" value="Mini-ITX" class="osusume">
@@ -250,8 +255,8 @@
 
     <div id="mother_board">
       <tr>
-        <td width="10%">マザーボード</td>
-        <td width="45%">
+        <td width="10%" align="center">マザーボード</td>
+        <td width="45%" align="center">
           <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'mother_board'}">
               <form>
@@ -259,13 +264,13 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
           </c:forEach>
         </td>
-        <td width="15%">
+        <td width="15%" align="center">
           <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="mother_board">
             <button type="button" class="add">追加</button>
@@ -273,7 +278,7 @@
         </td>
         <form method="get" action="searchproduct">
           <input type="hidden" name="productType" value="mother_board">
-          <td width="30%">おすすめ:
+          <td width="30%" align="center">おすすめ:
             <input type="submit" name="formfactor" value="Mini ITX" class="osusume">
             <input type="submit" name="chipset" value="AMD B550" class="osusume">
             <input type="submit" name="chipset" value="INTEL Z490" class="osusume">
@@ -284,8 +289,8 @@
 
     <div id="storage">
       <tr>
-        <td width="10%">ストレージ</td>
-        <td width="45%">
+        <td width="10%" align="center">ストレージ</td>
+        <td width="45%" align="center">
           <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'storage'}">
               <form>
@@ -293,13 +298,13 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
           </c:forEach>
         </td>
-        <td width="15%">
+        <td width="15%" align="center">
           <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="storage">
             <button type="button" class="add">追加</button>
@@ -307,7 +312,7 @@
         </td>
         <form method="get" action="searchproduct">
           <input type="hidden" name="productType" value="storage">
-          <td width="30%">おすすめ:
+          <td width="30%" align="center">おすすめ:
             <input type="submit" name="size" value="M.2 (Type2280)" class="osusume">
             <form method="get" action="searchproduct">
               <input type="hidden" name="size" value="2.5">
@@ -324,8 +329,8 @@
 
     <div id="power_supply">
       <tr>
-        <td width="10%">電源</td>
-        <td width="45%">
+        <td width="10%" align="center">電源</td>
+        <td width="45%" align="center">
           <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'power_supply'}">
               <form>
@@ -333,13 +338,13 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
           </c:forEach>
         </td>
-        <td width="15%">
+        <td width="15%" align="center">
           <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="power_supply">
             <button type="button" class="add">追加</button>
@@ -347,7 +352,7 @@
         </td>
         <form method="get" action="searchproduct">
           <input type="hidden" name="productType" value="power_supply">
-          <td width="30%">おすすめ:
+          <td width="30%" align="center">おすすめ:
             <form method="get" action="searchproduct">
               <input type="hidden" name="factor" value="[&quot;SFX&quot;]">
               <input type="submit" value="SFX" class="osusume">
@@ -367,8 +372,8 @@
 
     <div id="case_fan">
       <tr>
-        <td width="10%">ケースファン</td>
-        <td width="45%">
+        <td width="10%" align="center">ケースファン</td>
+        <td width="45%" align="center">
           <c:forEach var="part" items="${sessionScope.build.getStackedProducts()}">
             <c:if test="${part.product.type eq 'case_fan'}">
               <form>
@@ -376,13 +381,13 @@
                   * <c:out value="${part.stack}"/>:
                   <c:out value="${part.product.price}"/></a>
                 <input type="hidden" name="partNo" value="${part.product.no}">
-                <button formmethod="get" formaction="deletebuildpart">X</button>
+                <button formmethod="get" formaction="deletebuildpart">削除</button>
               </form>
               <br>
             </c:if>
           </c:forEach>
         </td>
-        <td width="15%">
+        <td width="15%" align="center">
           <form action="searchproduct" method="get">
             <input type="hidden" name="productType" value="case_fan">
             <button type="button" class="add">追加</button>
@@ -390,7 +395,7 @@
         </td>
         <form method="get" action="searchproduct">
           <input type="hidden" name="productType" value="case_fan">
-          <td width="30%">おすすめ:
+          <td width="30%" align="center">おすすめ:
             <form method="get" action="searchproduct">
               <input type="hidden" name="size" value="140">
               <input type="submit" value="140mm角" class="osusume">
@@ -410,7 +415,7 @@
 
   </table>
   <div id="total-prize-section">
-    <h4>総計金額: <c:out value="${sessionScope.build.getTotalPrice()}"/></h4>
+    <h4>総計金額: <c:out value="${sessionScope.build.getTotalPrice()}"/> 円</h4>
   </div>
   <br>
   <div id="build-action-pannel">
@@ -439,7 +444,6 @@
 </div>
 
 <%--  <br><tr><td>総計</td></tr><tr><td>円</td></tr>
-<div>
  <form method="post" action="">
   <br><input type="submit" value="保存">
  </form>

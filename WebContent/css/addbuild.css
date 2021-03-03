@@ -72,16 +72,21 @@ h3 {
     padding: 0.3em 1em;
     text-decoration: none;
     color: white;
-    border: solid 2px #CC0000;
+    border: solid 2px #d2b48c;
     transition: .4s;
     font-size: 20px;
-    background-color: #FF0000;
+    background-color: #d2b48c;
 }
 
 .mitsu:hover {
-    background: #FF0000;
+    background: #f0e68c;
     color: white;
 }
 div.productname {
 	/*商品の名前が少し上になるので中央にする*/
+}
+table.show tr td {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    /*tableの線の色、太さ指定*/
 }
