@@ -231,3 +231,15 @@ source $project_root/sql/insert_dummy_data.sql
   * [jquery-3.5.1.min.js: jQuery ライブラリ](https://jquery.com/)
   * [jquery-ui.min.js: jQuery UI ライブラリ](https://jqueryui.com/)
   * [axios.min.js: axios ライブラリ](https://github.com/axios/axios)
+
+### 楽天API
+
+[Rakuten Developers (楽天APIドキュメント): https://webservice.rakuten.co.jp/](https://webservice.rakuten.co.jp/)
+
+* 使用したエンドポイント
+  * [楽天商品検索API](https://webservice.rakuten.co.jp/api/ichibaitemsearch/)
+  * [商品価格ナビ製品検索API](https://webservice.rakuten.co.jp/api/productsearch/)
+
+rakuten.RakutenAPIWrapperクラスで商品検索に必要な情報を取得、 この情報を利用してrakuten.RequestSenderクラスで楽天APIから商品情報をJSON形式で取得。
+取得したJSON情報をrakuten.ItemJSONParser, rakuten.ProductJSONParserクラス上で JSON-javaライブラリを使ってパーシング。 パーシングした情報をjava
+beansに入れてコマンドクラスで利用する流れです。
