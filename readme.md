@@ -234,7 +234,7 @@ source $project_root/sql/insert_dummy_data.sql
 
 ### 楽天API
 
-[Rakuten Developers (楽天APIドキュメント): https://webservice.rakuten.co.jp/](https://webservice.rakuten.co.jp/)
+> [Rakuten Developers (楽天APIドキュメント): https://webservice.rakuten.co.jp/](https://webservice.rakuten.co.jp/)
 
 * 使用したエンドポイント
   * [楽天商品検索API](https://webservice.rakuten.co.jp/api/ichibaitemsearch/)
