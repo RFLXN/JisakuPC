@@ -9,11 +9,11 @@
 <div id=addproduct>
   <h2>商品登録</h2>
   <form method="post" action="addnewproduct">
-    Name: <input type="text" name="productName"><br>
-    Brand: <input type="text" name="productBrand"><br>
-    Spec: <input type="text" name="spec"><br>
-    Price: <input type="number" name="price"><br>
-    Type: <input type="text" name="productType"><br>
+    パーツ名: <input type="text" name="productName"><br>
+    ブランド名: <input type="text" name="productBrand"><br>
+    スペック: <input type="text" name="spec"><br>
+    値段: <input type="number" name="price"><br>
+    種類: <input type="text" name="productType"><br>
     <input type="submit" value="登録">
   </form>
 </div>
@@ -21,7 +21,7 @@
 <div id=deleteproduct>
   <h2>商品削除</h2>
   <form method="post" action="deleteproduct">
-    No: <input type="text" name="productNo"><br>
+    商品番号: <input type="text" name="productNo"><br>
     <input type="submit" value="削除">
   </form>
 </div>
@@ -29,7 +29,7 @@
 <div id=deletepost>
   <h2>投稿削除</h2>
   <form method="post" action="deletepost">
-    No: <input type="text" name="postno"><br>
+    商品番号: <input type="text" name="postno"><br>
     <input type="submit" value="削除">
   </form>
 </div>

@@ -65,7 +65,7 @@
     <c:if test="${sessionScope.loginFlag.admin}">
       <div id="admin-pannel" class="col-xs-12">
         <form action="productmanagement">
-          <button type="submit" class="btn btn-default">管理者専用ぺぇじ</button>
+          <button type="submit" class="btn btn-default">管理者専用ページ</button>
         </form>
       </div>
     </c:if>
